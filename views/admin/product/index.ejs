@@ -1,0 +1,802 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+            style="
+              padding: 10px 1.5rem;
+              background-color: var(--vz-card-bg) !important;
+              -webkit-box-shadow: 0 1px 2px rgb(56 65 74 / 15%);
+              box-shadow: 0 1px 2px rgb(56 65 74 / 15%);
+              border-bottom: 1px solid none;
+              border-top: 1px solid none;
+              margin: -23px -1.5rem 1.5rem -1.5rem;
+            "
+          >
+            <h4 class="mb-sm-0" style="margin-left: 106px">All Products</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+      <div class="container-fluid">
+        <div class="card">
+          <div class="card-body">
+            <div class="row g-2">
+              <div class="col-sm-4">
+                <form
+                  class="search-box my-0"
+                  method="get"
+                  action="/admin/products"
+                >
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Search Via Name"
+                    name="search"
+                    value="<%= search %>"
+                  />
+                  <i class="ri-search-line search-icon"></i>
+                </form>
+              </div>
+              <!--end col-->
+              <div class="col-sm-auto ms-auto">
+                <div class="list-grid-nav hstack gap-1">
+                  <button
+                    type="button"
+                    class="btn btn-info"
+                    data-bs-toggle="modal"
+                    data-bs-target="#createProductModal"
+                  >
+                    + Add Product
+                  </button>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+            <!--end row-->
+          </div>
+        </div>
+
+        <div class="team-list row list-view-filter">
+          <div class="col-lg-12">
+            <div class="card team-box">
+              <div class="card-body">
+                <div>
+                  <div class="table-responsive table-card">
+                    <table class="table align-middle fs-13" id="customerTable">
+                      <thead class="table-secondary">
+                        <tr>
+                          <th width="5%">SR NO.</th>
+                          <th width="10%">NAME</th>
+                          <th width="15%">SHORT DESC</th>
+                          <th width="40%">TAG LINES</th>
+                          <th width="10%">ICON</th>
+                          <th width="10%">SORT</th>
+                          <th>STATUS</th>
+                          <th style="text-align: center">ACTION</th>
+                        </tr>
+                      </thead>
+                      <tbody class="list form-check-all">
+                        <% products.forEach((product, index) => { %>
+                        <tr>
+                          <td>
+                            <p class="text-muted mb-0"><%= ++index %></p>
+                          </td>
+                          <td>
+                            <p class="text-muted mb-0"><%= product.name %></p>
+                          </td>
+                          <td>
+                            <p class="text-muted mb-0">
+                              <%= product.shortDescription %>
+                            </p>
+                          </td>
+                          <td class="name">
+                            <div class="team-profile-img">
+                              <div
+                                class="avatar-lg img-thumbnail rounded-circle flex-shrink-0"
+                              >
+                                <% if(product.tagLineIcon) { %>
+                                <img
+                                  src="/uploads/<%= product.tagLineIcon %>"
+                                  alt=""
+                                  class="img-fluid d-block rounded-circle w-100 h-100"
+                                />
+                                <% } %>
+                              </div>
+                              <div class="team-content">
+                                <p class="text-muted mb-0">
+                                  &#x2022; <%= product.tagLineOne %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  &#x2022; <%= product.tagLineTwo %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  &#x2022; <%= product.tagLineThree %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  &#x2022; <%= product.tagLineFour %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  Date : &#x2022; <%= product.tagLineFive %>
+                                </p>
+                              </div>
+                            </div>
+                          </td>
+                          
+                          <td>
+                            <% if(product.icon) { %>
+                            <div
+                              class="avatar-md img-thumbnail rounded-circle flex-shrink-0"
+                            >
+                              <img
+                                src="/uploads/<%= product.icon %>"
+                                alt=""
+                                class="img-fluid d-block rounded-circle w-100 h-100"
+                              />
+                            </div>
+                            <% } %>
+                          </td>
+                          <td>
+                            <p class="mb-0 fs-12 badge badge-soft-warning ">
+                              <%= product.sort %>
+                            </p>
+                          </td>
+                          <td>
+                            <% if(product.status){ %>
+                            <p class="mb-0 fs-12 badge badge-soft-success">
+                              Enabled
+                            </p>
+                            <% } else { %>
+                            <p class="mb-0 fs-12 badge badge-soft-danger">
+                              Disabled
+                            </p>
+                            <% } %>
+                            <br />
+                            <% if(product.isVisibleOnHomePage){ %>
+                            <p class="mb-0 fs-12 badge badge-soft-success mt-1">
+                              Visible on Home Page
+                            </p>
+                            <% } else { %>
+                            <p class="mb-0 fs-12 badge badge-soft-danger mt-1">
+                              Hidden from Home Page
+                            </p>
+                            <% } %>
+                          </td>
+                          
+                          <td align="center">
+                            <ul class="list-inline mb-0">
+                              <% if (product.status) { %>
+                              <li
+                                class="list-inline-item edit"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                title="Disable"
+                              >
+                                <a
+                                  href="/admin/products-status/<%= product.id %>/0"
+                                  class="text-muted d-inline-block"
+                                >
+                                  <lord-icon
+                                    src="https://cdn.lordicon.com/vfzqittk.json"
+                                    trigger="loop"
+                                    style="width: 20px; height: 20px"
+                                  >
+                                  </lord-icon>
+                                </a>
+                              </li>
+                              <% } else { %>
+                              <li
+                                class="list-inline-item"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                title="Enable"
+                              >
+                                <a
+                                  class="edit-item-btn"
+                                  href="/admin/products-status/<%= product.id %>/1"
+                                >
+                                  <lord-icon
+                                    src="https://cdn.lordicon.com/hjeefwhm.json"
+                                    trigger="loop"
+                                    style="width: 20px; height: 20px"
+                                  >
+                                  </lord-icon>
+                                </a>
+                              </li>
+                              <% } %>
+                              <li
+                                class="list-inline-item"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                title="Edit"
+                              >
+                                <a
+                                  class="remove-item-btn edit-product-btn"
+                                  href="javascript:;"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#editProductModal"
+                                  data-product="<%= JSON.stringify(product) %>"
+                                >
+                                  <lord-icon
+                                    src="https://cdn.lordicon.com/oclwxpmm.json"
+                                    trigger="loop"
+                                    style="width: 20px; height: 20px"
+                                  >
+                                  </lord-icon>
+                                </a>
+                              </li>
+                              <li
+                                class="list-inline-item"
+                                data-bs-toggle="tooltip"
+                                data-bs-trigger="hover"
+                                data-bs-placement="top"
+                                title="Delete"
+                              >
+                                <a
+                                  class="remove-item-btn d-none"
+                                  data-bs-toggle="modal"
+                                  href="javascript:;"
+                                  data-url="/admin/products/delete/<%= product.id %>"
+                                  onclick="handleDelete(this)"
+                                >
+                                  <lord-icon
+                                    src="https://cdn.lordicon.com/dovoajyj.json"
+                                    trigger="loop"
+                                    style="width: 20px; height: 20px"
+                                  >
+                                  </lord-icon>
+                                </a>
+                              </li>
+                            </ul>
+                          </td>
+                        </tr>
+                        <% }) %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createProductModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-product-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="productName" class="form-label">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="productIcon" class="form-label">Product Icon</label>
+                <input
+                  type="file"
+                  class="form-control icon"
+                  id="productIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productShortDescription" class="form-label"
+                  >Product Short Desc</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productShortDescription"
+                  placeholder="Enter "
+                  name="shortDescription"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productLongDescription" class="form-label"
+                  >Product Long Desc</label
+                >
+                <textarea
+                  class="form-control"
+                  id="productLongDescription"
+                  placeholder="Enter "
+                  name="longDescription"
+                  maxlength="1000"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productTagLineTitle" class="form-label"
+                  >Product Tag Line Title</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineTitle"
+                  placeholder="Enter "
+                  name="tagLineTitle"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineOne" class="form-label"
+                  >Product Tag Line One</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineOne"
+                  placeholder="Enter "
+                  name="tagLineOne"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineTwo" class="form-label"
+                  >Product Tag Line Two</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineTwo"
+                  placeholder="Enter "
+                  name="tagLineTwo"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineThree" class="form-label"
+                  >Product Tag Line Three</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineThree"
+                  placeholder="Enter "
+                  name="tagLineThree"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineFour" class="form-label"
+                  >Product Tag Line Four</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineFour"
+                  placeholder="Enter "
+                  name="tagLineFour"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineFive" class="form-label"
+                  >Product Tag Line Five</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="productTagLineFive"
+                  placeholder="Enter "
+                  name="tagLineFive"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineIcon" class="form-label"
+                  >Product Tag Line Icon</label
+                >
+                <input
+                  type="file"
+                  class="form-control tag-line-icon"
+                  id="productTagLineIcon"
+                  placeholder="Enter "
+                  name="tagLineIcon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label"> Product Visible on Home Page?</label>
+                <select class="form-select" name="isVisibleOnHomePage">
+                  <option value="">Select</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productSort" class="form-label">Product Sort</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="999999999"
+                  class="form-control"
+                  id="productSort"
+                  placeholder="Enter "
+                  name="sort"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="buttonName" class="form-label"
+                  >Button Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="buttonName"
+                  placeholder="Enter "
+                  name="buttonName"
+                  maxlength="150"
+                />
+              </div>
+            </div>
+
+            <!--end col-->
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editProductModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-product-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="productName" class="form-label">Product Name</label>
+                <input
+                  type="text"
+                  class="form-control product-name"
+                  id="productName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="productIcon" class="form-label">Product Icon</label>
+                <input
+                  type="file"
+                  class="form-control edit-icon"
+                  id="productIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productShortDescription" class="form-label"
+                  >Product Short Desc</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-short-desc"
+                  id="productShortDescription"
+                  placeholder="Enter "
+                  name="shortDescription"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productLongDescription" class="form-label"
+                  >Product Long Desc</label
+                >
+                <textarea
+                  class="form-control product-long-desc"
+                  id="productLongDescription"
+                  placeholder="Enter "
+                  name="longDescription"
+                  maxlength="1000"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="productTagLineTitle" class="form-label"
+                  >Product Tag Line Title</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-title"
+                  id="productTagLineTitle"
+                  placeholder="Enter "
+                  name="tagLineTitle"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineOne" class="form-label"
+                  >Product Tag Line One</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-one"
+                  id="productTagLineOne"
+                  placeholder="Enter "
+                  name="tagLineOne"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineTwo" class="form-label"
+                  >Product Tag Line Two</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-two"
+                  id="productTagLineTwo"
+                  placeholder="Enter "
+                  name="tagLineTwo"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineThree" class="form-label"
+                  >Product Tag Line Three</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-three"
+                  id="productTagLineThree"
+                  placeholder="Enter "
+                  name="tagLineThree"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineFour" class="form-label"
+                  >Product Tag Line Four</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-four"
+                  id="productTagLineFour"
+                  placeholder="Enter "
+                  name="tagLineFour"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineFive" class="form-label"
+                  >Product Tag Line Five</label
+                >
+                <input
+                  type="text"
+                  class="form-control product-tag-line-five"
+                  id="productTagLineFive"
+                  placeholder="Enter "
+                  name="tagLineFive"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productTagLineIcon" class="form-label"
+                  >Product Tag Line Icon</label
+                >
+                <input
+                  type="file"
+                  class="form-control edit-tag-line-icon"
+                  id="productTagLineIcon"
+                  placeholder="Enter"
+                  name="tagLineIcon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label"> Product Visible on Home Page?</label>
+                <select
+                  class="form-select product-home-page-visibility"
+                  name="isVisibleOnHomePage"
+                >
+                  <option value="">Select</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="productSort" class="form-label">Product Sort</label>
+                <input
+                  type="number"
+                  min="0"
+                  max="999999999"
+                  class="form-control product-sort"
+                  id="productSort"
+                  placeholder="Enter "
+                  name="sort"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="editButtonName" class="form-label"
+                  >Button Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editButtonName"
+                  placeholder="Enter "
+                  name="buttonName"
+                  maxlength="150"
+                />
+              </div>
+            </div>
+
+            <!--end col-->
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/product.js"></script>
+<%- include('../partials/footer'); %>

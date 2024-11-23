@@ -1,0 +1,263 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          TDS Rates
+                        </p>
+                      </div>
+                      <div class="col-sm-auto ms-auto">
+                        <div class="flex-grow-1">
+                          <button
+                            class="btn btn-info add-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createFaqModal"
+                          >
+                            <i class="ri-add-fill me-1 align-bottom"></i>
+                            Add TDS
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card team-box">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>SR NO.</th>
+                              <th>Role</th>
+                              <th>Percentage %</th>
+                              <th style="text-align: center">ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% faqs.forEach((faq, index)=> { %>
+                            <tr>
+                              <td>
+                                <p class="text-muted mb-0"><%= ++index %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= faq.role %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= faq.percent %>
+                                </p>
+                              </td>
+                              <td align="center">
+                                <ul class="list-inline mb-0">
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Edit"
+                                  >
+                                    <a
+                                      class="remove-item-btn edit-tds-btn"
+                                      href="javascript:;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#editFaqModal"
+                                      data-role="<%= faq.role %>"
+                                      data-percent="<%= faq.percent %>"
+                                      data-id="<%= faq.id %>"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/oclwxpmm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <%- include('../../components/admin/partials/pagination');
+                    %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createFaqModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add TDS</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-tds-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <div class="col-lg-12">
+              <div>
+                <label for="role" class="form-label">Role</label>
+                <select name="role" class="form-control">
+                  <option value="normal">normal</option>
+                  <option value="advance">advance</option>
+                </select>
+              </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div>
+                <label for="offer" class="form-label">Edit Percentage %</label>
+                <br />
+                <input
+                  class="form-control"
+                  type="number"
+                  name="percent"
+                  id="percent"
+                  step="0.01"
+                  min="0"
+                  max="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editFaqModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit TDS</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-tds-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-12">
+              <div>
+                <label for="role" class="form-label">Role</label>
+                <input
+                  class="form-control tds-name"
+                  type="text"
+                  name="role"
+                  id="role"
+                  readonly
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="offer" class="form-label">Edit Percentage %</label>
+                <br />
+                <input
+                  class="form-control tds-percent"
+                  type="number"
+                  name="percent"
+                  id="percent"
+                  step="0.01"
+                  min="0"
+                  max="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/tds.js"></script>
+<%- include('../partials/footer'); %>

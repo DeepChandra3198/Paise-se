@@ -1,0 +1,27 @@
+<a
+  href="/product/<%= product.name.toLowerCase()
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/(^-|-$)+/g, '') %>/<%= product.id %>"
+>
+  <div class="single-featured-box d-none">
+    <div class="icon color-fb7756">
+      <img <% if (product.icon !== null) { %> src="/uploads/<%= product.icon %>"
+      <% } else { %> src="/customer-assets/img/credit-card.png" <% } %>
+      style="width: 60px" />
+    </div>
+    <h3 class="mt-3"><%= product.name %></h3>
+    <p class="hidden-xs"><%= product.shortDescription %></p>
+    <span class="read-more-btn hidden-xs">Get Best Offers </span>
+  </div>
+  
+   <div class="single-features-box">
+          <div class="icon">
+             <img <% if (product.icon !== null) { %> src="/uploads/<%= product.icon %>"
+      <% } else { %> src="/customer-assets/img/credit-card.png" <% } %> />
+          </div>
+          <h3 style="text-transform: uppercase;"><%= product.name %></h3>
+          <p class="hidden-xs">  <%= product.shortDescription %></p>
+		  
+		  <p class="bestTag fixed-bottom position-absolute mb-3 hidden-xs"><b style=" color: #0b66c3;"><%= product.buttonName %>  <i class="fas fa-arrow-right"></i></b></p>
+        </div>
+</a>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tax Invoice</title>
+    <style>
+      /* Add some basic styling for the print button */
+      #printButton {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      #printButton:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+
+  <body style="margin: auto; background: #eee">
+    <!-- Print button -->
+    <button id="printButton" onclick="printInvoice()">Print Invoice</button>
+
+    <table
+      width="800px"
+      border="0"
+      cellpadding="0"
+      cellspacing="0"
+      align="center"
+      style="background: #fff; font-family: arial"
+    >
+      <tbody>
+        <tr>
+          <td style="height: 30px"></td>
+        </tr>
+        <tr>
+          <td>
+            <table
+              width="700px"
+              border="1"
+              cellpadding="0"
+              cellspacing="0"
+              align="center"
+              style="
+                background: #fff;
+                font-family: arial;
+                font-size: 14px;
+                border-color: #ddd;
+                border-width: 1px;
+              "
+            >
+              <tbody>
+                <tr>
+                  <td colspan="2">
+                    <table
+                      width="100%"
+                      border="0"
+                      cellpadding="0"
+                      cellspacing="0"
+                      align="center"
+                      style="
+                        background: #eee;
+                        font-family: arial;
+                        font-size: 14px;
+                      "
+                    >
+                      <tbody>
+                        <tr>
+                          <td>
+                            <h3 style="text-align: center; margin-bottom: 0">
+                              Tax Invoice<br /><%= user.name %>
+                            </h3>
+                            <h5 style="text-align: center; margin-top: 0">
+                              Address : <%= user.address %><br />
+                              <% if(user.gstNumber) { %> GST Number :<%=
+                              user.gstNumber %><br />
+                              <% } %> Channel Code : <%= user.chanelCode %>
+                            </h5>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="height: 15px"></td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="height: 15px"></td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table
+                      width="100%"
+                      border="1"
+                      cellpadding="0"
+                      cellspacing="0"
+                      align="center"
+                      style="
+                        border: 0;
+                        background: #fff;
+                        font-family: arial;
+                        font-size: 12px;
+                      "
+                    >
+                      <tbody>
+                        <tr>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>Invoice No :-</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b><%= invoiceId %></b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>Invoice Date:-</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0">
+                              <b><%= new Date().toDateString() %></b>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>Place of Supply :-</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>Noida</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0">
+                              <b>Reverse Charge Applicable:-</b>
+                            </p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>No</b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px" colspan="2">
+                            <p style="margin: 0">
+                              <b>Details of Receiver ( Billed To ) :-</b>
+                            </p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>Billing Month:-</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0">
+                              <b
+                                ><%= new Date().toLocaleDateString('en-GB', {
+                                month: 'long', year: 'numeric' }) %>
+                              </b>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr style="background: #eee">
+                          <td style="padding: 10px" colspan="2">
+                            <p style="margin: 0">
+                              <b>Xperiance Fintech Private Limited</b>
+                            </p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>GST No.</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>PAN No.</b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px" colspan="2">
+                            <p style="margin: 0">
+                              3rd Floor, Gali No.03, Sharma Market, Hoshiyarpur,
+                              Sector-51,<br />
+                              Noida, Gautam Buddha Nagar, Uttar Pradesh - 202301
+                            </p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>09AAACX4382M1ZR</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>AAACX4382M</b></p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table
+                      width="100%"
+                      border="1"
+                      cellpadding="0"
+                      cellspacing="0"
+                      align="center"
+                      style="
+                        border: 0;
+                        background: #fff;
+                        font-family: arial;
+                        font-size: 12px;
+                      "
+                    >
+                      <tbody>
+                        <tr style="background: #eee">
+                          <td style="padding: 10px; width: 50px">
+                            <p style="margin: 0"><b>S No.</b></p>
+                          </td>
+                          <td style="padding: 10px; width: 293px">
+                            <p style="margin: 0">
+                              <b>Descriptions of Services</b>
+                            </p>
+                          </td>
+                          <td style="padding: 10px; width: 179px">
+                            <p style="margin: 0"><b>&nbsp;</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0">
+                              <b>Payout Amt. <br />(Taxable)</b>
+                            </p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>1</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0">
+                              <b>
+                                Total Payout for the Month <%= new
+                                Date().toLocaleDateString('en-GB', { month:
+                                'long', year: 'numeric' }) %><br />
+                                Connector Code - <%= user.chanelCode %>
+                              </b>
+                            </p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>&nbsp;</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b><%= payoutAmount %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px"></td>
+                          <td style="padding: 10px"></td>
+                          <td style="padding: 10px"></td>
+                          <td style="padding: 10px"></td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          >
+                            <p style="margin: 0"><b>Total Taxable Amount</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b>&nbsp;</b></p>
+                          </td>
+                          <td style="padding: 10px">
+                            <p style="margin: 0"><b><%= payoutAmount %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          ></td>
+                          <td style="padding: 5px 10px">
+                            <p style="margin: 0"><b>CGST @ 9%</b></p>
+                          </td>
+                          <td style="padding: 5px 10px"></td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          ></td>
+                          <td style="padding: 5px 10px">
+                            <p style="margin: 0"><b>SGST @ 9%</b></p>
+                          </td>
+                          <td style="padding: 5px 10px"></td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          ></td>
+                          <td style="padding: 5px 10px">
+                            <p style="margin: 0"><b>IGST @ 18%</b></p>
+                          </td>
+                          <td style="padding: 5px 10px">
+                            <p style="margin: 0"><b><%= gstAmount %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          ></td>
+                          <td style="padding: 5px 10px; background: #eee">
+                            <p style="margin: 0"><b>Round Off</b></p>
+                          </td>
+                          <td style="padding: 5px 10px; background: #eee"></td>
+                        </tr>
+                        <tr>
+                          <td
+                            style="padding: 10px; text-align: center"
+                            colspan="2"
+                          ></td>
+                          <td style="padding: 5px 10px; font-size: 14px">
+                            <p style="margin: 0"><b>Total Payable</b></p>
+                          </td>
+                          <td style="padding: 5px 10px; font-size: 14px">
+                            <p style="margin: 0">
+                              <b><%= totalPayableAmount %></b>
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">
+                    <table
+                      width="100%"
+                      border="1"
+                      cellpadding="0"
+                      cellspacing="0"
+                      align="center"
+                      style="
+                        border: 0;
+                        background: #fff;
+                        font-family: arial;
+                        font-size: 12px;
+                      "
+                    >
+                      <tbody>
+                        <tr>
+                          <td colspan="2" style="padding: 10px; border: 0"></td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px; border: 0">
+                            <p style="margin: 0"><b>In Words :-</b></p>
+                          </td>
+                          <td style="padding: 10px; border: 0">
+                            <p style="margin: 0"><b><%= amountInWords %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 10px; border: 0">
+                            <p style="margin: 0"><b>Amount to Credited:-</b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b><%= totalPayableAmount %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b>Payee Name:-</b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b><%= user.name %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b>Bank Name:-</b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b><%= user.bankName %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b>Bank A/c Number:- </b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b><%= user.bankAccount %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b>IFSC Code:- </b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b><%= user.bankIfsc %></b></p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0"><b>Branch:- </b></p>
+                          </td>
+                          <td style="padding: 5px 10px; border: 0">
+                            <p style="margin: 0">
+                              <b><%= user.bankBranch %>.</b>
+                            </p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="height: 30px"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script>
+      function printInvoice() {
+        window.print();
+      }
+    </script>
+  </body>
+</html>

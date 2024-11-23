@@ -1,0 +1,84 @@
+<%- include('../partials/header') %>
+<!-- Start Login Area -->
+<section class="login-area">
+  <div class="row m-0">
+    <div class="col-lg-6 col-md-12 p-0">
+      <div class="login-image">
+        <img src="/customer-assets/img/login-bg.jpg" alt="image" />
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-12 p-0">
+      <div class="login-content">
+        <div class="d-table">
+          <div class="d-table-cell">
+            <div class="login-form">
+              <div class="logo black-logo">
+                <a href="javascript:;"
+                  ><img
+                    width="50%"
+                    src="/customer-assets/img/logo.png"
+                    alt="image"
+                /></a>
+              </div>
+              <div class="logo white-logo">
+                <a href="javascript:;"
+                  ><img src="/customer-assets/img/logo.png" alt="image"
+                /></a>
+              </div>
+
+              <h5>Your data is safe and secure at PaiseSe.com</h5>
+              <span class="text-danger sent-otp"></span>
+              <form class="mobile-otp-form">
+                <div class="form-group">
+                  <input
+                    type="number"
+                    name="phone"
+                    id="mobileNumber"
+                    placeholder="Your Number"
+                    class="form-control font-monospace"
+                  />
+                </div>
+
+                <div class="form-group">
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Your Password"
+                    class="form-control font-monospace"
+                  />
+                </div>
+
+                <button class="btn btn-primary send-otp">Login</button>
+                <!-- <button type="button" class="btn btn-primary verify-otp d-none">
+                  Verify Login Code
+                </button>
+                <button type="button" class="btn btn-primary resend-otp d-none mt-3">
+                  resend Login Code
+                </button> -->
+              </form>
+              <p class="fs-6">
+                <b>
+                  <a href="/reset-password"> Forgot Password?</a>
+                </b>
+              </p>
+
+              <a class="text-white" href="/register">
+                <button
+                  class="btn btn-white w-100 mt-4"
+                  style="border: 3px solid #0a66c2; color: #0a66c2"
+                >
+                  Register
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Login Area -->
+<script type="module" src="/javascripts/customer/login.js"></script>
+<%- include('../partials/footer') %>

@@ -1,0 +1,755 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  id                      Int       @id @default(autoincrement())
+  User                    User      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId                  Int
+  customerId              String?
+  leadId                  String?
+  loanType                String?
+  productSelection        String?
+  chanelCode              String?
+  customerName            String?
+  locationPin             String?
+  state                   String?
+  city                    String?
+  phone                   String?
+  dob                     DateTime?
+  aadhar                  String?
+  pancard                 String?
+  gender                  String?
+  loanRequired            Int?
+  disbursingBank          String?
+  disbursedAmount         Int?
+  payoutAmount            Float?
+  netSalary               Int?
+  companyName             String?
+  preferedLender          String?   @db.LongText
+  employmentType          String?
+  turnOver                Int?
+  vehicleType             String?
+  vehicleBrand            String?
+  preferedInsurer         String?
+  grossReceipt            String?
+  profession              String?
+  primaryBank             String?
+  cardNameRequired        String?
+  doc1Name                String?
+  doc2Name                String?
+  doc3Name                String?
+  doc4Name                String?
+  aadharCardDocument      String?
+  pancardDocument         String?
+  bankStatement           String?
+  passportPhoto           String?
+  salarySlip              String?
+  addressProof            String?
+  coApAadharCardDocument  String?
+  coApPancardDocument     String?
+  coApPassportPhoto       String?
+  registrationCertificate String?
+  udhyamAadhar            String?
+  gstReturnTwelveMonths   String?
+  itrTwoYears             String?
+  coiTwoYears             String?
+  balanceSheetTwoYears    String?
+  profitLossAnnexure      String?
+  taxAuditReport          String?
+  currentBankOneYear      String?
+  ccBankOneYear           String?
+  odBankOneYear           String?
+  runningLoanSheet        String?
+  ownershipProof          String?
+  detailSheet             String?
+  otherDoc1               String?
+  otherDoc2               String?
+  otherDoc3               String?
+  otherDoc4               String?
+  status                  String?
+  remark                  String?
+  invoiced                Boolean?  @default(false)
+  disbursedAt             DateTime?
+  createdAt               DateTime  @default(now())
+  updatedAt               DateTime  @updatedAt
+}
+
+model Invoice {
+  id           Int      @id @default(autoincrement())
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId       Int
+  gst          Float
+  tds          Float?
+  payoutAmount Float
+  totalAmount  Float
+  normal       String?
+  advance      String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model tds {
+  id        Int      @id @default(autoincrement())
+  role      String?
+  percent   Float?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model paiseseWebhook {
+  id          Int      @id @default(autoincrement())
+  externalId  String?
+  deliveredTS String?
+  status      String?
+  cause       String?
+  phoneNo     String?
+  errCode     String?
+  noOfFrags   String?
+  mask        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model User {
+  id                 Int      @id @default(autoincrement())
+  name               String?
+  email              String?  @unique
+  phone              String?  @unique
+  status             String?
+  remark             String?
+  chanelCode         String?  @unique
+  profile            String?
+  bankName           String?
+  pincode            String?
+  state              String?
+  city               String?
+  address            String?
+  bankAccount        String?
+  bankAccountHolder  String?
+  bankBranch         String?
+  bankIfsc           String?
+  bankChequeDocument String?
+  aadhar             String?
+  gstNumber          String?
+  password           String?
+  pancard            String?  @db.VarChar(10)
+  pancardDocument    String?
+  aadharCardDocument String?
+  dob                String?
+  utms               Json?
+  agreedToTerms      Boolean?
+  type               String   @default("customer")
+  staffType          String?
+  role               String?  @default("normal")
+  agentCategory      String?
+  payoutPercent      Float?
+  userType           String?
+  accountVerifyType  String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  UserInformation          UserInformation[]
+  BusinessLoanEnquiries    BusinessLoanEnquiries[]
+  HomeLoanEnquiries        HomeLoanEnquiries[]
+  LapLoanEnquiries         LapLoanEnquiries[]
+  TwoWheelerLoanEnquiries  TwoWheelerLoanEnquiries[]
+  CarLoanEnquiries         CarLoanEnquiries[]
+  FamilyDoctorEnquiries    FamilyDoctorEnquiries[]
+  PersonalLoanEnquiries    PersonalLoanEnquiries[]
+  PanVerifications         PanVerifications?
+  HealthInsuranceEnquiries HealthInsuranceEnquiries[]
+  Lead                     Lead[]
+  Invoice                  Invoice[]
+  GstVerifications         GstVerifications?
+}
+
+model UserInformation {
+  id                   Int      @id @default(autoincrement())
+  userId               Int
+  productId            Int
+  employment           String
+  name                 String   @db.VarChar(100)
+  email                String?
+  pincode              String?  @db.VarChar(20)
+  city                 String?  @db.VarChar(100)
+  state                String?  @db.VarChar(100)
+  dob                  DateTime @db.Date
+  pancard              String?  @db.VarChar(10)
+  annualIncome         Float?   @db.Double
+  tentativeCreditLimit Float?   @db.Double
+  creditCardHolder     Boolean  @default(false)
+  creditCardProvidedBy Json?
+  creditCardType       String?
+  utms                 Json?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  User           User             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product        Products         @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  UserCardClicks UserCardClicks[]
+}
+
+model Masters {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  icon      String?
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  MasterValues MasterValues[]
+}
+
+model BankLoanTypeCommission {
+  id            Int      @id @default(autoincrement())
+  bank          String   @unique
+  loanType      String?
+  agentCategory String?
+  payoutPercent Float?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model MasterValues {
+  id        Int      @id @default(autoincrement())
+  masterId  Int
+  name      String
+  icon      String?
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Master Masters @relation(fields: [masterId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Products {
+  id                  Int      @id @default(autoincrement())
+  name                String
+  icon                String?
+  shortDescription    String?
+  longDescription     String   @db.Text
+  tagLineTitle        String?
+  tagLineOne          String?
+  tagLineTwo          String?
+  tagLineThree        String?
+  tagLineFour         String?
+  tagLineFive         String?
+  tagLineIcon         String?
+  buttonName          String?  @db.Text
+  isVisibleOnHomePage Boolean  @default(false)
+  sort                Int      @default(8888)
+  status              Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  Faqs                     Faqs[]
+  UserInformation          UserInformation[]
+  Bres                     Bres[]
+  UserCardClicks           UserCardClicks[]
+  BusinessLoanEnquiries    BusinessLoanEnquiries[]
+  HomeLoanEnquiries        HomeLoanEnquiries[]
+  LapLoanEnquiries         LapLoanEnquiries[]
+  TwoWheelerLoanEnquiries  TwoWheelerLoanEnquiries[]
+  CarLoanEnquiries         CarLoanEnquiries[]
+  FamilyDoctorEnquiries    FamilyDoctorEnquiries[]
+  PersonalLoanBres         PersonalLoanBres[]
+  PersonalLoanEnquiries    PersonalLoanEnquiries[]
+  HealthInsuranceEnquiries HealthInsuranceEnquiries[]
+
+  @@fulltext([name])
+}
+
+model Faqs {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  question  String   @db.VarChar(255)
+  answer    String   @db.Text
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Offers {
+  id        Int      @id @default(autoincrement())
+  offer     String   @db.VarChar(255)
+  photo     String?
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model checkOfferOtp {
+  id        Int      @id @default(autoincrement())
+  phone     String
+  otp       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cities {
+  id        Int      @id @default(autoincrement())
+  name      String
+  state     String?
+  pincode   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Cards {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  type         String
+  fees         Float    @db.Double
+  info         String?
+  description  String?  @db.LongText
+  lender       String?
+  miles        String?
+  points       String?
+  loungeAccess String?
+  link         String   @db.Text
+  icon         String?
+  status       Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  Bres           Bres[]
+  UserCardClicks UserCardClicks[]
+}
+
+model Bres {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  lender    String?
+  cardId    Int?
+  age       Int
+  income    Float?   @default(0.0) @db.Double
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Product                Products                 @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Card                   Cards?                   @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  CreditCardBreCities    CreditCardBreCities[]
+  CreditCardBreCompanies CreditCardBreCompanies[]
+}
+
+model CreditCardBreCities {
+  id        Int      @id @default(autoincrement())
+  breId     Int
+  Bre       Bres     @relation(fields: [breId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  city      String
+  pincode   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CreditCardBreCompanies {
+  id        Int      @id @default(autoincrement())
+  breId     Int
+  Bre       Bres     @relation(fields: [breId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  company   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PersonalLoanBres {
+  id            Int      @id @default(autoincrement())
+  productId     Int
+  bankName      String
+  age           Int
+  maxAge        Int?
+  maxLoanAmount Float?   @default(0.0) @db.Double
+  income        Float?   @default(0.0) @db.Double
+  otherIncome   Float?   @default(0.0) @db.Double
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  redirectUrl   String?
+
+  Product               Products                @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  PersonalLoanBreCities PersonalLoanBreCities[]
+}
+
+model PersonalLoanBreCities {
+  id              Int              @id @default(autoincrement())
+  breId           Int
+  PersonalLoanBre PersonalLoanBres @relation(fields: [breId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  city            String
+  pincode         String
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model UserCardClicks {
+  id                Int      @id @default(autoincrement())
+  userInformationId Int
+  cardId            Int
+  productId         Int
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  UserInformation UserInformation @relation(fields: [userInformationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Card            Cards           @relation(fields: [cardId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product         Products        @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model staticPages {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String?  @unique
+  description String?  @db.LongText
+  status      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonials {
+  id          Int      @id @default(autoincrement())
+  name        String
+  icon        String?
+  designation String?
+  content     String?  @db.LongText
+  status      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Partners {
+  id        Int      @id @default(autoincrement())
+  name      String
+  icon      String?
+  sort      Int      @default(8888)
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BusinessLoanEnquiries {
+  id                   Int      @id @default(autoincrement())
+  userId               Int
+  productId            Int
+  loanAmount           Float    @db.Double
+  employment           String?  @db.VarChar(100)
+  annualTurnover       String?  @db.VarChar(100)
+  city                 String?  @db.VarChar(100)
+  phone                String?  @db.VarChar(20)
+  companyType          String?  @db.VarChar(100)
+  currentBusinessYears String?  @db.VarChar(100)
+  email                String?
+  dob                  DateTime @db.Date
+  pancard              String?  @db.VarChar(10)
+  name                 String?  @db.VarChar(100)
+  businessName         String?
+  utms                 Json?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model HomeLoanEnquiries {
+  id                     Int      @id @default(autoincrement())
+  userId                 Int
+  productId              Int
+  type                   String?  @db.VarChar(100)
+  loanAmount             String?  @db.VarChar(100)
+  city                   String?  @db.VarChar(100)
+  employment             String?  @db.VarChar(100)
+  bankAccount            String?  @db.VarChar(100)
+  pancard                String?  @db.VarChar(10)
+  name                   String?  @db.VarChar(100)
+  dob                    DateTime @db.Date
+  propertyType           String?
+  email                  String?
+  tentativePurchaseMonth String?  @db.VarChar(100)
+  utms                   Json?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model LapLoanEnquiries {
+  id                     Int      @id @default(autoincrement())
+  userId                 Int
+  productId              Int
+  loanAmount             String?  @db.VarChar(100)
+  city                   String?  @db.VarChar(100)
+  employment             String?  @db.VarChar(100)
+  bankAccount            String?  @db.VarChar(100)
+  pancard                String?  @db.VarChar(10)
+  name                   String?  @db.VarChar(100)
+  dob                    DateTime @db.Date
+  propertyType           String?
+  email                  String?
+  tentativePurchaseMonth String?  @db.VarChar(100)
+  utms                   Json?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model TwoWheelerLoanEnquiries {
+  id                     Int      @id @default(autoincrement())
+  userId                 Int
+  productId              Int
+  city                   String?  @db.VarChar(100)
+  employment             String?  @db.VarChar(100)
+  pancard                String?  @db.VarChar(10)
+  name                   String?  @db.VarChar(100)
+  dob                    DateTime @db.Date
+  phone                  String?  @db.VarChar(20)
+  email                  String?
+  monthlyIncome          String?  @db.VarChar(100)
+  twoWheelerBrand        String?  @db.VarChar(100)
+  tentativePurchaseMonth String?  @db.VarChar(100)
+  utms                   Json?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model CarLoanEnquiries {
+  id                     Int      @id @default(autoincrement())
+  userId                 Int
+  productId              Int
+  city                   String?  @db.VarChar(100)
+  employment             String?  @db.VarChar(100)
+  pancard                String?  @db.VarChar(10)
+  name                   String?  @db.VarChar(100)
+  dob                    DateTime @db.Date
+  phone                  String?  @db.VarChar(20)
+  email                  String?
+  monthlyIncome          String?  @db.VarChar(100)
+  carBrand               String?  @db.VarChar(100)
+  productType            String?  @db.VarChar(100)
+  tentativePurchaseMonth String?  @db.VarChar(100)
+  carModelYear           String?  @db.VarChar(100)
+  utms                   Json?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model FamilyDoctorEnquiries {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  name      String   @db.VarChar(100)
+  phone     String?  @db.VarChar(20)
+  email     String?
+  age       Int
+  pincode   String   @db.VarChar(20)
+  city      String   @db.VarChar(100)
+  utms      Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model PersonalLoanEnquiries {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  productId   Int
+  employment  String
+  name        String   @db.VarChar(100)
+  email       String?
+  pincode     String?  @db.VarChar(20)
+  city        String?  @db.VarChar(100)
+  state       String?  @db.VarChar(100)
+  dob         DateTime @db.Date
+  pancard     String?  @db.VarChar(10)
+  salary      Float    @default(0.0) @db.Double
+  itr         Float    @default(0.0) @db.Double
+  loanAmount  Float    @default(0.0) @db.Double
+  emiAmount   Float    @default(0.0) @db.Double
+  type        String?
+  companyName String?  @db.VarChar(255)
+  companyType String?  @db.VarChar(255)
+  utms        Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model HealthInsuranceEnquiries {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  productId Int
+  name      String   @db.VarChar(100)
+  phone     String?  @db.VarChar(20)
+  age       Int
+  pincode   String?  @db.VarChar(20)
+  city      String?  @db.VarChar(100)
+  state     String?  @db.VarChar(100)
+  utms      Json?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User    User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  Product Products @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model CompanyBankMasters {
+  id          Int      @id @default(autoincrement())
+  companyName String   @db.VarChar(255)
+  bankName    String   @db.VarChar(255)
+  grade       String   @db.VarChar(50)
+  foir        Float    @default(0.0) @db.Double
+  status      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model OtherBankMasters {
+  id            Int      @id @default(autoincrement())
+  bankName      String   @db.VarChar(255)
+  grade         String   @db.VarChar(50)
+  foir          Float    @default(0.0) @db.Double
+  maxLoanAmount Float?   @default(0.0) @db.Double
+  redirectUrl   String?
+  status        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model ProfessionalBankMasters {
+  id        Int      @id @default(autoincrement())
+  bankName  String   @db.VarChar(255)
+  foir      Float    @default(0.0) @db.Double
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BankGradeMasters {
+  id        Int      @id @default(autoincrement())
+  bankName  String   @db.VarChar(255)
+  grade     String   @db.VarChar(50)
+  foir      String   @db.VarChar(50)
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ContactQueries {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String   @db.VarChar(50)
+  phone     String?  @db.VarChar(50)
+  subject   String?
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PartnerConnectQueries {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  email     String   @db.VarChar(50)
+  phone     String?  @db.VarChar(50)
+  subject   String?
+  pincode   String?  @db.VarChar(20)
+  city      String?  @db.VarChar(100)
+  state     String?  @db.VarChar(100)
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model PanVerifications {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  name      String
+  pancard   String   @db.VarChar(10)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model GstVerifications {
+  id          Int      @id @default(autoincrement())
+  userId      Int      @unique
+  companyName String   @db.VarChar(255)
+  gstNo       String   @db.VarChar(15)
+  gstDetails  String   @db.LongText
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  User User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Greetings {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TeamMembers {
+  id          Int      @id @default(autoincrement())
+  type        String   @default("Core Team")
+  name        String
+  designation String?
+  about       String?  @db.LongText
+  linkedIn    String?
+  photo       String?
+  status      Boolean  @default(true)
+  sort        Int      @default(8888)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Blogs {
+  id        Int      @id @default(autoincrement())
+  title     String
+  content   String?  @db.LongText
+  author    String?
+  icon      String?
+  cover     String?
+  status    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model bankifsc {
+  id         Int     @id @default(autoincrement())
+  bank       String?
+  ifsc       String?
+  branch     String?
+  addess     String? @db.LongText
+  city1      String?
+  city2      String?
+  state      String?
+  code       String?
+  phone      String?
+  bankSlug   String?
+  stateSlug  String?
+  citySlug   String?
+  branchSlug String?
+}

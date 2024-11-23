@@ -1,0 +1,416 @@
+<%- include('./partials/header') %>
+
+
+  <div class="txt-pop">
+    <a href="javascript:;"><i class="fas greet fa-angle-right"></i></a>
+    <p>
+      <%= greeting?.name %>
+    </p>
+  </div>
+
+
+
+
+  <!-- <a style="position: sticky; top: 95%; left: 95%;" href="https://wa.me/919953553471" target="_blank">
+  <img src="../../public/images/wa-icon.gif" alt="whatsapp">
+</a> -->
+
+  <div class="home-page-main-banner" data-jarallax='{"speed": 0.3}'>
+    <div class="d-table">
+      <div class="d-table-cell">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Carousel -->
+            <div id="demo" class="carousel slide px-0" data-bs-ride="carousel">
+              <!-- Indicators/dots -->
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="3"></button>
+
+              </div>
+
+              <!-- The slideshow/carousel -->
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="/customer-assets/img/loan-bnr1.jpg" alt="<%= process.env.APP_NAME %>"
+                    class="d-block w-100 m-none" />
+
+                  <img src="/customer-assets/img/m-loan-bnr1.jpg" alt="<%= process.env.APP_NAME %>"
+                    class="d-none w-100 m-block" />
+
+                </div>
+                <div class="carousel-item">
+                  <img src="/customer-assets/img/loan-bnr2.jpg" <%=process.env.APP_NAME %>"
+                  class="d-block w-100 m-none"
+                  />
+                  <img src="/customer-assets/img/m-loan-bnr2.jpg" <%=process.env.APP_NAME %>"
+                  class="d-none w-100 m-block"
+                  />
+                </div>
+
+                <div class="carousel-item ">
+                  <img src="/customer-assets/img/loan-bnr3.png" alt="<%= process.env.APP_NAME %>"
+                    class="d-block w-100 m-none" />
+                  <img src="/customer-assets/img/m-loan-bnr3.png" alt="<%= process.env.APP_NAME %>"
+                    class="d-none w-100 m-block" />
+                </div>
+                <div class="carousel-item ">
+                  <img src="/customer-assets/img/loan-bnr4.jpg" alt="<%= process.env.APP_NAME %>"
+                    class="d-block w-100 m-none" />
+                  <img src="/customer-assets/img/m-loan-bnr4.jpg" alt="<%= process.env.APP_NAME %>"
+                    class="d-none w-100 m-block" />
+                </div>
+              </div>
+
+              <!-- Left and right controls/icons -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Start Featured Boxes Area -->
+  <section class="featured-boxes-area featured__wrapper">
+    <div class="container">
+      <div class="featured-boxes-inner">
+        <div class="row">
+          <% products.forEach(product=> { %>
+            <div class="col-lg-3 col-6">
+              <%- include('../components/customer/product', { product }) %>
+            </div>
+            <% }) %>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Featured Boxes Area -->
+
+  <!-- Start Services Area -->
+  <% displayProducts.forEach((product, index)=> { %>
+    <% if(index % 2===0) { %>
+      <section class="services-area pt-5 pb-5">
+        <div class="container container_auto">
+          <div class="overview-box">
+            <div class="overview-image ">
+              <div class="image">
+                <img <% if(product.tagLineIcon) { %>
+                src="/uploads/<%= product.tagLineIcon %>" <% } else { %>
+                    src="/customer-assets/img/credit-card.png" <% } %> alt="<%= product.name %>"
+                        style="width: 160px" class="" />
+
+                        <div class="circle-img">
+                          <img src="/customer-assets/img/circle.png" alt="<%= product.name %>" />
+                        </div>
+              </div>
+            </div>
+
+            <div class="overview-content ">
+              <div class="content">
+                <h2>
+                  <%= product.tagLineTitle %>
+                </h2>
+                <div class="bar"></div>
+                <h5 style="display:none;">
+                  <%= product.name %>
+                </h5>
+
+                <ul class="services-list">
+                  <% if(product.tagLineOne.length> 0) { %>
+                    <li>
+                      <span><i class="flaticon-check-mark"></i>
+                        <%= product.tagLineOne %>
+                      </span>
+                    </li>
+                    <% } %>
+                      <% if(product.tagLineTwo.length> 0) { %>
+                        <li>
+                          <span><i class="flaticon-check-mark"></i>
+                            <%= product.tagLineTwo %>
+                          </span>
+                        </li>
+                        <% } %>
+                          <% if(product.tagLineThree.length> 0) { %>
+                            <li>
+                              <span><i class="flaticon-check-mark"></i>
+                                <%= product.tagLineThree %>
+                              </span>
+                            </li>
+                            <% } %>
+                              <% if(product.tagLineFour.length> 0) { %>
+                                <li>
+                                  <span><i class="flaticon-check-mark"></i>
+                                    <%= product.tagLineFour %>
+                                  </span>
+                                </li>
+                                <% } %>
+                                  <% if(product.tagLineFive.length> 0) { %>
+                                    <li>
+                                      <span><i class="flaticon-check-mark"></i>
+                                        <%= product.tagLineFive %>
+                                      </span>
+                                    </li>
+                                    <% } %>
+                </ul>
+                <a href="/product/<%= product.name.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)+/g, '') %>/<%= product.id %>" class="btn btn-primary">Know More</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <% } else { %>
+        <section class="services-area pt-5 pb-5">
+          <div class="container container_auto">
+            <div class="overview-box">
+              <div class="overview-content ">
+                <div class="content">
+                  <h2>
+                    <%= product.tagLineTitle %>
+                  </h2>
+                  <div class="bar"></div>
+                  <h5 style="display:none;">
+                    <%= product.name %>
+                  </h5>
+
+                  <ul class="services-list">
+                    <% if(product.tagLineOne.length> 0) { %>
+                      <li>
+                        <span><i class="flaticon-check-mark"></i>
+                          <%= product.tagLineOne %>
+                        </span>
+                      </li>
+                      <% } %>
+                        <% if(product.tagLineTwo.length> 0) { %>
+                          <li>
+                            <span><i class="flaticon-check-mark"></i>
+                              <%= product.tagLineTwo %>
+                            </span>
+                          </li>
+                          <% } %>
+                            <% if(product.tagLineThree.length> 0) { %>
+                              <li>
+                                <span><i class="flaticon-check-mark"></i>
+                                  <%= product.tagLineThree %>
+                                </span>
+                              </li>
+                              <% } %>
+                                <% if(product.tagLineFour.length> 0) { %>
+                                  <li>
+                                    <span><i class="flaticon-check-mark"></i>
+                                      <%= product.tagLineFour %>
+                                    </span>
+                                  </li>
+                                  <% } %>
+                                    <% if(product.tagLineFive.length> 0) { %>
+                                      <li>
+                                        <span><i class="flaticon-check-mark"></i>
+                                          <%= product.tagLineFive %>
+                                        </span>
+                                      </li>
+                                      <% } %>
+                  </ul>
+                  <a href="/product/<%= product.name.toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)+/g, '') %>/<%= product.id %>" class="btn btn-primary">Know More</a>
+                </div>
+              </div>
+              <div class="overview-image ">
+                <div class="image">
+                  <img <% if(product.tagLineIcon) { %>
+                  src="/uploads/<%= product.tagLineIcon %>" <% } else { %>
+                      src="/customer-assets/img/credit-card.png" <% } %> alt="<%= product.name %>"
+                          style="width: 160px" class="" />
+
+                          <div class="circle-img">
+                            <img src="/customer-assets/img/circle.png" alt="<%= product.name %>" />
+                          </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <% } %>
+          <% }) %>
+            <!-- End Services Area -->
+
+            <!-- login dashboard -->
+            <%- include('../customer/auth/loginDashboard.ejs') %>
+            <!-- end here login dashboard -->
+
+          <!-- Start Featured Boxes Area -->
+          <section class="featured-boxes-area wow animate__animated animate__zoomIn animated ptb-100 bg-f6f4f8">
+            <div class="container">
+                <div class="featured-boxes-inner">
+                    <div class="row m-0">
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                             <a href="credit_loan.html">
+                            <div class="single-featured-box">
+                                <div class="icon color-fb7756">
+                                    <img src="customer-assets/img/credit-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Credit Cards</h3>
+                                <p class="hidden-xs">From 35+ options, choose a card matching your lifestyle & needs</p>
+                                <span class="read-more-btn hidden-xs">Get Best Offers </span>
+                           </div>  </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                           <a href="personal_loan.html">
+                            <div class="single-featured-box">
+                                <div class="icon color-facd60">
+                                     <img src="customer-assets/img/loan-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Personal Loan</h3>
+                                <p class="hidden-xs">Select the best offer curated just for you from a wide choice of Banks & NBFC's</p>
+                                <span href="personal-loan.html" class="read-more-btn hidden-xs">Read More</span>
+                           </div> </a>
+                        </div>
+                       <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                           <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-fb7756">
+                                    <img src="customer-assets/img/credit-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Coming Soon</h3>
+                                <p class="hidden-xs">From 35+ options, choose a card matching your lifestyle & needs</p>
+                                <span class="read-more-btn hidden-xs">Get Best Offers </span>
+                            </div>  </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                            <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-facd60">
+                                     <img src="customer-assets/img/loan-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Coming Soon</h3>
+                                <p class="hidden-xs">Select the best offer curated just for you from a wide choice of Banks & NBFC's</p>
+                                <span class="read-more-btn hidden-xs">Read More</span>
+                            </div></a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                             <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-fb7756">
+                                    <img src="customer-assets/img/credit-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Credit Cards</h3>
+                                <p class="hidden-xs">From 35+ options, choose a card matching your lifestyle & needs</p>
+                                <span class="read-more-btn hidden-xs">Get Best Offers </span>
+                           </div>  </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                           <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-facd60">
+                                     <img src="customer-assets/img/loan-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Personal Loan</h3>
+                                <p class="hidden-xs">Select the best offer curated just for you from a wide choice of Banks & NBFC's</p>
+                                <span href="personal-loan.html" class="read-more-btn hidden-xs">Read More</span>
+                           </div> </a>
+                        </div>
+                       <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                           <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-fb7756">
+                                    <img src="customer-assets/img/credit-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Coming Soon</h3>
+                                <p class="hidden-xs">From 35+ options, choose a card matching your lifestyle & needs</p>
+                                <span class="read-more-btn hidden-xs">Get Best Offers </span>
+                            </div>  </a>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-md-6 p-0 loan__box">
+                            <a href="">
+                            <div class="single-featured-box">
+                                <div class="icon color-facd60">
+                                     <img src="customer-assets/img/loan-card-img.jpg" style="width:60px">
+                                </div>
+                                <h3>Coming Soon</h3>
+                                <p class="hidden-xs">Select the best offer curated just for you from a wide choice of Banks & NBFC's</p>
+                                <span class="read-more-btn hidden-xs">Read More</span>
+                            </div></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Featured Boxes Area -->
+
+
+
+            <!-- Start Invoicing Area -->
+            <section class="invoicing-area ptb-70" style="display: none">
+              <div class="container-fluid">
+                <div class="row align-items-center">
+                  <div class="col-lg-6 col-md-12">
+                    <div class="invoicing-content">
+                      <h2>Easy Payment to borrow free get a better filling at home</h2>
+                      <div class="bar"></div>
+                      <!--p>
+            Easy Payment to borrow free get a better filling at home
+          </p-->
+                      <a href="#" class="btn btn-primary">Get Started</a>
+                    </div>
+                  </div>
+                  <div class="col-lg-6 col-md-12">
+                    <div class="invoicing-image">
+                      <div class="main-image">
+                        <img src="/customer-assets/img/invoicing-image/1.png"
+                          class="wow animate__animated animate__zoomIn" alt="image" />
+                        <img src="/customer-assets/img/invoicing-image/2.png"
+                          class="wow animate__animated animate__fadeInLeft" alt="image" />
+                        <img src="/customer-assets/img/invoicing-image/3.png"
+                          class="wow animate__animated animate__fadeInLeft" alt="image" />
+                        <img src="/customer-assets/img/invoicing-image/4.png"
+                          class="wow animate__animated animate__fadeInRight" alt="image" />
+                      </div>
+                      <div class="main-mobile-image">
+                        <img src="/customer-assets/img/invoicing-image/main-pic.png"
+                          class="wow animate__animated animate__zoomIn" alt="image" />
+                      </div>
+                      <div class="circle-image">
+                        <img src="/customer-assets/img/invoicing-image/circle1.png" alt="image" />
+                        <img src="/customer-assets/img/invoicing-image/circle2.png" alt="image" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- End Invoicing Area -->
+
+            
+      
+            <!-- End Fun Facts Area -->
+            <!-- Start Feedback Area -->
+            <!-- <%- include('../components/customer/testimonials', { testimonials }) %> -->
+              <!-- End Feedback Area -->
+
+              <!-- Start Ready To Talk Area -->
+              <section class="ready-to-talk">
+                <div class="container">
+                  <div class="ready-to-talk-content ">
+                    <h3>Our partners from across the industry</h3>
+                  </div>
+                </div>
+              </section>
+              <!-- End Ready To Talk Area -->
+
+              <!-- Start Partner Area -->
+              <%- include('../components/customer/partners', { partners }) %>
+                <!-- End Partner Area -->
+
+                <!-- Start Footer Area -->
+
+                <%- include('./partials/footer') %>
+                  <script type="module" src="/javascripts/customer/login.js"></script>

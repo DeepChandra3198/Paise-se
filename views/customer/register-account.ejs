@@ -1,0 +1,185 @@
+<%- include('./partials/header' , {hide : true}) %>
+
+  <div class="preloader" style="display: block">
+    <div class="loader">
+      <div class="shadow"></div>
+      <div class="box"></div>
+    </div>
+  </div>
+  <!-- End Preloader -->
+
+  <!-- Start Login Area -->
+  <section class="login-area">
+    <div class="row m-0">
+      <div class="col-lg-6 col-md-12 p-0">
+        <div class="signup-image personal-loan-img">
+          <img src="assets/img/personal-loan-bg.jpg" alt="image"
+            class="wow animate__ animate__zoomInDown animated animated"
+            style="visibility: visible; animation-name: zoomInDown" />
+          <div class="app-download-content wow animate__ animate__zoomIn animated animated"
+            style="visibility: visible; animation-name: zoomIn">
+            <h2>B2B Agents Account</h2>
+            <div class="bar"></div>
+
+            <ul class="features-list">
+              <% registerInstruction.forEach(master=> { %>
+                <li>
+                  <span><i class="flaticon-check-mark"></i>
+                    <%= master.name %>
+                  </span>
+                </li>
+                <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="login-content login-content__">
+          <div class="d-table">
+            <div class="d-table-cell">
+              <div class="login-form">
+                <div class="logo black-logo">
+                  <a href="index.html"><img src="/customer-assets/img/logo.png" alt="image" style="width: 200px" /></a>
+                </div>
+                <div class="logo white-logo">
+                  <a href="index.html"><img src="/customer-assets/img/logo.png" alt="image" style="width: 200px" /></a>
+                </div>
+
+                <!-- Loader -->
+                <div id="screen-loader"
+                  class="d-none position-fixed top-0 start-0 w-100 h-100 bg-light opacity-75 d-flex justify-content-center align-items-center"
+                  style="z-index: 1050;">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+
+                <div class="screen-loader" style="display: block">
+                  <div class="loader">
+                    <div class="shadow"></div>
+                    <div class="box"></div>
+                  </div>
+                </div>
+                <!-- <h3>Bank Details</h3> -->
+
+                <form class="register-account-form">
+                  <div class="row mb-5">
+                    <!-- check box start -->
+                    <div class="container mt-5 ">
+                      <div class="row justify-content-center">
+                        <div class="col-12 d-flex justify-content-center gap-5 mb-4">
+                          <!-- Checkbox 1 -->
+                          <div class="text-center">
+                            <input type="radio" id="account" name="accountVerifyType" class="rounded-checkbox"
+                              value="Individual/Sole Proprietary" checked />
+                            <label for="account" class="checkbox-label">
+                              account
+                            </label>
+                          </div>
+
+                          <!-- Checkbox 2 -->
+                          <div class="text-center">
+                            <input type="radio" id="cheque" name="accountVerifyType" class="rounded-checkbox"
+                              value="cheque" />
+                            <label for="cheque" class="checkbox-label">
+                              cheque
+                            </label>
+                          </div>
+                          <!-- check box end -->
+                        </div>
+
+
+                        <div class="form-group bankIfsc">
+                          <!-- <span class="text-danger m-1">*</span> -->
+                          <input type="text" name="bankIfsc" id="bankIfsc" placeholder="IFSC *" class="form-control"
+                            required="true" style="display: inline; width: 97%" />
+                        </div>
+                        <div class="form-group bankName">
+                          <!-- <span class="text-danger">*</span> -->
+                          <input type="text" name="bankName" id="bankName" placeholder="Bank Name *"
+                            class="form-control" required="true" style="display: inline; width: 97%" />
+                        </div>
+                        <div class="form-group bankBranch">
+                          <!-- <span class="text-danger m-1">*</span> -->
+                          <input type="text" name="bankBranch" id="bankBranch" placeholder="Account Branch *"
+                            class="form-control" required="true" style="display: inline; width: 97%" />
+                        </div>
+
+
+
+                        <div class="form-group bankAccount">
+                          <!-- <span class="text-danger m-1">*</span> -->
+                          <input type="tel" name="bankAccount" id="bankAccount" placeholder="Account Number *"
+                            class="form-control" required="true" pattern="[0-9]*" style="display: inline; width: 97%" />
+                        </div>
+                        <div class="form-group bankAccountHolder">
+                          <!-- <span class="text-danger m-1">*</span> -->
+                          <input type="text" name="bankAccountHolder" id="bankAccountHolder"
+                            placeholder="Account Holder Name *" class="form-control" required="true"
+                            style="display: inline; width: 97%" />
+                        </div>
+                        <div class="form-group upload_photo p-3 bankChequeDocument" style="background: #0a66c2">
+                          <label class="row p-6" role="button">
+                            <input type="file" name="bankChequeDocument" id="number"
+                              onchange="displayDoc(this, 'bankChequeDocument');" placeholder="photo"
+                              class="form-control d-none" accept=".pdf, .jpg, .png" />
+                            <span class="text-center text-white" id="selectedBankCheque"><b>Cheque Upload <span
+                                  class="text-danger">*</span></b></span>
+                          </label>
+                        </div>
+                        <button href="register-aggrement" type="submit"
+                          class="btn btn-primary registerSubmitButton d-none">
+                          Next
+                        </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Login Area -->
+
+  <!-- Dark/Light Toggle -->
+  <div class="dark-version">
+    <label id="switch" class="switch">
+      <input type="checkbox" onchange="toggleTheme()" id="slider" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
+  <!-- Links of JS files -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/meanmenu.js"></script>
+  <script src="assets/js/nice-select.min.js"></script>
+  <script src="assets/js/slick.min.js"></script>
+  <script src="assets/js/magnific-popup.min.js"></script>
+  <script src="assets/js/appear.min.js"></script>
+  <script src="assets/js/odometer.min.js"></script>
+  <script src="assets/js/owl.carousel.min.js"></script>
+  <script src="assets/js/parallax.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
+  <script src="assets/js/form-validator.min.js"></script>
+  <script src="assets/js/contact-form-script.js"></script>
+  <script src="assets/js/jquery.ajaxchimp.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <a href="https://themeforest.net/checkout/from_item/24748730?license=regular&amp;support=bundle_6month&amp;_ga=2.127639053.1035807767.1645331073-1425290503.1590986634"
+    class="buy-now-btn" target="_blank"><img src="assets/img/envato.png" alt="envato" /></a>
+
+  <!-- Start Footer Area -->
+  <script>
+    function displayDoc(input, docName) {
+      if (docName == "bankChequeDocument") {
+        if (input.files && input.files[0]) {
+          document.getElementById("selectedBankCheque").innerText =
+            input.files[0].name;
+        }
+      }
+    }
+  </script>
+  <script type="module" src="/javascripts/customer/login.js"></script>
+  <script type="module" src="/javascripts/customer/register-account.js"></script>
+  <%- include('./partials/footer') %>

@@ -1,0 +1,230 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="mt-5 pt-5">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          Leads
+                          <!-- export-customers -->
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-box mt-4">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>PERSONAL</th>
+                              <th>OTHER INFO</th>
+                              <th>PRODUCT</th>
+                              <th>LOAN INFO</th>
+                              <th style="width: 16%; text-align: center">
+                                ACTIONS
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% leads.forEach((teamMember)=> { %>
+                            <tr
+                              style="background: #fff; border: 1px solid #eee"
+                            >
+                              <td class="name" style="border: 0">
+                                <div class="team-profile-img">
+                                  <!-- <div
+                                    class="avatar-lg img-thumbnail rounded-circle flex-shrink-0"
+                                  >
+                                    <img
+                                      src="https://loan.webkype.net/admin/assets/images/users/avatar-2.jpg"
+                                      alt=""
+                                      class="img-fluid d-block rounded-circle"
+                                    />
+                                  </div> -->
+                                  <div class="team-content">
+                                    <p class="text-muted mb-0">
+                                      Name :- <%= teamMember.customerName %>
+                                    </p>
+                                    <p class="text-muted mb-0">
+                                      Area Code :- <%= teamMember.locationPin %>
+                                    </p>
+                                    <p class="text-muted mb-0 lead">
+                                      Contact No. :- <%= teamMember.phone %>
+                                    </p>
+                                  </div>
+                                </div>
+                              </td>
+                              <td class="name" style="border: 0">
+                                <p class="text-muted mb-0">
+                                  Company :- <%= teamMember.companyName %>
+                                </p>
+                                <% if (teamMember.netSalary) { %>
+                                <p class="text-muted mb-0">
+                                  Net Salary :- <%=
+                                  teamMember.netSalary.toLocaleString('en-IN')
+                                  %>
+                                </p>
+                                <% } %>
+                              </td>
+                              <td class="name" style="border: 0">
+                                <p class="text-muted mb-0">
+                                  Product Selection :- <%=
+                                  teamMember.productSelection %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  Channel Code :- <%= teamMember.chanelCode %>
+                                </p>
+                                <p class="text-muted mb-0">
+                                  Lead Id :- <%= teamMember.leadId %>
+                                </p>
+                              </td>
+                              <td class="name" style="border: 0">
+                                <p class="text-muted mb-0">
+                                  <b> <%= teamMember.loanType %> </b>
+                                </p>
+                                <% if (teamMember.loanRequired) { %>
+                                <p class="text-muted mb-0">
+                                  Amount Required: <%=
+                                  teamMember.loanRequired.toLocaleString('en-IN')
+                                  %>
+                                </p>
+                                <% } %> <% if (teamMember.primaryBank) { %>
+                                <p class="text-muted mb-0">
+                                  Customer Bank: <%= teamMember.primaryBank %>
+                                </p>
+                                <% } %> <% if (teamMember.cardNameRequired) { %>
+                                <p class="text-muted mb-0">
+                                  Required Card: <%= teamMember.cardNameRequired
+                                  %>
+                                </p>
+                                <% } %>
+                              </td>
+
+                              <td style="text-align: center; border: 0">
+                                <div class="mb-2">
+                                  <!-- <a
+                                    href="javascript:void(0);"
+                                    class="link-primary me-3"
+                                    ><i class="fas fa-check fs-15"></i
+                                  ></a> -->
+                                  <a
+                                    href="edit-lead/<%= teamMember.id %>"
+                                    class="link-danger"
+                                    ><i class="fas fa-pen fs-15"></i
+                                  ></a>
+                                  <a
+                                    href="lead/<%= teamMember.id %>"
+                                    class="link-danger m-3"
+                                    ><i class="fas fa-eye fs-15"></i
+                                  ></a>
+                                </div>
+                              </td>
+                            </tr>
+                            <% }) %>
+                            <tr>
+                              <td
+                                colspan="4"
+                                style="height: 20px; border: 0"
+                              ></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+
+  <div
+    class="modal fade"
+    id="updateStatusModal"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+      <div class="modal-content border-0">
+        <div class="modal-header bg-soft-info p-3">
+          <h5 class="modal-title" id="exampleModalLabel">
+            Update Lead Status Via Excel
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            id="close-modal"
+          ></button>
+        </div>
+        <form class="checkout-tab update-lead-status">
+          <div class="modal-body">
+            <div class="row g-3">
+              <!-- <div class="col-lg-12">
+                                    <a class="btn btn-light btn-sm" href="/assets/BreCities.xlsx">Download Sample
+                                        Sheet</a>
+                                </div> -->
+              <div class="col-lg-12">
+                <div>
+                  <label for="excelFile" class="form-label">Excel File</label>
+                  <input
+                    type="file"
+                    class="form-control"
+                    id="excelFile"
+                    placeholder="Enter"
+                    name="leadSheet"
+                    accept=".xls,.xlsx"
+                  />
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="d-flex align-items-start gap-3 mt-3">
+                  <button
+                    type="submit"
+                    class="btn btn-primary btn-label right ms-auto nexttab excel-btn"
+                    data-nexttab="pills-bill-address-tab"
+                  >
+                    <i
+                      class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                    ></i>
+                    Submit
+                  </button>
+                </div>
+              </div>
+              <!--end col-->
+            </div>
+          </div>
+          <!--end modal-body-->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/footer'); %>
+<script type="module" src="/javascripts/admin/lead-table.js"></script>

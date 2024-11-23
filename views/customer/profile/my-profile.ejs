@@ -1,0 +1,110 @@
+<div class="tab-pane fade <% if(type === 'credit-card') { %> show active <% } %>" id="security" role="tabpanel">
+  <div class="justify-content-center">
+    <form class="ctp-contact-form profile-form">
+      <div class="col-md-12 mb-4">
+        <h5>My Profile</h5>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              class="form-control"
+              
+              value="<%= user.name %>"
+              placeholder="Enter"
+              maxlength="100"
+            />
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              class="form-control"
+              value="<%= user.email %>"
+              placeholder="Enter"
+              maxlength="100"
+            />
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Phone</label>
+            <input
+              type="number"
+              min="0"
+              name="phone"
+              id="name"
+              class="form-control"
+              
+              placeholder="Enter"
+              value="<%= user.phone %>"
+            />
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Gender</label>
+            <select class="nice-select" name="gender">
+              <option value="">Select</option>
+              <option <% if(user.gender === 'Male') { %> selected <% } %> value="Male">Male</option>
+              <option <% if(user.gender === 'Female') { %> selected <% } %> value="Female">Female</option>
+            </select>
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>Address</label>
+            <input
+              type="text"
+              name="address"
+              id="phone_number"
+              
+              class="form-control"
+              placeholder="Enter"
+              value="<%= user.address %>"
+            />
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label>PAN No</label>
+            <input
+              type="text"
+              name="pancard"
+              id="phone_number"
+              
+              data-error="Please enter your number"
+              class="form-control"
+              placeholder="Enter"
+              value="<%= user.pancard %>"
+
+            />
+            <div class="help-block with-errors"></div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-primary">
+            Update
+          </button>
+          <div id="msgSubmit" class="h3 text-center hidden"></div>
+        </div>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>

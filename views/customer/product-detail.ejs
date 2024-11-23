@@ -1,0 +1,179 @@
+<%- include('./partials/header') %>
+
+<div class="mt-5 ptb-70 pb-4 r-mt-0 r-pb-0">
+  <div class="d-table">
+    <div class="d-table-cell">
+      <div class="container">
+        <div class="row">
+          <!-- Carousel -->
+          <div class="col-md-12">
+            <h3><%= product.name %></h3>
+            <p class="line_height hidden-xs" ><%= product.longDescription %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Start Featured Boxes Area -->
+<section class="mt-0 mb-5">
+  <div class="container">
+    <div class="loan_wrapper_pg">
+      <div class="row m-0">
+        <div class="col-sm-5">
+          <div class="section-title text-left mb-3 ms-0">
+            <h4><%= product.shortDescription %></h4>
+            <div class="bar ms-0"></div>
+
+            <div class="ctp-choose-content pt-0 pb-0 px-0">
+              <div class="choose-inner-card">
+                <h4 class="txt-normal">
+                  <div class="icon"><i class="fa-solid fa-check"></i></div>
+                  <%= product.tagLineOne %>
+                </h4>
+              </div>
+              <div class="choose-inner-card">
+                <h4 class="txt-normal">
+                  <div class="icon"><i class="fa-solid fa-check"></i></div>
+                  <%= product.tagLineTwo %>
+                </h4>
+              </div>
+              <div class="choose-inner-card">
+                <h4 class="txt-normal">
+                  <div class="icon"><i class="fa-solid fa-check"></i></div>
+                  <%= product.tagLineThree %>
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3"><img src="/customer-assets/img/5.png" /></div>
+        <div
+          class="col-sm-4 py-3 rounded-3 <% if (!user) { %> shadow bg-gradient-green <% } %> mb-2"
+        >
+          <form class="mobile-otp-form <% if (user) { %> d-none <% } %>">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <label for="mobileNumber" class="control-label mb-2 fs-6 text-white fw-semibold"
+                    >Mobile Number <i class="fa fa-mobile-alt"></i>
+                    <span class="text-danger sent-otp"></span
+                  ></label>
+                  <input
+                    type="number"
+                    name="phone"
+                    id="mobileNumber"
+                    placeholder="Bank will contact you on this number"
+                    class="form-control no-arrow text-green placeholder-green"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-1 otp-div d-none fs-6 text-white mt-2">
+                  <label for="otp" class="control-label mb-2 fw-semibold fs-6 text-white"
+                    >Login Code</label
+                  >
+                  <input
+                    type="number"
+                    name="otp"
+                    id="otp"
+                    placeholder="Enter login code received on your mobile"
+                    class="form-control no-arrow text-green placeholder-green"
+                  />
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="form-check mt-3">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value="1"
+                    id="flexCheckDefault"
+                    required
+                  />
+                  <label class="form-check-label text-white" for="flexCheckDefault">
+                    By submitting this form, you have read and agree to the
+                    <a href="/p/terms-conditions" target="_blank" class="text-white">Terms & Conditions.</a>
+                  </label>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <button class="btn btn-light w-100 mt-3 send-otp">Check Offers</button>
+                <button type="button" class="btn btn-light w-100 mt-3 verify-otp d-none">
+                  Verify Login code
+                </button>
+              </div>
+            </div>
+          </form>
+          <div
+            class="row align-items-center h-100 <% if (!user) { %> d-none <% } else if(user.type === 'admin') { %> d-none <% } %>"
+          >
+            <a href="javascript:;" class="btn btn-primary w-100 mt-3 check-offers shadow">
+              Check Offers
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Featured Boxes Area -->
+
+<div class="mt-5 ptb-70 pb-4 r-mt-0 r-pt-0 m-block" style="display:none">
+  <div class="d-table">
+    <div class="d-table-cell">
+      <div class="container">
+        <div class="row">
+          <!-- Carousel -->
+          <div class="col-md-12">
+            <p class="line_height"><%= product.longDescription %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Start Services Area -->
+<%- include('../components/customer/product-detail-description', { product }) %>
+<!-- End Services Area -->
+
+<!-- Start FAQ Area -->
+<div class="ctp-faq-area ptb-70">
+  <div class="container">
+    <div class="section-title ctp-title text-left">
+      <h2>FAQ</h2>
+    </div>
+
+    <div class="ctp-faq-accordion">
+      <div class="accordion" id="FaqAccordion">
+        <% product.Faqs.forEach((faq, index) => { %>
+        <div class="accordion-item">
+          <button
+            class="accordion-button"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse<%= faq.id %>"
+            aria-expanded="true"
+            aria-controls="collapse<%= faq.id %>"
+          >
+            <%= faq.question %>
+          </button>
+          <div
+            id="collapse<%= faq.id %>"
+            class="accordion-collapse collapse <% if(index === 0) { %> show <% } %>"
+            data-bs-parent="#FaqAccordion"
+          >
+            <div class="accordion-body"><%= faq.answer %></div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End FAQ Area -->
+
+<!-- Start Footer Area -->
+<script type="module" src="/javascripts/customer/login.js"></script>
+<%- include('./partials/footer') %>

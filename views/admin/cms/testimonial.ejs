@@ -1,0 +1,415 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          Testimonials
+                        </p>
+                      </div>
+                      <div class="col-sm-auto ms-auto">
+                        <div class="flex-grow-1">
+                          <button
+                            class="btn btn-info add-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createTestimonialModal"
+                          >
+                            <i class="ri-add-fill me-1 align-bottom"></i>
+                            Add Testimonial
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card team-box">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>SR NO.</th>
+                              <th>NAME</th>
+                              <th>DESIGNATION</th>
+                              <th>CONTENT</th>
+                              <th>ICON</th>
+                              <th>STATUS</th>
+                              <th style="text-align: center">ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% testimonials.forEach((testimonial, index) => { %>
+                            <tr>
+                              <td>
+                                <p class="text-muted mb-0"><%= ++index %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= testimonial.name %>
+                                </p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= testimonial.designation %>
+                                </p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= testimonial.content.substring(0,50) %> ...
+                                </p>
+                              </td>
+                              <td>
+                                <% if(testimonial.icon !== null) { %>
+                                <img
+                                  src="/uploads/<%= testimonial.icon %>"
+                                  style="width: 30px"
+                                />
+                                <% } %>
+                              </td>
+                              <td>
+                                <% if(testimonial.status){ %>
+                                <p class="mb-0 fs-12 badge badge-soft-success">
+                                  Enabled
+                                </p>
+                                <% } else { %>
+                                <p class="mb-0 fs-12 badge badge-soft-danger">
+                                  Disabled
+                                </p>
+                                <% } %>
+                              </td>
+                              <td align="center">
+                                <ul class="list-inline mb-0">
+                                  <% if (testimonial.status) { %>
+                                  <li
+                                    class="list-inline-item edit"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Disable"
+                                  >
+                                    <a
+                                      href="/admin/testimonial-status/<%= testimonial.id %>/0"
+                                      class="text-muted d-inline-block"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/vfzqittk.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } else { %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Enable"
+                                  >
+                                    <a
+                                      class="edit-item-btn"
+                                      href="/admin/testimonial-status/<%= testimonial.id %>/1"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/hjeefwhm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Edit"
+                                  >
+                                    <a
+                                      class="remove-item-btn edit-testimonial-btn"
+                                      href="javascript:;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#editTestimonialModal"
+                                      data-testimonial="<%= JSON.stringify(testimonial) %>"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/oclwxpmm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Delete"
+                                  >
+                                    <a
+                                      class="remove-item-btn"
+                                      data-bs-toggle="modal"
+                                      href="javascript:;"
+                                      data-url="/admin/testimonial/delete/<%= testimonial.id %>"
+                                      onclick="handleDelete(this)"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/dovoajyj.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createTestimonialModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Testimonial</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-testimonial-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <div>
+                <label for="testimonialName" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="testimonialName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="testimonialIcon" class="form-label">Icon</label>
+                <input
+                  type="file"
+                  class="form-control icon"
+                  id="testimonialIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="testimonialDesignation" class="form-label"
+                  >Designation</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="testimonialDesignation"
+                  placeholder="Enter "
+                  name="designation"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="testimonialContent" class="form-label"
+                  >Content</label
+                >
+                <textarea
+                  rows="4"
+                  class="form-control"
+                  id="testimonialContent"
+                  placeholder="Enter "
+                  name="content"
+                  maxlength="1000"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editTestimonialModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Testimonial</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-testimonial-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <div>
+                <label for="testimonialName" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control testimonial-name"
+                  id="testimonialName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label for="testimonialIcon" class="form-label">Icon</label>
+                <input
+                  type="file"
+                  class="form-control edit-icon"
+                  id="testimonialIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="testimonialDesignation" class="form-label"
+                  >Designation</label
+                >
+                <input
+                  type="text"
+                  class="form-control testimonial-designation"
+                  id="testimonialDesignation"
+                  placeholder="Enter "
+                  name="designation"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="testimonialContent" class="form-label"
+                  >Content</label
+                >
+                <textarea
+                  rows="4"
+                  class="form-control testimonial-content"
+                  id="testimonialContent"
+                  placeholder="Enter "
+                  name="content"
+                  maxlength="1000"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/testimonial.js"></script>
+<%- include('../partials/footer'); %>

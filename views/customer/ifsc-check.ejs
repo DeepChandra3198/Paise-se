@@ -1,0 +1,119 @@
+<%- include('./partials/header') %>
+<div class="ifsc-code-container">
+   <div class="material-form">
+     <form name="ifsc_code">
+      <div class="row p-5">
+      <div class="col card p-3 shadow rounded border-0" style="margin-top: 2.3cm;">
+       <h4 class="mb-5">IFSC Code Finder – Search Latest IFSC Online</h4>
+       <div class="form-group">
+        <label>Bank</label>
+         <select class="form-select select2-select" aria-label="Scrollable select example" id="bank-name">
+            <% if (typeof(bank) !="undefined") { %>
+                <option>Select Bank </option>
+                <% bankName.forEach((bName, index) => { %>
+                  <option value="<%= bName.bank %>" <% if(bName.bank === bank?.bank) { %> selected <% } %>><%= bName.bank %></option>
+                <% }) %>
+            <% } else { %>
+           <option>Select Bank </option>
+           <% bankName.forEach((bName, index) => { %>
+             <option value="<%= bName.bank %>"><%= bName.bank %></option>
+           <% }) %>  
+           <% } %>
+         </select>
+       </div>
+       <div class=" mt-4 form-group">
+        <label>State</label>
+         <select class="form-select select2-select" aria-label="Scrollable select example" id="state-name">
+            <% if (typeof(state) !="undefined") { %>
+                <option>Select State </option>
+                <% stateName.forEach((sName, index) => { %>
+                  <option value="<%= sName.state %>" <% if(sName.state === state?.state) { %> selected <% } %>><%= sName.state %></option>
+                <% }) %>
+            <% } else if (typeof(stateName) !="undefined") { %>
+           <option>Select State </option>
+           <% stateName.forEach((sName, index) => { %>
+             <option value="<%= sName.state %>"><%= sName.state %></option>
+           <% }) %>  
+           <% } else { %>
+            <option>Select State </option>
+            <% } %>
+         </select>
+       </div>
+       <div class=" mt-4 form-group">
+        <label>City</label>
+         <select class="form-select select2-select" aria-label="Scrollable select example" id="city-name">
+            <% if (typeof(city) !="undefined") { %>
+                <option>Select City </option>
+                <% cityName.forEach((sName, index) => { %>
+                  <option value="<%= sName.city1 %>" <% if(sName.city1 === city?.city1) { %> selected <% } %>><%= sName.city1 %></option>
+                <% }) %>
+            <% } else if (typeof(cityName) !="undefined") { %>
+           <option>Select City </option>
+           <% cityName.forEach((sName, index) => { %>
+             <option value="<%= sName.city1 %>"><%= sName.city1 %></option>
+           <% }) %>  
+           <% } else { %>
+            <option>Select City </option>
+            <% } %>
+         </select>
+       </div>
+       <div class=" mt-4 form-group">
+        <label>Branch</label>
+         <select class="form-select select2-select" aria-label="Scrollable select example" id="branch-name">
+          <% if (typeof(branch) !="undefined") { %>
+            <option>Select Branch </option>
+            <% branchName.forEach((sName, index) => { %>
+              <option value="<%= sName.branch %>" <% if(sName.branch === branch?.branch) { %> selected <% } %>><%= sName.branch %></option>
+            <% }) %>
+          <% } else if (typeof(branchName) !="undefined") { %>
+         <option>Select Branch </option>
+         <% branchName.forEach((sName, index) => { %>
+           <option value="<%= sName.branch %>"><%= sName.branch %></option>
+         <% }) %>  
+         <% } else { %>
+          <option>Select Branch </option>
+          <% } %>
+         </select>
+       </div>
+      </div>
+      <div class="col-lg-4 col-md-12" style="margin-top: 2.3cm;">
+        <div class="ctp-contact-information bankInfo_wrap <% if (typeof(branch) == 'undefined') { %> d-none <% } %>" id="ifsc-detail">
+            <div class="information-box">
+                <% if (typeof(branch) != 'undefined') { %>
+                <h3 style="font-family: monospace;"><%= branch.bank %> (<%= branch.ifsc %>)</h3>
+                <ul class="contact-info">
+                    <li class="address" style="font-family: monospace;">
+                        <span class="sub">IFSC Code: </span>
+                        <%= branch.ifsc %> (used for RTGS, IMPS and NEFT Transactions)
+                    </li>
+                    <li class="address" style="font-family: monospace;">
+                        <span class="sub">Address :</span>
+                        <%= branch.addess %>
+                    </li>
+                     <li class="address" style="font-family: monospace;">
+                        <span class="sub">State :</span>
+                        <%= branch.state %>
+                    </li>
+                    <% if (branch.phone != 0) { %>
+                     <li class="address" style="font-family: monospace;">
+                        <span class="sub">Phone :</span>
+                        <%= branch.code %><%= branch.phone %>
+                    </li>
+                    <% } %>
+                    <li class="address" style="font-family: monospace;">
+                        <span class="sub">Branch :</span>
+                        <%= branch.branch %>
+                    </li>
+                    
+                </ul>
+                <% } %>
+            </div>
+        </div>
+    </div>
+      </div>
+     </form>
+   </div>
+ </div>
+ 
+<script type="module" src="/javascripts/customer/ifsc-check.js"></script>
+<%- include('./partials/footer'); %>

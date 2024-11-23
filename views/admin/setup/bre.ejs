@@ -1,0 +1,661 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">Bres</p>
+                      </div>
+                      <div class="col-sm-auto ms-auto">
+                        <div class="flex-grow-1">
+                          <button
+                            class="btn btn-info add-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createBreModal"
+                          >
+                            <i class="ri-add-fill me-1 align-bottom"></i>
+                            Add Bre
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card team-box">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>SR NO.</th>
+                              <th>PRODUCT</th>
+                              <th>LENDER</th>
+                              <th>CARD</th>
+                              <th>AGE</th>
+                              <th>INCOME</th>
+                              <th>CITIES</th>
+                              <th>COMPANIES</th>
+                              <th>STATUS</th>
+                              <th style="text-align: center">ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% bres.forEach((bre, index) => { %>
+                            <tr>
+                              <td>
+                                <p class="text-muted mb-0"><%= ++index %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= bre.Product?.name %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= bre.lender %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= bre.Card?.name %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= bre.age %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= Number(bre.income.toFixed(0)).toLocaleString('en-US') %>
+                                </p>
+                              </td>
+                              <td>
+                                <a
+                                  href="javascript:;"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#viewCitiesModal"
+                                  class="mb-0 fs-12 badge badge-soft-primary view-cities"
+                                  data-id="<%= bre.id %>"
+                                  >View</a
+                                >
+                              </td>
+                              <td>
+                                <a
+                                  href="javascript:;"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#viewCompaniesModal"
+                                  class="mb-0 fs-12 badge badge-soft-primary view-companies"
+                                  data-id="<%= bre.id %>"
+                                  >View</a
+                                >
+                              </td>
+                              <td>
+                                <% if(bre.status){ %>
+                                <p class="mb-0 fs-12 badge badge-soft-success">Enabled</p>
+                                <% } else { %>
+                                <p class="mb-0 fs-12 badge badge-soft-danger">Disabled</p>
+                                <% } %>
+                              </td>
+                              <td align="center">
+                                <ul class="list-inline mb-0">
+                                  <% if (bre.status) { %>
+                                  <li
+                                    class="list-inline-item edit"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Disable"
+                                  >
+                                    <a
+                                      href="/admin/setup/bre-status/<%= bre.id %>/0"
+                                      class="text-muted d-inline-block"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/vfzqittk.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } else { %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Enable"
+                                  >
+                                    <a
+                                      class="edit-item-btn"
+                                      href="/admin/setup/bre-status/<%= bre.id %>/1"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/hjeefwhm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Edit"
+                                  >
+                                    <a
+                                      class="remove-item-btn edit-bre-btn"
+                                      href="javascript:;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#editBreModal"
+                                      data-bre="<%= JSON.stringify(bre) %>"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/oclwxpmm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Delete"
+                                  >
+                                    <a
+                                      class="remove-item-btn"
+                                      data-bs-toggle="modal"
+                                      href="javascript:;"
+                                      data-url="/admin/setup/bre/delete/<%= bre.id %>"
+                                      onclick="handleDelete(this)"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/dovoajyj.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Map Cities"
+                                  >
+                                    <a
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#addCitiesModal"
+                                      href="javascript:;"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/fihkmkwt.json"
+                                        trigger="loop"
+                                        colors="primary:#121331,secondary:#4bb3fd"
+                                        state="hover-jump-spin"
+                                        style="width: 25px; height: 25px"
+                                        data-url="/admin/setup/bre-cities/<%= bre.id %>"
+                                        class="add-city-btn"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Map Cities"
+                                  >
+                                    <a
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#addCompaniesModal"
+                                      href="javascript:;"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/vxsnbfop.json"
+                                        trigger="loop"
+                                        colors="primary:#ebe6ef,secondary:#3a3347,tertiary:#92140c,quaternary:#f9c9c0,quinary:#f24c00,senary:#646e78"
+                                        state="hover-jump-spin"
+                                        style="width: 25px; height: 25px"
+                                        data-url="/admin/setup/bre-companies/<%= bre.id %>"
+                                        class="add-company-btn"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createBreModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add BRE</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-bre-form">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-6 d-none">
+              <div>
+                <label class="form-label"> Select Product</label>
+                <select class="form-select" name="productId">
+                  <% products.forEach(product => { if(product.id === 1) { %>
+                  <option value="<%= product.id %>"><%= product.name %></option>
+                  <% } }) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label"> Select Lender</label>
+                <select class="form-select new-bre-lender" name="lender">
+                  <option value="">Select</option>
+                  <% cardProvidedBy.MasterValues.forEach(cardBy => { %>
+                  <option value="<%= cardBy.name %>"><%= cardBy.name %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Select Card</label>
+                <select class="form-select new-bre-cards" name="cardId">
+                  <option value="">Select</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Age</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter"
+                  min="18"
+                  value="18"
+                  name="age"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Income</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter"
+                  min="0"
+                  step="0.01"
+                  name="income"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editBreModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit BRE</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-bre-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-6 d-none">
+              <div>
+                <label class="form-label"> Select Product</label>
+                <select class="form-select bre-product-id" name="productId">
+                  <% products.forEach(product => { if(product.id === 1) {  %>
+                  <option value="<%= product.id %>"><%= product.name %></option>
+                  <% } }) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label"> Select Lender</label>
+                <select class="form-select edit-bre-lender" name="lender">
+                  <option value="">Select</option>
+                  <% cardProvidedBy.MasterValues.forEach(cardBy => { %>
+                  <option value="<%= cardBy.name %>"><%= cardBy.name %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Select Card</label>
+                <select class="form-select edit-bre-cards" name="cardId">
+                  <option value="">Select</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Age</label>
+                <input
+                  type="number"
+                  class="form-control bre-age"
+                  placeholder="Enter"
+                  min="18"
+                  value="18"
+                  name="age"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div>
+                <label class="form-label">Income</label>
+                <input
+                  type="number"
+                  class="form-control bre-income"
+                  placeholder="Enter"
+                  min="0"
+                  step="0.01"
+                  name="income"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addCitiesModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Cities/Pincode Via Excel</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-cities">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-12">
+              <a class="btn btn-light btn-sm" href="/assets/BreCities.xlsx"
+                >Download Sample Sheet</a
+              >
+            </div>
+            <div class="col-lg-12">
+              <div>
+                <label for="excelFile" class="form-label">Excel File</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="excelFile"
+                  placeholder="Enter"
+                  name="excelFile"
+                  accept=".xls,.xlsx"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab excel-btn"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                  Submit
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="addCompaniesModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Companies Via Excel</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-companies">
+        <div class="modal-body">
+          <div class="row g-3">
+            <div class="col-lg-12">
+              <a class="btn btn-light btn-sm" href="/assets/BreCompanies.xlsx"
+                >Download Sample Sheet</a
+              >
+            </div>
+            <div class="col-lg-12">
+              <div>
+                <label for="excelFile" class="form-label">Excel File</label>
+                <input
+                  type="file"
+                  class="form-control"
+                  id="excelFile"
+                  placeholder="Enter"
+                  name="excelFile"
+                  accept=".xls,.xlsx"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab excel-btn"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"></i>
+                  Submit
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="viewCitiesModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">View Mapped Cities/Pincode</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <div class="table-responsive m-2">
+        <table class="table align-middle table-nowrap mb-0 fs-13">
+          <thead class="table-secondary">
+            <tr>
+              <th>SR NO.</th>
+              <th>CITY</th>
+              <th>PINCODE</th>
+            </tr>
+          </thead>
+          <tbody class="list cities"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="viewCompaniesModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">View Mapped Companies</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <div class="table-responsive m-2">
+        <table class="table align-middle table-nowrap mb-0 fs-13">
+          <thead class="table-secondary">
+            <tr>
+              <th>SR NO.</th>
+              <th>COMPANY</th>
+            </tr>
+          </thead>
+          <tbody class="list companies"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/bre.js"></script>
+<%- include('../partials/footer'); %>

@@ -1,0 +1,46 @@
+<% let page = "?page="; if(currentUrl.includes('?')) { page = "&page="; } %>
+<nav
+  aria-label="Page navigation"
+  class="d-flex justify-content-end mt-3 <% if(totalCount === 0) { %> d-none <% } %>"
+>
+  <ul class="pagination w-100" style="overflow-y: auto">
+    <li class="page-item">
+      <a
+        class="page-link"
+        style="min-width: 235px"
+        href="<%= currentUrl %><%= page %><%= currentPageNo - 1 %>"
+        aria-label="Previous"
+      >
+        Showing <%= startIndex + 1 %> to <%= endIndex + 1 %> of <%= totalCount
+        %> results
+      </a>
+    </li>
+    <% if (currentPageNo > 1) { %>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="<%= currentUrl %><%= page %><%= currentPageNo - 1 %>"
+        aria-label="Previous"
+      >
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
+    <li class="page-item <%= i === currentPageNo ? 'active' : '' %>">
+      <a class="page-link" href="<%= currentUrl %><%= page %><%= i %>"><%= i %></a>
+    </li>
+    <% } %> <% if (currentPageNo < totalPages) { %>
+    <li class="page-item">
+      <a
+        class="page-link"
+        href="<%= currentUrl %><%= page %><%= currentPageNo + 1 %>"
+        aria-label="Next"
+      >
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+    <% } %>
+  </ul>
+</nav>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zxx" class="theme-light">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Links of CSS files -->
+  <link rel="stylesheet" href="/customer-assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/animate.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/flaticon.css" />
+  <link rel="stylesheet" href="/customer-assets/css/magnific-popup.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/nice-select.css" />
+  <link rel="stylesheet" href="/customer-assets/css/slick.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/owl.carousel.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/owl.theme.default.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/meanmenu.css" />
+  <link rel="stylesheet" href="/customer-assets/css/odometer.min.css" />
+  <link rel="stylesheet" href="/customer-assets/css/style.css" />
+  <link rel="stylesheet" href="/customer-assets/css/responsive.css" />
+  <link rel="stylesheet" href="/customer-assets/css/dark-style.css" />
+  <script src="/javascripts/axios.js"></script>
+  <script src="/javascripts/luxon.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <title></title>
+
+  <link rel="icon" type="image/png" href="/customer-assets/img/logo-se.jpg" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+</head>
+
+<body>
+  <form method="post" action="/logout" class="logout-form"></form>
+  <!-- Preloader -->
+  <!-- <div class="preloader">
+      <div class="loader">
+        <div class="shadow"></div>
+        <div class="box"></div>
+      </div>
+    </div> -->
+  <!-- End Preloader -->
+
+  <!-- Start Navbar Area -->
+  <% var hide=hide || false %>
+    <a style="position: sticky; z-index: 10; top: 85%; left: 96%;" href="https://wa.me/919953553471" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png"
+        alt="whatsapp" width="50px" height="50px">
+    </a>
+    <div class="<%=hide ? 'd-none' : '' %>">
+      <%- include('./navbar') %>
+        <!-- <%- include('../whatsapp') %> -->
+    </div>
+    <!-- End Navbar Area -->
+
+    <script>
+      function showMore(index) {
+        var content = document.getElementById("content-" + index);
+        var more = document.getElementById("more-" + index);
+        var button = document.getElementById("show-more-" + index);
+
+        if (more.style.display === "none") {
+          more.style.display = "inline";
+          button.innerHTML = "︿";
+        } else {
+          more.style.display = "none";
+          button.innerHTML = "﹀";
+        }
+      }
+    </script>
+
+    </script>
+</body>
+
+</html>

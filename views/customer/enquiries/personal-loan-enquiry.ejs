@@ -1,0 +1,272 @@
+<%- include('../partials/header') %>
+<style></style>
+<!-- Start Signup Area -->
+<section class="signup-area">
+  <div class="row m-0">
+    <div class="col-lg-5 col-md-12 p-0 hidden-xs">
+      <div class="signup-image personal-loan-img">
+        <div class="app-download-content ">
+          <h2>Personal Loan</h2>
+          <div class="bar"></div>
+          <ul class="features-list">
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineOne %>
+              </span>
+            </li>
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineTwo %>
+              </span>
+            </li>
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineThree %>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+<div class="col-lg-12 col-md-12 p-0 mobile-visible" style="display:none">
+<div class="res_img_title">
+<div class="app-download-content ">
+          <h2>Personal Loan</h2>
+          <div class="bar"></div>         
+        </div>
+</div>
+<img src="/customer-assets/img/res-loan-bnr.png">
+</div>
+    <div class="col-lg-7 col-md-12 p-0">
+      <div class="signup-content">
+        <div class="d-table">
+          <div class="d-table-cell">
+            <form
+              class="personal-loan_wrap1 personal-loan_wrapper  step-1-form"
+            >
+              <div class="row res-mt-0" style="margin-top:150px">
+                <div class="col-sm-8 hidden-xs" >
+                  <h6 class="text-left">
+                    <img src="/customer-assets/img/loan-card-img.jpg" style="width: 40px" />
+                    Personal Loan
+                  </h6>
+                </div>
+                <div class="col-sm-4">
+                  <span class="text-right">Step 1/2</span>
+                </div>
+              </div>
+              <div class="app-download-content mt-2 ps-0">
+                <h4 class="text-left">Employment Type</h4>
+                <div class="bar"></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group text-left">
+                    <% employmentTypes.MasterValues.forEach(employmentType => { %>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input employment-Type"
+                        type="radio"
+                        name="employment"
+                        id="inlineRadio<%= employmentType.id %>"
+                        value="<%= employmentType.name %>"
+                      />
+                      <label class="form-check-label" for="inlineRadio<%= employmentType.id %>">
+                        <%= employmentType.name %>
+                      </label>
+                    </div>
+                    <% }); %>
+                  </div>
+                  <div class="form-group text-left mb-3">
+                    <label>&nbsp;</label>
+                    <input
+                      type="text"
+                      name="pancard"
+                      id="email"
+                      placeholder="Pan Card (Optional)"
+                      class="form-control"
+                      maxlength="10"
+                      value="<%= user.pancard %>"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3">
+                    <input
+                      type="text"
+                      name="name"
+                      id="email"
+                      placeholder="Full Name"
+                      class="form-control"
+                      value="<%= user.PanVerifications?.name %>"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3">
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Email Address"
+                      class="form-control"
+                      value="<%= user.email %>"
+                    />
+                  </div>
+                  <div class="row">
+                    <div class="form-group text-left mb-3 col-sm-6">
+                      <input
+                        type="text"
+                        name="pincode"
+                        id="email"
+                        placeholder="Pin Code"
+                        class="form-control"
+                      />
+                    </div>
+                    <div class="form-group text-left mb-3 col-sm-6">
+                      <input
+                        type="text"
+                        name="city"
+                        id="email"
+                        placeholder="City"
+                        class="form-control"
+                        readonly
+                      />
+                    </div>
+                    <div class="form-group text-left mb-3 col-sm-12">
+                      <input
+                        type="text"
+                        name="state"
+                        placeholder="State"
+                        class="form-control state"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="mb-3 col-sm-12">
+                      <label class="col-sm-12 text-left">Date of Birth</label>
+                      <input
+                        type="text"
+                        name="dob"
+                        id="email"
+                        readonly
+                        class="no-calendar-icon form-control"
+                        value="<%= new Date(user.dob).toISOString().slice(0, 10); %>"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 mt-3 personal-loan_step1 step-1-form-btn"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <form
+              class="personal-loan_wrap2 personal-loan_wrapper  step-2-form"
+              style="display: none"
+            >
+              <input type="hidden" name="companyType" value="normal" />
+               <div class="row res-mt-0" style="margin-top:150px">
+                <div class="col-sm-8"  >
+                  <span class="close_wrap2 close_wrap"><i class="fas fa-chevron-left"></i></span>
+                </div>
+                <div class="col-sm-4">
+                  <span class="text-right">Step 2/2</span>
+                </div>
+              </div>
+              <div class="app-download-content mt-5 ps-0">
+                <h4 class="text-left income-type-heading"></h4>
+                <div class="bar"></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group text-left mb-3 salary">
+                    <label class="text-secondary mb-2">Net Monthly Salary</label>
+                    <input type="hidden" name="salary" />
+                    <input
+                      type="text"
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group text-left mb-3 itr">
+                    <label class="text-secondary mb-2">ITR</label>
+                    <input type="hidden" name="itr" />
+                    <input type="text" class="form-control" />
+                  </div>
+
+                  <div class="form-group text-left mb-3">
+                    <label class="text-secondary mb-2">Loan Amount Required</label>
+                    <input type="hidden" name="loanAmount" />
+                    <input
+                      type="text"
+                      class="form-control loan-amount"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3">
+                    <label class="text-secondary mb-2">Total Monthly EMIs Amount</label>
+                    <input type="hidden" name="emiAmount" />
+                    <input
+                      type="text"
+                      class="form-control emi-amount"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3 company-select-box-div">
+                    <label class="text-secondary mb-2">Company Name You Work For</label>
+                    <select
+                      class="form-control select2-select company-select-box"
+                      name="companyName"
+                      style="width: 100%"
+                    ></select>
+                  </div>
+
+                  <div class="form-group text-left mb-3 type-select-box-div d-none">
+                    <label class="text-secondary mb-2">Type</label>
+                    <select class="form-control select2-select" name="type" style="width: 100%">
+                      <option></option>
+                      <% userTypes.MasterValues.forEach(type => { %>
+                      <option value="<%= type.name %>"><%= type.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <button
+                    type="submit"
+                    href="javascript:;"
+                    class="btn btn-primary w-100 mt-2 step-2-form-btn"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Login Area -->
+<script type="module" src="/javascripts/customer/personal-loan-enquiry.js"></script>
+<%- include('../partials/footer') %>
+<script>
+  $(document).ready(function () {
+    // $(".personal-loan_step1").click(function () {
+    //   $(".personal-loan_wrap2").addClass("open");
+    //   $(".personal-loan_wrap1").addClass("close");
+    //   $(".personal-loan_wrap1").removeClass("open");
+    // });
+
+    $('.close_wrap2').click(function () {
+      $('.personal-loan_wrap2').removeClass('open');
+      $('.personal-loan_wrap1').addClass('open');
+    });
+  });
+</script>

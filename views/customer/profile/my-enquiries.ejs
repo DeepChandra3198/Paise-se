@@ -1,0 +1,281 @@
+<div class="tab-pane fade <% if(type !== 'credit-card') { %> show active <% } %>" id="cost" role="tabpanel">
+  <div class="justify-content-center">
+    <div class="col-lg-12 col-sm-12">
+      <h5 class="mb-3">My Enquiry (<%= type.toUpperCase() %>)</h5>
+      <div class="row">
+        <div class="col-md-4 ">
+          <!-- <select class="form-control form-control-sm my-2 loan-type" name="type">
+            <option <% if(type === 'credit-card') { %> selected <% } %> value="credit-card">Credit Card</option>
+            <option <% if(type === 'personal-loan') { %> selected <% } %> value="personal-loan">Personal Loan</option>
+            <option <% if(type === 'home-loan') { %> selected <% } %> value="home-loan">Home Loan</option>
+            <option <% if(type === 'business-loan') { %> selected <% } %> value="business-loan">Business Loan</option>
+            <option <% if(type === 'two-wheeler') { %> selected <% } %> value="two-wheeler">Two Wheeler</option>
+            <option <% if(type === 'car-loan') { %> selected <% } %> value="car-loan">Car Loan</option>
+            <option <% if(type === 'family-doctor') { %> selected <% } %> value="family-doctor">Family Doctor</option>
+          </select> -->
+          <select class="form-select-md p-2 my-2 loan-type col-md-12" name="type">
+            <option <% if(type === 'credit-card') { %> selected <% } %> value="credit-card">Credit Card</option>
+            <option <% if(type === 'personal-loan') { %> selected <% } %> value="personal-loan">Personal Loan</option>
+            <option <% if(type === 'home-loan') { %> selected <% } %> value="home-loan">Home Loan</option>
+            <option <% if(type === 'business-loan') { %> selected <% } %> value="business-loan">Business Loan</option>
+            <option <% if(type === 'two-wheeler') { %> selected <% } %> value="two-wheeler">Two Wheeler</option>
+            <option <% if(type === 'car-loan') { %> selected <% } %> value="car-loan">Car Loan</option>
+            <option <% if(type === 'family-doctor') { %> selected <% } %> value="family-doctor">Family Doctor</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-secondary">
+            <tr>
+              <th>PRODUCT</th>
+              <th>CUSTOMER</th>
+              <th>DATE/TIME</th>
+            </tr>
+          </thead>
+          <tbody class="">
+            <% if(type === 'credit-card') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">
+                    Product: <%= query.Card?.name %> (<%= query.Product?.name %>)
+                  </p>
+                  <p class="text-muted mb-0">Type: <%= query.Card?.type %></p>
+                  <p class="text-muted mb-0">
+                    Fees:
+                    <span class="text_blue"
+                      ><%= Number(query.Card?.fees).toLocaleString('en-US') %></span
+                    >
+                    <a href="javascript:void(0);" class="link-primary me-3"
+                      ><i class="ri-phone-line align-bottom fs-15"></i
+                    ></a>
+                  </p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.UserInformation?.name %></p>
+                <p class="text-muted mb-0">Phone: <%= query.UserInformation?.phone %></p>
+                <p class="text-muted mb-0">Email: <%= query.UserInformation?.email %></p>
+                <p class="text-muted mb-0">Type: <%= query.UserInformation?.type %></p>
+                <p class="text-muted mb-0">
+                  Annual Income: <%=
+                  Number(query.UserInformation?.annualIncome).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">
+                  Have Credit Card: <%= query.UserInformation?.creditCardHolder ? 'Yes' : 'No' %> <%
+                  if (query.UserInformation?.creditCardHolder) { %> | <%=
+                  query.UserInformation?.creditCardType %> | <%=
+                  query.UserInformation?.creditCardProvidedBy %> <% } %>
+                </p>
+                <p class="text-muted mb-0">
+                  From: <%= query.UserInformation?.city %> | <%= query.UserInformation?.state %> |
+                  <%= query.UserInformation?.pincode %>
+                </p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'home-loan') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Phone: <%= query.phone %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">Loan Amount: <%= query.loanAmount %></p>
+                <p class="text-muted mb-0">City of Residence: <%= query.city %></p>
+                <p class="text-muted mb-0">Employment Type: <%= query.employment %></p>
+                <p class="text-muted mb-0">Primary Bank Account: <%= query.bankAccount %></p>
+                <p class="text-muted mb-0">Pancard: <%= query.pancard %></p>
+                <p class="text-muted mb-0">Property Type: <%= query.propertyType %></p>
+                <p class="text-muted mb-0">
+                  Tentative Purchase Month: <%= query.tentativePurchaseMonth %>
+                </p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'business-loan') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Phone: <%= query.phone %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">
+                  DOB: <%= new Date(query.dob).toLocaleString('en-IN').split(',')[0] %>
+                </p>
+                <p class="text-muted mb-0">
+                  Loan Amount: <%= Number(query.loanAmount.toFixed(0)).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">Annual Turnover: <%= query.annualTurnover %></p>
+                <p class="text-muted mb-0">City of Residence: <%= query.city %></p>
+                <p class="text-muted mb-0">Company Type: <%= query.companyType %></p>
+                <p class="text-muted mb-0">
+                  Yrs in Current Business: <%= query.currentBusinessYears %>
+                </p>
+                <p class="text-muted mb-0">Pancard: <%= query.pancard %></p>
+                <p class="text-muted mb-0">Business Name: <%= query.businessName %></p>
+                <p class="text-muted mb-0">Employment Type: <%= query.employment %></p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'two-wheeler-loan') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Phone: <%= query.phone %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">
+                  DOB: <%= new Date(query.dob).toLocaleString('en-IN').split(',')[0] %>
+                </p>
+                <p class="text-muted mb-0">Two Wheeler Brand: <%= query.twoWheelerBrand %></p>
+                <p class="text-muted mb-0">Monthly Income: <%= query.monthlyIncome %></p>
+                <p class="text-muted mb-0">From: <%= query.city %></p>
+                <p class="text-muted mb-0">Pancard: <%= query.pancard %></p>
+                <p class="text-muted mb-0">
+                  Tentative Purchase Month: <%= query.tentativePurchaseMonth %>
+                </p>
+                <p class="text-muted mb-0">Employment: <%= query.employment %></p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'car-loan') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">
+                  DOB: <%= new Date(query.dob).toLocaleString('en-IN').split(',')[0] %>
+                </p>
+                <p class="text-muted mb-0">Car Brand: <%= query.carBrand %></p>
+                <p class="text-muted mb-0">Product Type: <%= query.productType %></p>
+                <p class="text-muted mb-0">Monthly Income: <%= query.monthlyIncome %></p>
+                <p class="text-muted mb-0">From: <%= query.city %></p>
+                <p class="text-muted mb-0">Pancard: <%= query.pancard %></p>
+                <p class="text-muted mb-0">
+                  Tentative Purchase Month: <%= query.tentativePurchaseMonth %>
+                </p>
+                <p class="text-muted mb-0">Employment: <%= query.employment %></p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'family-doctor') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">Phone: <%= query.phone %></p>
+                <p class="text-muted mb-0">Age: <%= query.age %></p>
+                <p class="text-muted mb-0">Pincode: <%= query.pincode %></p>
+                <p class="text-muted mb-0">City: <%= query.city %></p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } else if(type === 'personal-loan') { %> <% queries.forEach(query => { %>
+            <tr style="background: #fff; border: 1px solid #eee">
+              <td class="name" style="border: 0">
+                <a class="team-content">
+                  <p class="text-muted mb-0">Product: <%= query.Product?.name %></p>
+                </a>
+              </td>
+
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0">Name: <%= query.name %></p>
+                <p class="text-muted mb-0">Email: <%= query.email %></p>
+                <p class="text-muted mb-0">Pincode: <%= query.pincode %></p>
+                <p class="text-muted mb-0">City: <%= query.city %></p>
+                <p class="text-muted mb-0">State: <%= query.state %></p>
+                <p class="text-muted mb-0">
+                  DOB: <%= new Date(query.dob).toLocaleString('en-IN').split(',')[0] %>
+                </p>
+                <p class="text-muted mb-0">Pancard: <%= query.pancard %></p>
+                <p class="text-muted mb-0">
+                  Current Salary: <%= Number(query.salary.toFixed(0)).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">
+                  ITR: <%= Number(query.itr.toFixed(0)).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">
+                  Needed Loan Amount: <%=
+                  Number(query.loanAmount.toFixed(0)).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">
+                  Current Ongoing EMI Amount: <%=
+                  Number(query.emiAmount.toFixed(0)).toLocaleString('en-US') %>
+                </p>
+                <p class="text-muted mb-0">Company: <%= query.companyName %></p>
+              </td>
+              <td class="name" style="border: 0">
+                <p class="text-muted mb-0 format-date"><%= query.createdAt %></p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="4" style="height: 20px; border: 0"></td>
+            </tr>
+            <% }) %> <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

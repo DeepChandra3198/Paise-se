@@ -1,0 +1,203 @@
+<%- include('../partials/header') %>
+<!-- Start Signup Area -->
+<section class="signup-area">
+  <div class="row m-0">
+    <div class="col-lg-5 col-md-12 p-0 hidden-xs">
+      <div class="signup-image personal-loan-img">
+        <div class="app-download-content">
+          <h2>Home Loan</h2>
+          <div class="bar"></div>
+          <ul class="features-list">
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineOne %>
+              </span>
+            </li>
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineTwo %>
+              </span>
+            </li>
+            <li>
+              <span>
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineThree %>
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	<div class="col-lg-12 col-md-12 p-0 mobile-visible" style="display:none">
+<div class="res_img_title">
+<div class="app-download-content ">
+             <h2>Home Loan</h2>
+          <div class="bar"></div>         
+        </div>
+</div>
+<img src="/customer-assets/img/res-loan-bnr.png">
+</div>
+
+    <div class="col-lg-7 col-md-12 p-0">
+      <div class="signup-content">
+        <div class="d-table">
+          <div class="d-table-cell">
+            <form class="personal-loan_wrap1 personal-loan_wrapper home-loan-enquiry-form">
+              <div class="app-download-content mt-80 ps-0">
+                <h4 class="text-left">Home Loan & Loan Against Property</h4>
+                <div class="bar"></div>
+              </div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group text-left mb-3">
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input loan-type"
+                        type="radio"
+                        name="type"
+                        id="inlineRadio11"
+                        value="Home Loan"
+                        checked
+                      />
+                      <label class="form-check-label" for="inlineRadio11"> Home Loan </label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input loan-type"
+                        type="radio"
+                        name="type"
+                        id="inlineRadio12"
+                        value="Loan Against Property"
+                      />
+                      <label class="form-check-label" for="inlineRadio12"> Loan Against Property </label>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="form-group text-left mb-3 col-md-6">
+                      <input
+                        type="text"
+                        name="pancard"
+                        id="email"
+                        placeholder="Pan Card (Optional)"
+                        class="form-control"
+                        maxlength="10"
+                        value="<%= user.pancard %>"
+                      />
+                    </div>
+                    <div class="form-group text-left mb-3 col-md-6">
+                      <input
+                        type="text"
+                        name="name"
+                        id="email"
+                        placeholder="Full Name"
+                        class="form-control"
+                        value="<%= user.PanVerifications?.name %>"
+                      />
+                    </div>
+                    <div class="form-group text-left mb-3 col-sm-6">
+                      <label>Date of Birth</label>
+                      <input
+                      type="text"
+                      readonly
+                        name="dob"
+                        id="email"
+                        placeholder="Date of Birth"
+                        class="form-control no-calendar-icon"
+                      />
+                    </div>
+                    <div class="form-group text-left mb-3 col-md-6">
+                      <label>&nbsp;</label>
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email Address"
+                        class="form-control"
+                        value="<%= user.email %>"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="form-group text-left mb-3">
+                    <select
+                      class="form-control credit-card-type mb-3 nice-select"
+                      name="loanAmount"
+                    >
+                      <option value="">Loan Amount</option>
+                      <% loanAmounts.MasterValues.forEach(loanAmount => { %>
+                      <option value="<%= loanAmount.name %>"><%= loanAmount.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <div class="form-group text-left">
+                    <select class="form-control credit-card-type mb-3 nice-select" name="city">
+                      <option value="">City of Residence</option>
+                      <% cities.forEach(city => { %>
+                      <option value="<%= city %>"><%= city %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <div class="form-group text-left">
+                    <select class="form-control mb-3 nice-select" name="employment">
+                      <option value="">Employment Type</option>
+                      <% employmentTypes.MasterValues.forEach(type => { %>
+                      <option value="<%= type.name %>"><%= type.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <div class="form-group text-left">
+                    <select class="form-control mb-3 nice-select" name="bankAccount">
+                      <option value="">Primary Bank Type</option>
+                      <% primaryBankAccounts.MasterValues.forEach(primaryBankAccount => { %>
+                      <option value="<%= primaryBankAccount.name %>">
+                        <%= primaryBankAccount.name %>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <div class="form-group text-left">
+                    <select class="form-control mb-3 nice-select" name="propertyType">
+                      <option value="">Property Type</option>
+                      <% propertyTypes.MasterValues.forEach(propertyType => { %>
+                      <option value="<%= propertyType.name %>"><%= propertyType.name %></option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <div class="form-group text-left">
+                    <select class="form-control mb-3 nice-select tentative-purchase-month" name="tentativePurchaseMonth">
+                      <option value="">Tentative Purchase Month</option>
+                      <% tentativePurchaseMonths.MasterValues.forEach(tentativePurchaseMonth => { %>
+                      <option value="<%= tentativePurchaseMonth.name %>">
+                        <%= tentativePurchaseMonth.name %>
+                      </option>
+                      <% }) %>
+                    </select>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 mt-3 personal-loan_step1 step-1-form-btn"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Login Area -->
+<script type="module" src="/javascripts/customer/home-loan-enquiry.js"></script>
+<%- include('../partials/footer') %>

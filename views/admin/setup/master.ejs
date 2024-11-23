@@ -1,0 +1,344 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">Masters</p>
+                      </div>
+                      <div class="col-sm-auto ms-auto">
+                        <div class="flex-grow-1">
+                          <button
+                            class="btn btn-info add-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createMasterModal"
+                          >
+                            <i class="ri-add-fill me-1 align-bottom"></i>
+                            Add Master
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card team-box">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>SR NO.</th>
+                              <th>MASTER</th>
+                              <th>ICON</th>
+                              <th>STATUS</th>
+                              <th style="text-align: center">ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% masters.forEach((master, index) => { %>
+                            <tr>
+                              <td>
+                                <p class="text-muted mb-0"><%= ++index %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= master.name %>
+                                </p>
+                              </td>
+                              <td>
+                                <% if(master.icon !== null) { %>
+                                <img
+                                  src="/uploads/<%= master.icon %>"
+                                  style="width: 30px"
+                                />
+                                <% } %>
+                              </td>
+                              <td>
+                                <% if(master.status){ %>
+                                <p class="mb-0 fs-12 badge badge-soft-success">
+                                  Enabled
+                                </p>
+                                <% } else { %>
+                                <p class="mb-0 fs-12 badge badge-soft-danger">
+                                  Disabled
+                                </p>
+                                <% } %>
+                              </td>
+                              <td align="center">
+                                <ul class="list-inline mb-0">
+                                  <% if (master.status) { %>
+                                  <li
+                                    class="list-inline-item edit"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Disable"
+                                  >
+                                    <a
+                                      href="/admin/setup/master-status/<%= master.id %>/0"
+                                      class="text-muted d-inline-block"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/vfzqittk.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } else { %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Enable"
+                                  >
+                                    <a
+                                      class="edit-item-btn"
+                                      href="/admin/setup/master-status/<%= master.id %>/1"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/hjeefwhm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Edit"
+                                  >
+                                    <a
+                                      class="remove-item-btn edit-master-btn"
+                                      href="javascript:;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#editMasterModal"
+                                      data-name="<%= master.name %>"
+                                      data-id="<%= master.id %>"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/oclwxpmm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Delete"
+                                  >
+                                    <a
+                                      class="remove-item-btn"
+                                      data-bs-toggle="modal"
+                                      href="javascript:;"
+                                      data-url="/admin/setup/master/delete/<%= master.id %>"
+                                      onclick="handleDelete(this)"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/dovoajyj.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                    <%- include('../../components/admin/partials/pagination');
+                    %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createMasterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Master</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-master-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="masterName" class="form-label">Master Head</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="masterName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="masterIcon" class="form-label">Master Icon</label>
+                <input
+                  type="file"
+                  class="form-control icon"
+                  id="masterIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <!--end col-->
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editMasterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Master</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-master-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="masterName" class="form-label">Master Head</label>
+                <input
+                  type="text"
+                  class="form-control master-name"
+                  id="masterName"
+                  placeholder="Enter "
+                  name="name"
+                  maxlength="100"
+                />
+              </div>
+            </div>
+            <!--end col-->
+            <div class="col-lg-6">
+              <div>
+                <label for="masterIcon" class="form-label">Master Icon</label>
+                <input
+                  type="file"
+                  class="form-control edit-icon"
+                  id="masterIcon"
+                  placeholder="Enter "
+                  name="icon"
+                  accept=".jpg,.jpeg,.png,.gif"
+                />
+              </div>
+            </div>
+
+            <!--end col-->
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/master.js"></script>
+<%- include('../partials/footer'); %>

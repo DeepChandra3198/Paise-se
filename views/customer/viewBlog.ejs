@@ -1,0 +1,42 @@
+<%- include('./partials/header') %>
+<style>
+
+/* .error-area p *, .error-area li *{
+color: #222 !important;
+    font-size: 15px !important;
+    line-height: 23px !important;
+    
+} */
+.error-area li::marker{color: #222 !important;}
+.bg-f7fafd {
+    background-color: #fff !important;
+}
+.error-area li {
+    padding-left: 20px !important;
+}
+</style>
+<!-- Start Error Area -->
+<section class="error-area bg-f7fafd py-5">
+  <div class="container">
+    <div class="row">
+      <div class="page-title-area item-bg2 jarallax" data-jarallax="{&quot;speed&quot;: 0.3}" data-jarallax-original-styles="null"
+      style="background-image: url(https://img.freepik.com/free-photo/office-table-with-cup-coffee-keyboard-notepad_1220-4618.jpg?w=1480&t=st=1701780116~exp=1701780716~hmac=ebc6cfdc9d618ce2951f3e6e268e6010159bef86a2846cee194f10b7f2df7b36);">
+        <div class="container" style="background: #e1dfdf;">
+          <div class="page-title-content text-center">
+            <h1><%= page.title.toUpperCase() %></h1>
+            <h3 style="color: rgb(69, 165, 255);"><%= page.author.toUpperCase() %></h3>
+          </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+      <img style="max-height: 500px;" src="/uploads/<%= page.cover %>"
+      alt="<%= page.name %>"/>
+    </div>
+    <div class="row p-3"><%- page.content %></div>
+    <div class="col-12">
+      <a href="/" class="btn btn-primary">Go to Home</a>
+    </div>
+  </div>
+</section>
+<!-- End Error Area -->
+<%- include('./partials/footer') %>

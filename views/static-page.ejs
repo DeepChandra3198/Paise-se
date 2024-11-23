@@ -1,0 +1,34 @@
+<%- include('./customer/partials/header') %>
+<style>
+
+.error-area p *, .error-area li *{
+color: #222 !important;
+    font-size: 15px !important;
+    line-height: 23px !important;
+    
+}
+.error-area li::marker{color: #222 !important;}
+.bg-f7fafd {
+    background-color: #fff !important;
+}
+.error-area li {
+    padding-left: 20px !important;
+}
+</style>
+<!-- Start Error Area -->
+<section class="error-area bg-f7fafd py-5" style="margin-top: 7%;">
+  <div class="container">
+    <div class="row">
+      <h3><%= page.name %></h3>
+    </div>
+    <div class="row p-3"><%- page.description %></div>
+    <div class="col-12">
+      <a href="/" class="btn btn-primary">Go to Home</a>
+    </div>
+  </div>
+</section>
+<!-- End Error Area -->
+<%- include('./customer/partials/footer') %>
+
+
+

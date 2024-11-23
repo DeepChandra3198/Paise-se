@@ -1,0 +1,94 @@
+<%- include('./partials/header') %>
+
+<div
+  class="page-title-area item-bg2 jarallax"
+  data-jarallax='{"speed": 0.3}'
+  data-jarallax-original-styles="null"
+  style="background-image: none; background-attachment: scroll; background-size: auto"
+>
+  <div class="container">
+    <div class="page-title-content">
+      <h2>Team</h2>
+      <p>Meet our team</p>
+    </div>
+  </div>
+  <div
+    id="jarallax-container-0"
+    style="
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      visibility: hidden;
+      z-index: -100;
+    "
+  >
+    <div
+      style="
+        background-position: 50% 50%;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        width: 1397px;
+        height: 785.812px;
+        overflow: hidden;
+        pointer-events: none;
+        margin-left: 0px;
+        margin-top: 48.5938px;
+        visibility: visible;
+        transform: translateY(-71.325px) translateZ(0px);
+      "
+    ></div>
+  </div>
+</div>
+
+<section class="team-area ptb-70">
+  <div class="container">
+    <div class="row">
+      <% teamMembers?.forEach((teamMember, index) => { %>
+      <div class="col-lg-6 col-md-6">
+        <div class="single-team-member">
+          <div class="member-image">
+            <img src="/uploads/<%= teamMember.photo %>"
+            alt="<%= teamMember.name %>" />
+
+            <ul class="social">
+              <!-- <li>
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+              </li> -->
+              <li>
+                <a href="<%= teamMember.linkedIn %>" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="member-content">
+            <h3><%= teamMember.name %></h3>
+            <span><%= teamMember.designation %></span>
+            <!-- <p id="content">
+              <%= teamMember.about %>
+            </p> -->
+            <p id="content-<%= index %>" style="display: inline-block;">
+              <% if (teamMember.about.split(" ").length > 48) { %>
+                <%= teamMember.about.split(" ").slice(0, 48).join(" ") %>
+                <p id="more-<%= index %>" style="display: none;">
+                  <%= teamMember.about.split(" ").slice(48).join(" ") %>
+                </p>
+                <button class="btn" id="show-more-<%= index %>" onclick="showMore('<%= index %>')">﹀</button>
+              <% } else { %>
+                <%= teamMember.about %>
+              <% } %>
+            </p>        
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<%- include('./partials/footer') %>

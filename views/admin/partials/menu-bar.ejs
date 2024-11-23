@@ -1,0 +1,555 @@
+<div class="app-menu navbar-menu">
+  <!-- LOGO -->
+  <div class="navbar-brand-box">
+    <!-- Dark Logo-->
+   
+    <a href="/admin/dashboard" class="logo logo-dark">
+      <span class="logo-sm">
+        <img src="/assets/images/logo-sm.png" alt="" height="22" />
+      </span>
+      <span class="logo-lg">
+        <img src="/assets/images/logo-dark.png" alt="" height="17" />
+      </span>
+    </a>
+    <!-- Light Logo-->
+    <a href="/admin/dashboard" class="logo logo-light">
+      <span class="logo-sm">
+        <img src="/assets/images/logo-sm.png" alt="" height="22" />
+      </span>
+      <span class="logo-lg">
+        <img src="/assets/images/logo-light.png" alt="" height="17" />
+      </span>
+    </a>
+    <button
+      type="button"
+      class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+      id="vertical-hover"
+    >
+      <i class="ri-record-circle-line"></i>
+    </button>
+  </div>
+
+  <div id="scrollbar">
+    <div class="container-fluid">
+      <div id="two-column-menu"></div>
+      <ul class="navbar-nav" id="navbar-nav">
+        <li class="menu-title"><span data-key="t-menu">Menu</span></li>
+
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarApps"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps"> Setup</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/team-members"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Team Member</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/master"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Drop Down Master
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/master-value"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Drop Down Master Value</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/admin/setup/card" class="nav-link" data-key="t-chat"
+                  >Credit Card Master</a
+                >
+              </li>
+              <!-- 
+              <li class="nav-item">
+                <a href="loan-master.html" class="nav-link" data-key="t-chat">
+                  Loan Master</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="company-setup.html" class="nav-link" data-key="t-chat">
+                  Company</a
+                >
+              </li> -->
+              <li class="nav-item">
+                <a href="/admin/setup/bre" class="nav-link" data-key="t-chat">
+                  Credit Card BRE
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/personal-loan-bre"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  PL Sal & Prof Stage 1
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/company-bank-master"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  PL Sal Stage 2 Comp Cat & FOIR
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/other-bank-master"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  PL Sal Stage 2 Other Master
+                </a>
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/professional-bank-master"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  PL Prof Stage 2 BRE Variables
+                </a>
+              </li>
+              <%#
+              <li class="nav-item">
+                <a
+                  href="/admin/setup/bank-grade-master"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Bank Grade Master
+                </a>
+              </li>
+              %>
+            </ul>
+          </div>
+        </li>
+
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="/admin/customers">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Customers </span>
+          </a>
+        </li>
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="/admin/staffs">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Staffs </span>
+          </a>
+        </li>
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="/admin/invoices">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Invoices </span>
+          </a>
+        </li>
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="/admin/products">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Products </span>
+          </a>
+        </li>
+        <!-- end Dashboard Menu -->
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="/admin/leads"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Leads </span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=personal-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Personal Loan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=business-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Business Loan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=prof-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Professional Loan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=home-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Home Loan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=lap-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Loan Against Property</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=credit-card"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Credit Card</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=vehicle-loan"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Vehicle Loan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=health-insurance"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Health Insurance</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/leads?type=family-doctor"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Family Doctor</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarApps"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps"> CMS</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a href="/admin/faq" class="nav-link" data-key="t-chat"> FAQ</a>
+              </li>
+              <li class="nav-item">
+                <a href="/admin/page" class="nav-link" data-key="t-chat"
+                  >Static Pages</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/admin/testimonial" class="nav-link" data-key="t-chat"
+                  >Testimonials</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/admin/partner" class="nav-link" data-key="t-chat"
+                  >Partners</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/blogs" class="nav-link" data-key="t-chat"
+                  >Blogs</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  href="/admin/bankCommission"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Bank Commission</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a
+                  href="/admin/paiseseWebhook"
+                  class="nav-link"
+                  data-key="t-chat"
+                  >Paisese Webhook</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/offer" class="nav-link" data-key="t-chat"
+                  >Offer</a
+                >
+              </li>
+
+              <li class="nav-item">
+                <a href="/admin/tds" class="nav-link" data-key="t-chat"
+                  >TDS</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="/admin/product-queries">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Product Query </span>
+          </a>
+        </li>
+        <!-- end Dashboard Menu -->
+
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarApps"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps"> General Enquiries</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  href="/admin/home-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Home Loan / LAP Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/business-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Business Loan Enquiries</a
+                >
+              </li>
+              <li class="nav-item d-none">
+                <a
+                  href="/admin/lap-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  LAP Loan Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/two-wheeler-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Two Wheeler Loan Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/car-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Car Loan Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/family-doctor-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Family Doctor Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/personal-loan-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Personal Loan Enquiries</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="/admin/health-insurance-queries"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Health Insurance Enquiries</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <!-- end Dashboard Menu -->
+        <li class="nav-item">
+          <a class="nav-link menu-link" href="contact-query">
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps">Contact Query</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarApps"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps"> Services</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  href="referral-service"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Referral</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="gst-check-service"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  GST Check</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="pan-check-service"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  PAN Check</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="adhaar-check-service"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Aadhaar Check</a
+                >
+              </li>
+              <li class="nav-item">
+                <a href="/ifsc-check" class="nav-link" data-key="t-chat">
+                  IFSC Check</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link menu-link"
+            href="#sidebarApps"
+            data-bs-toggle="collapse"
+            role="button"
+            aria-expanded="false"
+            aria-controls="sidebarApps"
+          >
+            <i class="ri-apps-2-line"></i>
+            <span data-key="t-apps"> CMS</span>
+          </a>
+          <div class="collapse menu-dropdown" id="sidebarApps">
+            <ul class="nav nav-sm flex-column">
+              <li class="nav-item">
+                <a
+                  href="page-manager-cms.html"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Page Manager</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="menu-manager-cms.html"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Menu Manager</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  href="ads-manager-cms.html"
+                  class="nav-link"
+                  data-key="t-chat"
+                >
+                  Ads Manager</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- end Dashboard Menu -->
+      </ul>
+    </div>
+    <!-- Sidebar -->
+  </div>
+</div>

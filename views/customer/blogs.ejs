@@ -1,0 +1,57 @@
+<%- include('./partials/header') %>
+
+<div class="page-title-area item-bg2 jarallax" data-jarallax="{&quot;speed&quot;: 0.3}" data-jarallax-original-styles="null">
+  <div class="container">
+    <div class="page-title-content">
+      <h1>Blogs</h1>
+      <h3>Browse our Blogs</h3>
+    </div>
+  </div>
+  
+</div>
+
+<section class="team-area ptb-70">
+  <div class="container">
+    <div class="row">
+      <% blogs.forEach((teamMember) => { %>
+      <div class="col-lg-8 col-md-8 single-blog card border-0 m-3 mt-5 row shadow p-4" id=<%= teamMember.id %> style="cursor: pointer;">
+        <img src="https://i.pinimg.com/736x/d3/72/14/d3721413d93fec258d43a2a90964932d.jpg" class="card-img"
+        alt="<%= teamMember.author %>" style="opacity: 0.3;"/> 
+        <div class="card-img-overlay">
+          <div>
+            <img src="/uploads/<%= teamMember.icon %>"
+            alt="<%= teamMember.name %>" style="width: 20vw ;" />
+          </div>
+
+          <div class="member-content">
+            <h3 style="font-size: 2vw; margin: 0;"><%= teamMember.title %></h3>
+            <span style="font-size: 1vw;"><%= teamMember.author %></span>
+            <!-- <p id="content">
+              <%= teamMember.about %>
+            </p> -->
+            <!-- <p id="content" style="display: inline-block;">
+              <% if (teamMember.content.split(" ").length > 54) { %>
+                <%= teamMember.content.split(" ").slice(0, 54).join(" ") %>
+              <% } else { %>
+                <%= teamMember.content %>
+              <% } %>
+            </p>         -->
+          </div>
+        </div>
+      </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+<script>
+  const singleBlog = document.getElementsByClassName("single-blog");
+
+  for(let i=0; i<singleBlog.length; i++){
+    singleBlog[i].addEventListener("click" , ()=>{
+      console.log(singleBlog[i].id,"clicked=====>>>")
+      window.location.assign(`/blogs/${singleBlog[i].id}`)
+    })
+  }
+
+</script>
+<%- include('./partials/footer') %>

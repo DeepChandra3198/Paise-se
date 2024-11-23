@@ -1,0 +1,393 @@
+<%- include('../partials/header'); %>
+<div class="main-content">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card team-box">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">Bank Grade Masters</p>
+                      </div>
+                      <div class="col-sm-auto ms-auto">
+                        <div class="flex-grow-1">
+                          <button
+                            class="btn btn-info add-btn"
+                            data-bs-toggle="modal"
+                            data-bs-target="#createBankGradeMasterModal"
+                          >
+                            <i class="ri-add-fill me-1 align-bottom"></i>
+                            Add Bank Grade Master
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card team-box">
+                  <div class="card-body">
+                    <div>
+                      <div class="table-responsive">
+                        <table
+                          class="table align-middle table-nowrap mb-0 fs-13"
+                          id="customerTable"
+                        >
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>SR NO.</th>
+                              <th>BANK NAME</th>
+                              <th>GRADE</th>
+                              <th>FOIR</th>
+                              <th>STATUS</th>
+                              <th style="text-align: center">ACTION</th>
+                            </tr>
+                          </thead>
+                          <tbody class="list form-check-all">
+                            <% bankGradeMasters.forEach((bankGradeMaster, index) => { %>
+                            <tr>
+                              <td>
+                                <p class="text-muted mb-0"><%= ++index %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0"><%= bankGradeMaster.bankName %></p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= bankGradeMaster.grade %>
+                                </p>
+                              </td>
+                              <td>
+                                <p class="text-muted mb-0">
+                                  <%= bankGradeMaster.foir %>%
+                                </p>
+                              </td>
+                              <td>
+                                <% if(bankGradeMaster.status){ %>
+                                <p class="mb-0 fs-12 badge badge-soft-success">
+                                  Enabled
+                                </p>
+                                <% } else { %>
+                                <p class="mb-0 fs-12 badge badge-soft-danger">
+                                  Disabled
+                                </p>
+                                <% } %>
+                              </td>
+                              <td align="center">
+                                <ul class="list-inline mb-0">
+                                  <% if (bankGradeMaster.status) { %>
+                                  <li
+                                    class="list-inline-item edit"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Disable"
+                                  >
+                                    <a
+                                      href="/admin/setup/bank-grade-master-status/<%= bankGradeMaster.id %>/0"
+                                      class="text-muted d-inline-block"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/vfzqittk.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } else { %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Enable"
+                                  >
+                                    <a
+                                      class="edit-item-btn"
+                                      href="/admin/setup/bank-grade-master-status/<%= bankGradeMaster.id %>/1"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/hjeefwhm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <% } %>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Edit"
+                                  >
+                                    <a
+                                      class="remove-item-btn edit-bank-grade-master-btn"
+                                      href="javascript:;"
+                                      data-bs-toggle="modal"
+                                      data-bs-target="#editBankGradeMasterModal"
+                                      data-bank-grade-master="<%= JSON.stringify(bankGradeMaster) %>"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/oclwxpmm.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                  <li
+                                    class="list-inline-item"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-trigger="hover"
+                                    data-bs-placement="top"
+                                    title="Delete"
+                                  >
+                                    <a
+                                      class="remove-item-btn"
+                                      data-bs-toggle="modal"
+                                      href="javascript:;"
+                                      data-url="/admin/setup/bank-grade-master/delete/<%= bankGradeMaster.id %>"
+                                      onclick="handleDelete(this)"
+                                    >
+                                      <lord-icon
+                                        src="https://cdn.lordicon.com/dovoajyj.json"
+                                        trigger="loop"
+                                        style="width: 20px; height: 20px"
+                                      >
+                                      </lord-icon>
+                                    </a>
+                                  </li>
+                                </ul>
+                              </td>
+                            </tr>
+                            <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<div
+  class="modal fade"
+  id="createBankGradeMasterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Add Bank Grade Master</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab create-bank-grade-master-form">
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <div class="col-lg-12">
+              <div>
+                <label for="bankName" class="form-label">Bank Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="bankName"
+                  placeholder="Enter "
+                  name="bankName"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="grade" class="form-label">Grade</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="grade"
+                  placeholder="Enter "
+                  name="grade"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Foir</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter"
+                  min="0"
+                  value="0"
+                  name="foir"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Max Loan Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  placeholder="Enter"
+                  min="0"
+                  value="1"
+                  max="999999999"
+                  name="maxLoanAmount"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="editBankGradeMasterModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 802px">
+    <div class="modal-content border-0">
+      <div class="modal-header bg-soft-info p-3">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Bank Grade Master</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          id="close-modal"
+        ></button>
+      </div>
+      <form class="checkout-tab edit-bank-grade-master-form">
+        <!--end modal-body-->
+        <div class="modal-body">
+          <div class="row g-3">
+
+            <div class="col-lg-12">
+              <div>
+                <label for="bankName" class="form-label">Bank Name</label>
+                <input
+                  type="text"
+                  class="form-control edit-bank-grade-master-bank-name"
+                  id="bankName"
+                  placeholder="Enter "
+                  name="bankName"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label for="grade" class="form-label">Grade</label>
+                <input
+                  type="text"
+                  class="form-control edit-bank-grade-master-grade"
+                  id="grade"
+                  placeholder="Enter "
+                  name="grade"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Foir</label>
+                <input
+                  type="number"
+                  class="form-control edit-bank-grade-master-foir"
+                  placeholder="Enter"
+                  min="0"
+                  value="0"
+                  name="foir"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div>
+                <label class="form-label">Max Loan Amount</label>
+                <input
+                  type="number"
+                  class="form-control max-loan-amount"
+                  placeholder="Enter"
+                  min="0"
+                  value="1"
+                  max="999999999"
+                  name="maxLoanAmount"
+                />
+              </div>
+            </div>
+
+            <div class="col-lg-12">
+              <div class="d-flex align-items-start gap-3 mt-3">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-label right ms-auto nexttab"
+                  data-nexttab="pills-bill-address-tab"
+                >
+                  <i
+                    class="ri-arrow-right-line label-icon align-middle fs-16 ms-2"
+                  ></i>
+                  Save
+                </button>
+              </div>
+            </div>
+            <!--end col-->
+          </div>
+        </div>
+        <!--end modal-body-->
+      </form>
+    </div>
+  </div>
+</div>
+<script type="module" src="/javascripts/admin/bank-grade-master.js"></script>
+<%- include('../partials/footer'); %>

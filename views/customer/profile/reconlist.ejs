@@ -1,0 +1,122 @@
+<%- include('../partials/header') %>
+
+<section class="ptb-70 my-account-pg mt-5 grey-bg">
+  <div class="container">
+    <div class="row">
+      <h5 class="mb-3">Payment Recon Listing</h5>
+
+      <div class="justify-content-center">
+        <div class="col-lg-12 col-sm-12">
+          <div class="row">
+            <div class="col-sm-9"></div>
+            <div class="col-sm-3">
+              <div class="form-group">
+                <select
+                  class="form-control input_form-control"
+                  style="display: none"
+                >
+                  <option>Payment Received</option>
+                  <option>Payment Pending</option>
+                </select>
+                <div
+                  class="nice-select form-control input_form-control"
+                  tabindex="0"
+                >
+                  <span class="current">Payment Pending</span>
+                  <ul class="list">
+                    <li data-value="Payment Received" class="option focus">
+                      Payment Received
+                    </li>
+                    <li data-value="Payment Pending" class="option selected">
+                      Payment Pending
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive table-card mt-3" style="width: 100%">
+            <table
+              class="table align-middle ctp-contact-form text-center"
+              id="customerTable"
+            >
+              <thead class="table-secondary">
+                <tr>
+                  <th><input type="checkbox" id="select-all" /></th>
+                  <th>Case Name</th>
+                  <th>Case Number (unique ID)</th>
+                  <th>Bank Name</th>
+                  <th>Disbursal Amt</th>
+                  <th>Gross Payout</th>
+                  <th>TDS</th>
+                  <th>GST</th>
+                  <th>Net Payout</th>
+                  <!-- <th>PO Order Raised</th> -->
+                </tr>
+              </thead>
+              <tbody class="list form-check-all">
+                <% leads.forEach((teamMember, index) => { %>
+                <tr>
+                  <td>
+                    <input
+                      type="checkbox"
+                      class="row-checkbox"
+                      data-netpayout="<%= teamMember?.netPayout %>"
+                      data-disbursedAt="<%= teamMember?.disbursedAt %>"
+                      data-userrole="<%= user?.role %>"
+                      data-id="<%= teamMember?.id %>"
+                      disabled
+                    />
+                  </td>
+                  <td><%= teamMember?.loanType %></td>
+                  <td><%= teamMember?.id %></td>
+                  <td>
+                    <%= teamMember?.disbursingBank %>
+                  </td>
+                  <td>
+                    <%= teamMember?.disbursedAmount.toLocaleString('en-IN') %>
+                  </td>
+                  <td>
+                    <%= teamMember?.payoutAmount.toLocaleString('en-IN') %>
+                  </td>
+                  <td><%= teamMember?.tds.toLocaleString('en-IN') %></td>
+                  <td><%= teamMember?.gst.toLocaleString('en-IN') %></td>
+                  <td><%= teamMember?.netPayout.toLocaleString('en-IN') %></td>
+                  <!-- <td>XX</td> -->
+                </tr>
+                <% }) %>
+                <tr style="border-color: #fff; height: 20px">
+                  <td colspan="9"></td>
+                </tr>
+                <tr>
+                  <td colspan="6"></td>
+                  <td colspan="2">Total Amount of Ticked Cases</td>
+                  <td colspan="1" id="total-amount">0</td>
+                </tr>
+                <tr>
+                  <td colspan="6"></td>
+                  <td colspan="2">(Advance)</td>
+                  <td colspan="1" id="advance-total-amount">0</td>
+                </tr>
+                <tr style="border-color: #fff; height: 20px">
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <div class="col-sm-3">
+              <button type="submit" class="btn btn-primary" id="generate-invoice">
+                Generate Invoice
+              </button>
+              <div id="msgSubmit" class="h3 text-center hidden"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="/javascripts/customer/reconlist.js"></script>
+<%- include('../partials/footer') %>

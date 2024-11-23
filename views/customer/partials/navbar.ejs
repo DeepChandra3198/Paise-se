@@ -1,0 +1,252 @@
+<div class="navbar-area">
+  <div class="luvion-responsive-nav">
+    <div class="container">
+      <div class="luvion-responsive-menu">
+        <div class="logo">
+          <a href="/">
+            <img src="/customer-assets/img/logo.png" alt="logo" />
+            <img src="/customer-assets/img/logo.png" alt="logo" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="luvion-nav">
+    <div>
+      <nav class="navbar navbar-expand-md navbar-light">
+        <% if(user?.type==='customer' ) { %>
+        <p
+          id="goBack"
+          role="button"
+          class="fs-3 fw-bold d-inline"
+          style="margin-left: 10px"
+          data-toggle="tooltip" 
+          title="Go Back!"
+          data-placement="left"
+        >
+          <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        </p>
+        <% } %>
+
+        <a class="navbar-brand" href="/" style="margin-left: 30px;">
+          <img src="/customer-assets/img/logo.png" alt="logo" />
+          <img src="/customer-assets/img/logo.png" alt="logo" />
+        </a>
+
+        <div
+          class="collapse navbar-collapse mean-menu"
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav h-100">
+            <!-- <li class="nav-item">
+              <a href="/offers" class="nav-link active">Offers</a>
+            </li> -->
+
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="calculatorsDropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                >Calculators
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="calculatorsDropdown">
+                <li class="nav-item">
+                  <a
+                    href="/personal-loan-calculator"
+                    class="dropdown-item"
+                    value="personal-loan-calculator"
+                    >Personal Loan Calculator</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/home-loan-calculator"
+                    class="dropdown-item"
+                    value="home-loan-calculator"
+                    >Home Loan Calculator</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/lap-calculator"
+                    class="dropdown-item"
+                    value="lap-calculator"
+                    >LAP Calculator</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/two-wheeler-loan-calculator"
+                    class="dropdown-item"
+                    value="two-wheeler-loan-calculator"
+                    >Two Wheeler Loan Calculator</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/car-loan-calculator"
+                    class="dropdown-item"
+                    value="car-loan-calculator"
+                    >Car Loan Calculator</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/business-loan-calculator"
+                    class="dropdown-item"
+                    value="business-loan-calculator"
+                    >Business Loan Calculator</a
+                  >
+                </li>
+              </ul>
+            </li>
+
+            <!-- <li class="nav-item">
+              <a href="/product/credit-card/1" class="nav-link active">Credit Cards</a>
+            </li>
+            <li class="nav-item">
+              <a href="/product/personal-loan/2" class="nav-link active">Personal Loan</a>
+            </li> -->
+
+            <!-- <li class="nav-item">
+              <a href="#" class="nav-link">More Products<i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li class="nav-item"><a href="/product/business-loan/3">Business Loan</a></li>
+                <li class="nav-item"><a href="/product/home-loan-lap/4">Home Loan / LAP</a></li>
+                <li class="nav-item"><a href="/product/two-wheeler/6">Two Wheeler</a></li>
+                <li class="nav-item"><a href="/product/car-loan/7">Car Loan</a></li>
+                <li class="nav-item"><a href="/product/family-doctor/8">Family Doctor</a></li>
+                <li class="nav-item"><a href="/product/health-insurance-enquiry/9">Health Insurance</a></li>
+              </ul>
+            </li> -->
+
+            <!-- <li class="nav-item">
+              <a href="#" class="nav-link dropdown-toggle" id="moreProductsDropdown" data-bs-toggle="dropdown" aria-haspopup="true">More Products</a>
+              <ul class="dropdown-menu" aria-labelledby="moreProductsDropdown">
+                <li class="nav-item"><a href="/product/business-loan/3" class="dropdown-item" value="business-loan">Business Loan</a></li>
+                <li class="nav-item"><a href="/product/home-loan-lap/4" class="dropdown-item" value="home-loan-lap">Home Loan / LAP</a></li>
+                <li class="nav-item"><a href="/product/two-wheeler/6" class="dropdown-item" value="two-wheeler">Two Wheeler</a></li>
+                <li class="nav-item"><a href="/product/car-loan/7" class="dropdown-item" value="car-loan">Car Loan</a></li>
+                <li class="nav-item"><a href="/product/family-doctor/8" class="dropdown-item" value="family-doctor">Family Doctor</a></li>
+                <li class="nav-item"><a href="/product/health-insurance-enquiry/9" class="dropdown-item" value="health-insurance">Health Insurance</a></li>
+              </ul>
+            </li> -->
+
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link dropdown-toggle"
+                id="resourcesDropdown"
+                data-bs-toggle="dropdown"
+                aria-haspopup="true"
+                >Resources</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                <li class="nav-item">
+                  <a href="/p/about-us" class="dropdown-item" value="about-us"
+                    >About us
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/blogs" class="dropdown-item" value="blogs">Blogs</a>
+                </li>
+                <li class="nav-item">
+                  <a href="/ifsc-check" class="dropdown-item" value="ifsc-check"
+                    >IFSC Check</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/p/privacy-policy"
+                    class="dropdown-item"
+                    value="privacy-policy"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a
+                    href="/p/terms-conditions"
+                    class="dropdown-item"
+                    value="terms-of-use"
+                    >Terms of Use</a
+                  >
+                </li>
+                <!-- <li class="nav-item"><a href="/customer/pan-verify" class="dropdown-item" value="pan-card">PAN Card</a></li> -->
+                <li class="nav-item">
+                  <a
+                    href="/customer/verify-pan-details"
+                    class="dropdown-item"
+                    value="pan-card"
+                    >PAN Card</a
+                  >
+                </li>
+                <!-- <li class="nav-item"><a href="#" class="dropdown-item" value="aadhaar-card">Aadhaar Card</a></li> -->
+                <!-- <li class="nav-item"><a href="#" class="dropdown-item" value="ifsc-codes">IFSC Codes</a></li> -->
+                <!-- <li class="nav-item"><a href="/our-team" class="dropdown-item" value="our-team">Our Team</a></li> -->
+              </ul>
+            </li>
+
+            <li class="nav-item">
+              <a href="/contact-us" class="nav-link">Contact</a>
+            </li>
+
+            <li class="nav-item">
+              <a href="/our-team" class="dropdown-item" value="our-team"
+                >Our Team</a
+              >
+            </li>
+
+            <% if (!user) { %>
+            <li class="nav-item">
+              <a href="/login" class="login-btn"
+                ><i class="flaticon-user"></i> <span class="">Log In</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="/register" class="login-btn"
+                ><i class="flaticon-user"></i> <span class="">Register</span></a
+              >
+            </li>
+            <% } else if(user.type==='customer' ) { %>
+            <li class="nav-item">
+              <a href="/customer/dashboard" class="login-btn"
+                ><i class="flaticon-settings"></i>
+                <span class="">Dashboard</span></a
+              >
+            </li>
+            <!-- <li class="nav-item">
+              <a
+                href="javascript:;"
+                onclick="document.querySelector('.logout-form').submit()"
+                class="login-btn"
+                ><i class="flaticon-settings"></i>
+                <span class="">Logout</span>
+              </a>
+            </li> -->
+            <% } %>
+            <div class="row justify-content-center mt-5 d-sm-flex d-md-none">
+              <lottie-player
+                src="https://lottie.host/6be99584-cb47-4671-b720-63b4b4f67653/pQjkNjKP9M.json"
+                background="transparent"
+                speed="1"
+                style="width: 300px; height: 300px"
+                loop
+                autoplay
+              ></lottie-player>
+            </div>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+  const backBtn = document.getElementById("goBack");
+  backBtn.addEventListener("click", () => {
+    window.history.back();
+  });
+</script>

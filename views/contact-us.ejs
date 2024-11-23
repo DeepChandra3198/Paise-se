@@ -1,0 +1,100 @@
+<%- include('./customer/partials/header') %>
+
+<!-- Start Error Area -->
+<section class="error-area  mt-5 ptb-70 pb-4 r-mt-0">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row justify-content-center">
+          <div class="col-md-6 order-2 order-md-1">
+            <h3 class="heading mb-4">Let's talk about everything!</h3>
+            <p class="fs-5">More ways to connect</p>
+            <p class="fs-14">
+              Email:
+              <a href="mailto:ceooffice@paisese.com">ceooffice@paisese.com</a>
+            </p>
+            <p class="fs-14">Contact Number: 9953553471</p>
+            <lottie-player
+              src="https://assets2.lottiefiles.com/packages/lf20_kdx6cani.json"
+              background="transparent"
+              speed="1"
+              style="width: 300px; height: 300px"
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
+          <div class="col-md-6 order-1 order-md-2">
+            <h3 class="heading mb-4 d-block d-md-none">Contact Us</h3>
+            <form class="mb-5 contact-form" method="post" id="contactForm">
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    placeholder="Your name"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-md-6 form-group mb-3">
+                  <input
+                    type="number"
+                    min="0"
+                    class="form-control no-arrow"
+                    name="phone"
+                    id="phone"
+                    placeholder="Phone"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="subject"
+                    id="subject"
+                    placeholder="Subject"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <textarea
+                    class="form-control h-100"
+                    name="message"
+                    id="message"
+                    cols="30"
+                    rows="3"
+                    placeholder="Write your message"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-primary px-4 rounded-0">
+                    Send Message
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Error Area -->
+<script type="module" src="/javascripts/customer/contact-us.js"></script>
+<%- include('./customer/partials/footer') %>

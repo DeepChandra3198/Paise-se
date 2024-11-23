@@ -1,0 +1,70 @@
+<%- include('./partials/header') %>
+
+<!-- Start Error Area -->
+<section class="error-area bg-f7fafd py-5 mb-5" style="margin-top: 7%">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h3 class="heading mb-4">Let's verify your PAN details!</h3>
+            <lottie-player
+              src="https://assets7.lottiefiles.com/packages/lf20_4tiy5nnf.json"
+              background="transparent"
+              speed="1"
+              style="width: 320px; height: 320px"
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
+          <div class="col-md-6">
+            <form class="mb-5 pan-form" method="post" id="panForm">
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="panNumber"
+                    id="panNumber"
+                    placeholder="Your PAN card number"
+                    maxlength="10"
+                    value="<%= user.pancard %>"
+                  />
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    placeholder="Your Name"
+                    value="<%= user.name %>"
+                  />
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                  <label>Date of Birth</label>
+                  <input
+                    type="date"
+                    name="dob"
+                    id="email"
+                    placeholder="Date of Birth"
+                    class="form-control no-calendar-icon"
+                    value="<%= new Date(user.dob).toISOString().slice(0, 10) %>"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <button class="btn btn-secondary px-4 rounded-0">Verify</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Error Area -->
+<script type="module" src="/javascripts/customer/pan-verify.js"></script>
+<%- include('./partials/footer') %>

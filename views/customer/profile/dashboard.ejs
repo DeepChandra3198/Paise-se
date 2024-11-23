@@ -1,0 +1,1559 @@
+<%- include('../partials/header') %>
+
+  <style>
+    .main-content-label {
+      font-size: x-large;
+      background: linear-gradient(to right, #7779c3, #0dbad4);
+      color: transparent;
+    }
+  </style>
+
+  <section class="ptb-70 my-account-pg mt-5 grey-bg">
+    <marquee>
+      <h6 class="text-success">
+        <%= offers?.[0]?.offer ? offers?.[0]?.offer : "" %>
+          <img src="/uploads/<%= offers?.[0]?.photo %>" alt="offer" style="max-height: 40px;">
+      </h6>
+    </marquee>
+    <div class="container">
+      <div class="ctp-key-features-tabs">
+        <h5 class="mb-3">Customer My Account</h5>
+
+        <div class="row col-sm d-flex row-wrap-reverse">
+          <ul class="nav nav-tabs" id="myTab" role="tablist" style="width: 90vw;">
+            <li class="nav-item col" role="presentation">
+              <a class="nav-link <% (tab ==='2') ? 'active' : '' %>" id="security-tab" data-bs-toggle="tab"
+                href="#security" role="tab" aria-controls="security" aria-selected="false" tabindex="-1"><i
+                  class="fas fa-chevron-left"></i> My
+                Profile</a>
+            </li>
+            <li class="nav-item col" role="presentation">
+              <a class="nav-link <% (tab ==='1') ? 'active' : '' %>" id="dashboard-tab" data-bs-toggle="tab"
+                href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true"><i
+                  class="fas fa-chevron-left"></i>Dashboard</a>
+            </li>
+            <li class="nav-item col" role="presentation">
+              <a class="nav-link <% (tab ==='3') ? 'active' : '' %>" id="lead-tab" data-bs-toggle="tab" href="#lead"
+                role="tab" aria-controls="lead" aria-selected="false" tabindex="-1"
+                style="pointer-events: <%= user.status !== 'Approved' ? 'none' : 'auto' %>;"><i
+                  class="fas fa-chevron-left"></i> Add Leads</a>
+            </li>
+            <li class="nav-item col" role="presentation">
+              <a class="nav-link" id="leadH-tab" data-bs-toggle="tab" href="#leadH" role="tab" aria-controls="leadH"
+                aria-selected="false" tabindex="-1"
+                style="pointer-events: <%= user.status !== 'Approved' ? 'none' : 'auto' %>;">
+                <i class="fas fa-chevron-left"></i> Leads History
+              </a>
+            </li>
+            <li class="nav-item col" role="presentation">
+              <a class="nav-link" id="paymentR-tab" data-bs-toggle="tab" href="#paymentR" role="tab"
+                aria-controls="paymentR" aria-selected="false" tabindex="-1"
+                style="pointer-events: <%= user.status !== 'Approved' ? 'none' : 'auto' %>;"><i
+                  class="fas fa-chevron-left"></i> Payment
+                Recon</a>
+            </li>
+            <li class="nav-item col">
+              <a class="nav-link" id="refferal-tab" data-bs-toggle="tab" href="javascript:;"
+                onclick="document.querySelector('.logout-form').submit()" aria-controls="refferal"><i
+                  class="fas fa-sign-out-alt"></i>Logout</a>
+            </li>
+          </ul>
+
+          <div class="tab-content mt-5" id="myTabContent" style="width: 90vw;">
+
+            <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="#dashboard-tab">
+              <div class=" justify-content-center">
+                <div class="col-lg-12 col-sm-12">
+                  <h5 class="mb-3">My Dashboard</h5>
+                  <div class="row">
+                    <!-- <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>Product </label>
+                        <select class="form-control input_form-control" style="display: none;">
+                          <option>Product</option>
+                        </select>
+                        <div class="nice-select form-control input_form-control" tabindex="0"><span
+                            class="current">Product</span>
+                          <ul class="list">
+                            <li data-value="Product" class="option selected">Product</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>Date From </label>
+                        <input type="date" name="dashboardFrom" id="dashboardFrom"
+                          class="form-control input_form-control">
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="form-group">
+                        <label>Date To </label>
+                        <input type="date" name="dashboardTo" id="dashboardTo" class="form-control input_form-control">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mt-4">
+                    <div class="col-sm-12 text-center">
+                      <div class="table-responsive table-card mt-3" style="width:100%">
+                        <table class="table table-bordered text-nowrap align-middle" id="customerTable">
+                          <thead class="table-secondary text-white">
+                            <tr>
+
+                              <th style="background-color: #0a66c2;">Product</th>
+                              <th style="background-color: #0a66c2;">Pre-Login </th>
+                              <th style="background-color: #0a66c2;">Pre-Login Reject</th>
+                              <th style="background-color: #0a66c2;">Login </th>
+                              <th style="background-color: #0a66c2;">WIP</th>
+                              <th style="background-color: #0a66c2;">Documents Pending </th>
+                              <th style="background-color: #0a66c2;">Approved </th>
+                              <th style="background-color: #0a66c2;">Re-Look</th>
+                              <th style="background-color: #0a66c2;">Rejected </th>
+                              <th style="background-color: #0a66c2;">Disbursed </th>
+                              <th style="background-color: #0a66c2;">ABND </th>
+                              <th style="background-color: #0a66c2;">Not Interested</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% statusCountArr.forEach((teamMember)=> { %>
+                              <tr>
+                                <td class="fw-bold" style="color: #0a66c2;">
+                                  <%= teamMember.loanType %>
+                                </td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Pre-Login"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Pre-Login'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Pre-Login Reject"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Pre-Login Reject'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Logins"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Logins'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=WIP"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['WIP'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Documents Pending"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Documents Pending'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Approved"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Approved'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Re-Look"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Re-Look'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Rejected"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Rejected'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Disbursed"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Disbursed'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=ABND"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['ABND'] %>
+                                  </a></td>
+                                <td align="center"><a
+                                    href="lead-list?type=<%= teamMember.loanType.split(' ').join('-') %>&status=Not Interested"
+                                    style="width:100%;display:inline-block">
+                                    <%= teamMember?.['Not Interested'] %>
+                                  </a></td>
+                              </tr>
+                              <% }) %>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                    <!-- 
+                    <div class="col-sm-12">
+                      <div class="table-responsive table-card mt-3" style="width:100%">
+                        <table class="table table-striped table-bordered text-nowrap  align-middle " id="customerTable">
+                          <thead class="table-secondary">
+                            <tr>
+
+                              <th>Credit Card</th>
+                              <th>Leads</th>
+                              <th>Data Punch</th>
+                              <th>AIP Rejected</th>
+                              <th>KYC Done</th>
+                              <th>WIP</th>
+                              <th>Verification</th>
+                              <th>Card Out</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td align="right">3</td>
+                              <td align="right">5</td>
+                              <td align="right">6</td>
+                              <td align="right">100</td>
+                              <td align="right">40</td>
+                              <td align="right">20</td>
+                              <td align="right">10</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                    <div class="col-sm-12">
+                      <div class="table-responsive table-card mt-3" style="width:100%">
+                        <table class="table table-striped table-bordered text-nowrap  align-middle " id="customerTable">
+                          <thead class="table-secondary">
+                            <tr>
+                              <th>Insurance</th>
+                              <th>Leads</th>
+                              <th>Data Punch</th>
+                              <th>Policy Approved</th>
+                              <th>Payment Pending</th>
+                              <th>Payment Done</th>
+                              <th>Policy Issued</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td></td>
+                              <td align="right">3</td>
+                              <td align="right">5</td>
+                              <td align="right">6</td>
+                              <td align="right">100</td>
+                              <td align="right">40</td>
+                              <td align="right">20</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div> -->
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="security" role="tabpanel" aria-labelledby="#security-tab">
+              <div class=" justify-content-center">
+
+                <form class="ctp-contact-form profile-form">
+                  <div class="col-md-12 mb-4">
+                    <h5>My Profile</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Profile</label>
+                        <% if (user.profile) { %>
+                          <div class="m-2 mb-2">
+                            <img src="/uploads/<%= user.profile %>" alt="user" style="max-height: 150px;">
+                          </div>
+                          <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                            <b>Replace :</b>
+                            <% } %>
+                              <% } %>
+                                <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                                  <input type="file" name="profile" id="profile" data-error="Please upload your profile"
+                                    accept=".jpg,.jpeg,.png">
+                                  <% } %>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <b>Cheque Document :</b>
+                        <% if (user.bankChequeDocument) { %>
+                          <div class="mt-2 mb-2">
+                            <a href="/uploads/<%= user.bankChequeDocument %>" target="_blank">
+                              View Saved Cheque
+                            </a>
+                          </div>
+                          <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                            <b>Replace :</b>
+                            <% } %>
+                              <% } %>
+                                <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                                  <input type="file" name="bankChequeDocument" id="bankChequeDocument"
+                                    data-error="Please upload your profile" accept=".pdf">
+                                  <% } %>
+                      </div>
+                      <div class="form-group">
+                        <b>Pancard Document :</b>
+                        <% if (user.pancardDocument) { %>
+                          <div class="mt-2 mb-2">
+                            <a href="/uploads/<%= user.pancardDocument %>" target="_blank">
+                              View Saved Pancard
+                            </a>
+                          </div>
+                          <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                            <b>Replace :</b>
+                            <% } %>
+                              <% } %>
+                                <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                                  <input type="file" name="pancardDocument" id="pancardDocument"
+                                    data-error="Please upload your profile" accept=".jpg,.jpeg,.png,.pdf">
+                                  <% } %>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <b>Aadhar Card Document :</b>
+                        <% if (user.aadharCardDocument) { %>
+                          <div class="mt-2 mb-2">
+                            <a href="/uploads/<%= user.aadharCardDocument %>" target="_blank">
+                              View Saved Aadhar
+                            </a>
+                          </div>
+                          <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                            <b>Replace :</b>
+                            <% } %>
+                              <% } %>
+                                <% if (user.status !=='Approved' || user.status !=='Rejected' ) { %>
+                                  <input type="file" name="aadharCardDocument" id="aadharCardDocument"
+                                    data-error="Please upload your profile" accept=".jpg,.jpeg,.png,.pdf">
+                                  <% } %>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group" style="max-height: 20px;">
+                          <b>Status :- </b>
+                          <%= user.status %>
+                            <br>
+                            <% if (user.remark && user.remark !=null ) { %>
+                              <b>Remark :- </b>
+                              <%= user.remark %>
+                                <% } %>
+                                  <br>
+                                  <% if (user.chanelCode && user.chanelCode !=null ) { %>
+                                    <b>Chanel Code :- </b>
+                                    <%= user.chanelCode %>
+                                      <% } %>
+                                        <!-- <div class="help-block with-errors"></div> -->
+                        </div>
+                      </div>
+                      <!-- <div class="col-sm-4">
+                        <div class="form-group">
+                        </div>
+                      </div> -->
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="name" id="name"
+                        class="form-control" value="<%= user.name %>"
+                          data-error="Please enter your name" placeholder="Sergio Laughlin">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="email" id="email"
+                        class="form-control" value="<%= user.email %>"
+                          data-error="Please enter your email" placeholder="luvion@gmail.com">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Phone</label>
+                        <input readonly="true" placeholder="enter 10 digit phone" type="text"
+                          <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="phone" id="phone"
+                        class="form-control" value="<%= user.phone %>"
+                          data-error="Please enter your surname" placeholder="George" pattern="[0-9]{10}">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+
+                    <!-- <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        <select class="nice-select" name="gender">
+                          <option>Male</option>
+                          <option>Female</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>DOB</label>
+                        <input type="date" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="dob" id="dob"
+                        class="form-control"
+                        value="<%= new Date(user.dob).toISOString().substr(0, 10) %>"
+                          data-error="Please enter your surname" placeholder="George">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Marital Status</label>
+                        <select class="nice-select" name="maritalStatus">
+                          <option value="Married">Married</option>
+                          <option value="Unmarried">Unmarried</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>PAN No</label>
+                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="pancard" id="pancard"
+                        required="true" value="<%= user.pancard %>"
+                          data-error="Please enter your number" class="form-control" placeholder="Enter"
+                          pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Aadhar No</label>
+                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="aadhar" id="aadhar"
+                        required="true" value="<%= user.aadhar %>"
+                          data-error="Please enter your number" class="form-control" placeholder="Enter"
+                          pattern="[0-9]{12}">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Area Pin</label>
+                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="pincode" id="pincode"
+                        required="true" value="<%= user.pincode %>"
+                          class="form-control" placeholder="Enter">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>State</label>
+                        <input type="text" readonly name="state" id="state" required="true" value="<%= user.state %>"
+                          class="form-control" placeholder="Enter">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input type="text" readonly name="city" id="city" required="true" value="<%= user.city %>"
+                          class="form-control" placeholder="Enter">
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="address" id="address"
+                        required="true" value="<%= user.address %>"
+                          data-error="Please enter your number" class="form-control" placeholder="Enter">
+                          <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                      <div class="form-group">
+                        <label>PAN No</label>
+                        <input type="text" name="pancard" id="pancard" required="true" value="<%= user.pancard %>"
+                          data-error="Please enter your number" class="form-control" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+                    <br />
+                    <div class="col-sm-7">
+                      <button type="submit" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> class="btn btn-primary
+                        w-50">Update Profile</button>
+                      <div id="msgSubmit" class="h3 text-center hidden"></div>
+                    </div>
+                  </div>
+                  <div class="clearfix"></div>
+                </form>
+
+              </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="leadH" role="tabpanel" aria-labelledby="#leadH-tab">
+              <div class=" justify-content-center">
+                <div class="col-lg-12 col-sm-12">
+                  <h5 class="mb-5">My Enquiry</h5>
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <input type="text" name="name" id="leadCustomerName" placeholder="Search by Name"
+                          class="form-control" style="padding:10px !important;margin-bottom:15px">
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <input type="text" name="name" id="leadCompanyName" placeholder="Company Name"
+                          class="form-control" style="padding:10px !important;margin-bottom:15px">
+                      </div>
+                    </div>
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <input type="text" name="name" id="leadPhone" placeholder="Search by Number"
+                          class="form-control" style="padding:10px !important;margin-bottom:15px">
+                      </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                      <button class="btn btn-primary" id="leadSearch" style="width:50%">Search</button>
+                      <a href="/customer/dashboard" class="fs-18">
+                        <button class="btn btn-primary" style="width:45%">
+                          remove filter
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                  <div class="table-responsive table-card mt-3" style="width:100%">
+                    <table class="table align-middle " id="customerTable">
+                      <thead class="table-secondary">
+                        <tr>
+                          <th>PERSONAL</th>
+                          <th>OTHER INFO</th>
+                          <th>PRODUCT</th>
+                          <th>LOAN INFO</th>
+                          <th style="width:16%;text-align: center;">ACTIONS</th>
+                        </tr>
+                      </thead>
+                      <tbody class="list form-check-all">
+                        <% leads.forEach((teamMember)=> { %>
+                          <tr style="background:#fff;border:1px solid #eee">
+                            <td class="name" style="border:0">
+                              <div class="team-profile-img">
+                                <!-- <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
+                                  <img src="https://loan.webkype.net/admin/assets/images/users/avatar-2.jpg" alt=""
+                                    class="img-fluid d-block rounded-circle">
+
+                                </div> -->
+                                <div class="team-content">
+                                  <p class="text-muted mb-0">Name :- <%= teamMember.customerName %>
+                                  </p>
+                                  <p class="text-muted mb-0">Area Code :- <%= teamMember.locationPin %>
+                                  </p>
+                                  <p class="text-muted mb-0">Contact No. :- <%= teamMember.phone %>
+                                  </p>
+                                </div>
+                              </div>
+
+                            </td>
+                            <td class="name" style="border:0">
+
+                              <p class="text-muted mb-0">Company :- <%= teamMember.companyName %>
+                              </p>
+                              <% if (teamMember.netSalary) { %>
+                                <p class="text-muted mb-0">Net Salary :- <%=
+                                    teamMember.netSalary.toLocaleString('en-IN') %>
+                                </p>
+                                <% } %>
+                            </td>
+                            <td class="name" style="border:0">
+
+                              <p class="text-muted mb-0">Product Selection :- <%= teamMember.productSelection %>
+                              </p>
+                              <p class="text-muted mb-0">Channel Code :- <%= teamMember.chanelCode %>
+                              </p>
+                              <p class="text-muted mb-0">Lead Id :- <%= teamMember.leadId %>
+                              </p>
+                            </td>
+                            <td class="name" style="border:0">
+                              <p class="text-muted mb-0">
+                                <%= teamMember.loanType %>
+                              </p>
+
+                              <% if (teamMember.loanRequired) { %>
+                                <p class="text-muted mb-0">Amount Required: <%=
+                                    teamMember.loanRequired.toLocaleString('en-IN') %>
+                                </p>
+                                <% } %>
+
+                                  <% if (teamMember.primaryBank) { %>
+                                    <p class="text-muted mb-0">Customer Bank: <%= teamMember.primaryBank %>
+                                    </p>
+                                    <% } %>
+
+                                      <% if (teamMember.cardNameRequired) { %>
+                                        <p class="text-muted mb-0">Required Card: <%= teamMember.cardNameRequired %>
+                                        </p>
+                                        <% } %>
+
+                                          <% if (teamMember.vehicleType) { %>
+                                            <p class="text-muted mb-0">Required Card: <%= teamMember.vehicleType %>
+                                            </p>
+                                            <% } %>
+
+                                              <% if (teamMember.vehicleBrand) { %>
+                                                <p class="text-muted mb-0">Required Card: <%= teamMember.vehicleBrand %>
+                                                </p>
+                                                <% } %>
+                            </td>
+
+                            <td style="text-align: center; border:0">
+                              <div class="mb-2">
+                                <!-- <a href="javascript:void(0);" class="link-primary me-3"><i
+                                    class="fas fa-check fs-15"></i></a> -->
+                                <a href="edit-lead/<%= teamMember.id %>" class="link-danger"><i
+                                    class="fas fa-pen fs-15"></i></a>
+                                <a href="lead/<%= teamMember.id %>" class="link-danger m-3"><i
+                                    class="fas fa-eye fs-15"></i></a>
+                              </div>
+                            </td>
+                          </tr>
+                          <% }) %>
+                            <tr>
+                              <td colspan="4" style="height:20px;border:0"></td>
+                            </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- <div class="tab-pane fade" id="paymentR" role="tabpanel" aria-labelledby="#paymentR-tab">
+              <div class=" justify-content-center">
+
+                <div class="col-sm-12">
+
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                      <a href="payment-reconList" class="card custom-card mb-3">
+                        <div class="card-body">
+                          <div class="card-item">
+                            <div class="card-item-title mb-2">
+                              <h5 class="main-content-label mb-2">MTD Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h5 class="font-weight-light mb-0">100000</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                      <a href="payment-reconList" class="card custom-card  mb-3">
+                        <div class="card-body">
+                          <div class="card-item">
+                            <div class="card-item-title mb-2">
+                              <h5 class="main-content-label mb-2">Previous Month Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h5 class="font-weight-light mb-0">5000</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3">
+                      <a href="payment-reconList" class="card custom-card mb-3">
+                        <div class="card-body">
+                          <div class="card-item">
+                            <div class="card-item-title  mb-2">
+                              <h5 class="main-content-label mb-2">Quarterly Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h5 class="font-weight-light mb-0">95000</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                      <a href="payment-reconList" class="card custom-card mb-3">
+                        <div class="card-body">
+                          <div class="card-item">
+
+                            <div class="card-item-title mb-2">
+                              <h5 class="main-content-label mb-2">YTD Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h5 class="font-weight-light mb-0">18000</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3">
+                      <a href="payment-reconList" class="card custom-card mb-3">
+                        <div class="card-body">
+                          <div class="card-item">
+
+                            <div class="card-item-title mb-2">
+                              <h5 class="main-content-label mb-2">LTD Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h5 class="font-weight-light mb-0">113000</h5>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="ctp-contact-form">
+                      <div class="signup-content d-flex justify-content-center" style="height: 100% !important">
+                        <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_riAqnQrYxZ.json"
+                          background="transparent" speed="1" style="width: 400px; height: 400px;" loop
+                          autoplay></lottie-player>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div class="tab-pane fade" id="paymentR" role="tabpanel" aria-labelledby="#paymentR-tab">
+              <div class=" justify-content-center">
+
+                <div class="col-sm-12">
+
+
+                  <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 mb-4 text-blue">
+                      <h4 class="mb-0" style="font-size: xx-large;">LTD Earning</h4>
+                      <h5 style="font-size: xx-large;">
+                        ₹ <%= totalDisbursedAmount.lifeTime.toLocaleString('en-IN') %>
+                      </h5>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 main-content-label">
+                      <a href="payment-reconList" class="card custom-card mb-3 mt-1">
+                        <div class="card-body">
+                          <div class="card-item" style="height: 165px;">
+                            <div class="card-item-title">
+                              <h5 class=" mb-4" style="font-size: x-large; color:#2b75e4">MTD Earning
+                              </h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h6 class="font-weight-light mb-0" style="font-size: x-large; color:#2b75e4">
+                                  ₹ <%= totalDisbursedAmount.currentMonth.toLocaleString('en-IN') %>
+                                </h6>
+                              </div>
+                            </div>
+                            <% if (totalDisbursedAmount.currentMonthPercent>= 0) { %>
+                              <span class="text-success">
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <%= totalDisbursedAmount.currentMonthPercent %>%
+                              </span>
+                              <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 50px;">
+                              <% } else { %>
+                                <span class="text-danger">
+                                  <i class="fas fa-arrow-alt-circle-down"></i>
+                                  <%= totalDisbursedAmount.currentMonthPercent %>%
+                                </span>
+                                <img src="/assets/images/cart-icon2.png" class="chart_iconn" style="margin-left: 50px;">
+                                <% } %>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 main-content-label">
+                      <a href="payment-reconList" class="card custom-card mt-1 mb-3">
+                        <div class="card-body" style="height: 200px;">
+                          <div class="card-item">
+                            <div class="card-item-title">
+                              <h5 class="mb-4" style="font-size: x-large; color:#2b75e4">Previous
+                                Month Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h6 class="font-weight-light mb-0" style="font-size: x-large; color:#2b75e4">
+                                  ₹ <%= totalDisbursedAmount.previousMonth.toLocaleString('en-IN') %>
+                                </h6>
+                              </div>
+                            </div>
+                            <% if (totalDisbursedAmount.previousMonthPercent>= 0) { %>
+                              <span class="text-success">
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <%= totalDisbursedAmount.previousMonthPercent %>%
+                              </span>
+                              <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 65px;">
+                              <% } else { %>
+                                <span class="text-danger">
+                                  <i class="fas fa-arrow-alt-circle-down"></i>
+                                  <%= totalDisbursedAmount.previousMonthPercent %>%
+                                </span>
+                                <img src="/assets/images/cart-icon2.png" class="chart_iconn" style="margin-left: 65px;">
+                                <% } %>
+
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-3 main-content-label">
+                      <a href="payment-reconList" class="card custom-card mb-3 mt-1">
+                        <div class="card-body" style="height: 200px;">
+                          <div class="card-item">
+                            <div class="card-item-title">
+                              <h5 class=" mb-4" style="font-size: x-large; color:#2b75e4">Quarterly
+                                Earning</h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h6 class="font-weight-light mb-0" style="font-size: x-large; color:#2b75e4">
+                                  ₹ <%= totalDisbursedAmount.previousQuarter.toLocaleString('en-IN') %>
+                                </h6>
+                              </div>
+                            </div>
+                            <% if (totalDisbursedAmount.previousQuarterPercent>= 0) { %>
+                              <span class="text-success">
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <%= totalDisbursedAmount.previousQuarterPercent %>%
+                              </span>
+                              <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 65px;">
+                              <% } else { %>
+                                <span class="text-danger">
+                                  <i class="fas fa-arrow-alt-circle-down"></i>
+                                  <%= totalDisbursedAmount.previousQuarterPercent %>%
+                                </span>
+                                <img src="/assets/images/cart-icon2.png" class="chart_iconn" style="margin-left: 65px;">
+                                <% } %>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 main-content-label">
+                      <a href="payment-reconList" class="card custom-card mb-3 mt-1">
+                        <div class="card-body" style="height: 200px;">
+                          <div class="card-item">
+                            <div class="card-item-title">
+                              <h5 class=" mb-4" style="font-size: x-large; color:#2b75e4">YTD Earning
+                              </h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h6 class="font-weight-light mb-0" style="font-size: x-large; color:#2b75e4">
+                                  ₹ <%= totalDisbursedAmount.currentYear.toLocaleString('en-IN') %>
+                                </h6>
+                              </div>
+                            </div>
+
+                            <% if (totalDisbursedAmount.currentYearPercent>= 0) { %>
+                              <span class="text-success">
+                                <i class="fas fa-arrow-alt-circle-up"></i>
+                                <%= totalDisbursedAmount.currentYearPercent %>%
+                              </span>
+                              <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 65px;">
+                              <% } else { %>
+                                <span class="text-danger">
+                                  <i class="fas fa-arrow-alt-circle-down"></i>
+                                  <%= totalDisbursedAmount.currentYearPercent %>%
+                                </span>
+                                <img src="/assets/images/cart-icon2.png" class="chart_iconn" style="margin-left: 65px;">
+                                <% } %>
+                          </div>
+                        </div>
+                      </a>
+                    </div>
+
+                    <!-- <div class="col-sm-12 col-md-6 col-lg-6 col-xl-3 main-content-label">
+                      <a href="payment-reconList" class="card custom-card mb-3 mt-1">
+                        <div class="card-body">
+                          <div class="card-item" style="height: 165px;">
+                            <div class="card-item-title">
+                              <h5 class=" mb-4" style="font-size: x-large; color:#2b75e4">LTD Earning
+                              </h5>
+                            </div>
+                            <div class="card-item-body">
+                              <div class="card-item-stat">
+                                <h6 class="font-weight-light mb-0" style="font-size: x-large; color:#2b75e4">
+                                  ₹ <%= totalDisbursedAmount.lifeTime.toLocaleString('en-IN') %>
+                                </h6>
+                              </div>
+                            </div>
+                            <span style="color: #2b75e4;">
+                              <i class="fas fa-arrow-alt-circle-up"></i> <%= totalDisbursedAmount.currentMonthPercent %>%</span>
+                            <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 65px;">
+                          </div>
+                        </div>
+                      </a>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane fade" id="lead" role="tabpanel" aria-labelledby="#lead-tab">
+              <div class=" justify-content-center">
+                <form class="ctp-contact-form add-lead-form">
+                  <div class="col-md-12 mb-4">
+                    <h5>Add Leads</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4 mb-2">
+                      <div class="form-group">
+                        <label for="loanType">Loan Type</label>
+                        <select name="loanType" class="nice-select loan-type" required="true">
+                          <option value="">Select</option>
+                          <option value="Personal Loan">Personal Loan</option>
+                          <option value="Business Loan">Business Loan</option>
+                          <option value="Prof Loan">Prof Loan</option>
+                          <option value="Credit Card">Credit Card</option>
+                          <option value="Home Loan">Home Loan</option>
+                          <option value="Loan Against Property">Loan Against Property</option>
+                          <option value="Vehicle Loan">Vehicle Loan</option>
+                          <option value="Family Doctor">Family Doctor</option>
+                          <option value="Health Insurance">Health Insurance</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 mb-2 d-none productSelection">
+                      <div class="form-group">
+                        <label for="productSelection" id="prodSelectionLabel">Entity Type</label>
+                        <select name="productSelection" id="productSelection" class="form-select" style="height: 60px;">
+                          <option value="">Select</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Channel Code</label>
+                        <input type="text" name="chanelCode" id="chanel-code" class="form-control"
+                          data-error="Please enter chanel code" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+                    <div
+                      class="col-sm-4 lead-form-element credit-card-element family-doctor-element health-insurance-element">
+                      <div class="form-group">
+                        <label>Employment Type</label>
+                        <select name="employmentType" class="nice-select">
+                          <!-- Add your product options here -->
+                          <option value="">Select</option>
+                          <option value="salaried">Salaried</option>
+                          <option value="selfEmployed">Self Employed</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-sm-4 lead-form-element personal-loan-element professional-loan-element home-loan-element vehicle-loan-element family-doctor-element health-insurance-element">
+                      <div class="form-group">
+                        <label>Cust Name</label>
+                        <input type="text" name="customerName" id="customer-name" class="form-control"
+                          data-error="Please enter customer name" placeholder="Enter" required="true">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Contact Number </label>
+                        <input type="tel" name="phone" id="phone" class="form-control" required="true"
+                          data-error="Please enter your contact number" placeholder="Enter" pattern="[0-9]{10}">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label> Location (PIN)</label>
+                        <input type="text" name="locationPin" id="location-pin" class="form-control"
+                          data-error="Please enter your surname" placeholder="Enter" required="true">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>State</label>
+                        <input type="text" readonly name="state" id="pin-state" required="true" class="form-control"
+                          placeholder="Enter" value="">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>City</label>
+                        <input type="text" readonly name="city" id="pin-city" required="true" class="form-control"
+                          placeholder="Enter" value="">
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>DOB</label>
+                        <input type="date" name="dob" id="dob" class="form-control" placeholder="date of birth">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group text-center">
+                        <label>PAN No (PAN & Aadhaar Must be linked)</label>
+                        <input type="text" name="pancard" id="pancardAdd" data-error="Please enter your number"
+                          class="form-control" placeholder="Enter" pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}"
+                          required="true">
+                        <span></span>
+                        <span class="panNumberError text-danger fs-18" id="panNumberError"></span>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Aadhar No (PAN & Aadhaar Must be linked)</label>
+                        <input type="text" name="aadhar" id="aadhar" data-error="Please enter your number"
+                          class="form-control" placeholder="Enter" pattern="[0-9]{12}" required="true">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender" class="nice-select">
+                          <!-- Add your product options here -->
+                          <option value="">Select</option>
+                          <option value="male">Male</option>
+                          <option value="female">Female</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div
+                      class="col-sm-4 lead-form-element business-loan-element personal-loan-element professional-loan-element home-loan-element lap-loan-element">
+                      <div class="form-group">
+                        <label>Loan Required</label>
+                        <input type="hidden" name="loanRequired" id="loan-required-hidden" class="form-control"
+                          data-error="Please enter loan amount">
+                        <input type="text" id="loan-required-display" class="form-control" placeholder="Enter"
+                          oninput="formatInput(this ,'loan-required-hidden')">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 lead-form-element personal-loan-element home-loan-element">
+                      <div class="form-group">
+                        <label>Net Salary </label>
+                        <input type="hidden" name="netSalary" id="nett-salary-hidden" class="form-control"
+                          data-error="Please enter your nett salary" placeholder="Enter">
+                        <input type="text" id="nett-salary-display" class="form-control" placeholder="Enter"
+                          oninput="formatInput(this , 'nett-salary-hidden')">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 lead-form-element business-loan-element lap-loan-element">
+                      <div class="form-group">
+                        <label>Turnover </label>
+                        <input type="hidden" name="turnOver" id="turnOver-hidden" class="form-control"
+                          data-error="Please enter your turnover" placeholder="Enter">
+                        <input type="text" id="turnOver-display" class="form-control" placeholder="Enter"
+                          oninput="formatInput(this ,'turnOver-hidden')">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-sm-4 lead-form-element business-loan-element personal-loan-element credit-card-element home-loan-element lap-loan-element vehicle-loan-element">
+                      <div class="form-group">
+                        <label>Company Name </label>
+                        <input type="text" name="companyName" id="company-name" class="form-control"
+                          data-error="Please enter your surname" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 mb-2 lead-form-element vehicle-loan-element">
+                      <div class="form-group">
+                        <label for="vehicleType">Vehicle Type</label>
+                        <select name="vehicleType" class="nice-select">
+                          <!-- Add your product options here -->
+                          <option value="">Select</option>
+                          <option value="Car">Car</option>
+                          <option value="Two Wheeler">Two Wheeler</option>
+                          <option value="Commercial Vehicle">Commercial Vehicle</option>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 mb-2 lead-form-element vehicle-loan-element">
+                      <div class="form-group">
+                        <label for="vehicleBrand">Vehicle Brand</label>
+                        <input type="text" name="vehicleBrand" id="vehicleBrand" class="form-control"
+                          data-error="Please enter Brand name" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-4 lead-form-element business-loan-element lap-loan-element">
+                      <div class="form-group">
+                        <label>Entity Type </label>
+                        <input type="text" name="entityType" id="entityType" class="form-control"
+                          data-error="Please enter entity type" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+                    <div class="col-sm-4 lead-form-element professional-loan-element">
+                      <div class="form-group">
+                        <label> Gross Receipts </label>
+                        <input type="text" name="grossReceipt" id="grossReceipt" class="form-control"
+                          data-error="Please enter gross receipt" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 lead-form-element professional-loan-element">
+                      <div class="form-group">
+                        <label> Profession </label>
+                        <input type="text" name="profession" id="profession" class="form-control"
+                          data-error="Please enter profession" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div
+                      class="col-sm-4 lead-form-element business-loan-element personal-loan-element professional-loan-element home-loan-element lap-loan-element vehicle-loan-element health-insurance-element">
+                      <div class="form-group p-3">
+                        <label>Preferred Lender Selection </label>
+                        <select name="preferedLender[]" id="prefered-lender" class="select2-select" multiple="multiple">
+                          <option disabled>Select Bank </option>
+                          <% bankName.forEach((bName, index)=> { %>
+                            <option value="<%= bName.bank %>">
+                              <%= bName.bank %>
+                            </option>
+                            <% }) %>
+                        </select>
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 lead-form-element credit-card-element">
+                      <div class="form-group">
+                        <label>Primary Bank</label>
+                        <input type="text" name="primaryBank" id="primaryBank" class="form-control"
+                          data-error="Please provide primary bank" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-4 lead-form-element credit-card-element">
+                      <div class="form-group">
+                        <label>Card Required (Bank Name)</label>
+                        <input type="text" name="cardNameRequired" id="cardNameRequired" class="form-control"
+                          data-error="Please provide Card Name & Bank" placeholder="Enter">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-6 lead-form-element personal-loan-element business-loan-element">
+                      <div class="form-group">
+                        <label>Aadhar Both Sides</label>
+                        <input type="file" name="aadharCardDocument" id="aadharCardDocument" class="form-control"
+                          data-error="Please provide aadhar" placeholder="Enter" style="padding: 4px 20px !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6  lead-form-element personal-loan-element business-loan-element">
+                      <div class="form-group">
+                        <label>PAN Card Photo</label>
+                        <input type="file" name="pancardDocument" id="pancardDocument" class="form-control"
+                          data-error="Please provide pancard" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element personal-loan-element">
+                      <div class="form-group">
+                        <label>Last 6 Month Bank Statement</label>
+                        <input type="file" name="bankStatement" id="bankStatement" class="form-control"
+                          data-error="Please provide bank statement" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)" accept=".pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element personal-loan-element business-loan-element">
+                      <div class="form-group">
+                        <label>Passport Size Photo</label>
+                        <input type="file" name="passportPhoto" id="passportPhoto" class="form-control"
+                          data-error="Please provide passport" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element personal-loan-element">
+                      <div class="form-group">
+                        <label>Last 3 month Salary Slip</label>
+                        <input type="file" name="salarySlip" id="salarySlip" class="form-control"
+                          data-error="Please provide salary slip" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element personal-loan-element">
+                      <div class="form-group">
+                        <label>Local Address Proof</label>
+                        <input type="file" name="addressProof" id="addressProof" class="form-control"
+                          data-error="Please enter your surname" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Co-Applicants Aadhar Both Sides </label>
+                        <input type="file" name="coApAadharCardDocument" id="coApAadharCardDocument"
+                          class="form-control" data-error="Please provide aadhar" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6  lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Co-Applicants PAN Card Photo</label>
+                        <input type="file" name="coApPancardDocument" id="coApPancardDocument" class="form-control"
+                          data-error="Please provide pancard" placeholder="Enter"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Co-Applicants Passport Size Photo</label>
+                        <input type="file" name="coApPassportPhoto" id="coApPassportPhoto" class="form-control"
+                          data-error="Please provide passport" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Registration Certificate of company( DVAT,Service tax, GST) </label>
+                        <input type="file" name="registrationCertificate" id="registrationCertificate"
+                          class="form-control" data-error="Please provide registration certificate"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Udhyam Aadhar</label>
+                        <input type="file" name="udhyamAadhar" id="udhyamAadhar" class="form-control"
+                          data-error="Please provide Udhyam Aadhar" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>GST Return last 12 Months</label>
+                        <input type="file" name="gstReturnTwelveMonths" id="gstReturnTwelveMonths" class="form-control"
+                          data-error="Please provide GST Return last 12 Months" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>ITR 2 Year Complete</label>
+                        <input type="file" name="itrTwoYears" id="itrTwoYears" class="form-control"
+                          data-error="Please provide ITR 2 Year Complete" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>COI 2 Year Complete</label>
+                        <input type="file" name="coiTwoYears" id="coiTwoYears" class="form-control"
+                          data-error="Please provide COI 2 Year Complete" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Balance Sheet 2 Year Complete</label>
+                        <input type="file" name="balanceSheetTwoYears" id="balanceSheetTwoYears" class="form-control"
+                          data-error="Please provide Balance Sheet 2 Year Complete"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Profit & Loss With Annexure</label>
+                        <input type="file" name="profitLossAnnexure" id="profitLossAnnexure" class="form-control"
+                          data-error="Please provide Profit & Loss With Annexure"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Tax Audit Report</label>
+                        <input type="file" name="taxAuditReport" id="taxAuditReport" class="form-control"
+                          data-error="Please provide Tax Audit Report" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Current Account 1 Year Bank PDF</label>
+                        <input type="file" name="currentBankOneYear" id="currentBankOneYear" class="form-control"
+                          data-error="Please provide Current Account 1 Year Bank PDF"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>CC Account 1 Year Bank PDF</label>
+                        <input type="file" name="ccBankOneYear" id="ccBankOneYear" class="form-control"
+                          data-error="Please provide CC Account 1 Year Bank PDF" style="padding: 4px 20px !important;"
+                          onchange="validateFileSize(this)" accept=".pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>OD Account 1 Year Bank PDF</label>
+                        <input type="file" name="odBankOneYear" id="odBankOneYear" class="form-control"
+                          data-error="Please provide OD Account 1 Year Bank PDF" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Running Loan & Schedules Sheet</label>
+                        <input type="file" name="runningLoanSheet" id="runningLoanSheet" class="form-control"
+                          data-error="Please provide Running Loan & Schedules Sheet"
+                          style="padding: 4px 20px   !important;" onchange="validateFileSize(this)"
+                          accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Ownership Proof</label>
+                        <input type="file" name="ownershipProof" id="ownershipProof" class="form-control"
+                          data-error="Please provide Ownership Proof" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Details Sheet</label>
+                        <input type="file" name="detailSheet" id="detailSheet" class="form-control"
+                          data-error="Please provide Details Sheet" style="padding: 4px 20px   !important;"
+                          onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div>
+                    <div class="row m-3 mt-0" id="add-doc-1">
+                      <div class="col-sm-4">
+                        <button class="btn btn-secondry">+ Add Document</button>
+                      </div>
+                    </div>
+                    <div class="row d-none" id="other-doc1">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Document 1 Name <b>Optional</b> </label>
+                          <input type="text" name="doc1Name" id="document1-name" class="form-control"
+                            data-error="Please enter Document 1 Name" placeholder="Enter Document 1 name">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Other Document 1 <b>Optional</b></label>
+                          <input type="file" name="otherDoc1" id="otherDoc1" class="form-control"
+                            data-error="Please provide Other Document 1" style="padding: 4px 20px   !important;"
+                            onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row m-3 mt-0 d-none" id="add-doc-2">
+                      <div class="col-sm-4">
+                        <button class="btn btn-secondry">+ Add Document</button>
+                      </div>
+                    </div>
+                    <div class="row d-none" id="other-doc2">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Document 2 Name <b>Optional</b></label>
+                          <input type="text" name="doc2Name" id="document2-name" class="form-control"
+                            data-error="Please enter Document 2 Name" placeholder="Enter Document 2 name">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Other Document 2 <b>Optional</b></label>
+                          <input type="file" name="otherDoc2" id="otherDoc2" class="form-control"
+                            data-error="Please provide Other Document 2" style="padding: 4px 20px   !important;"
+                            onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row m-3 mt-0 d-none" id="add-doc-3">
+                      <div class="col-sm-4">
+                        <button class="btn btn-secondry">+ Add Document</button>
+                      </div>
+                    </div>
+                    <div class="row d-none" id="other-doc3">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Document 3 Name <b>Optional</b></label>
+                          <input type="text" name="doc3Name" id="document3-name" class="form-control"
+                            data-error="Please enter Document 3 Name" placeholder="Enter Document 3 name">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Other Document 3 <b>Optional</b></label>
+                          <input type="file" name="otherDoc3" id="otherDoc3" class="form-control"
+                            data-error="Please provide Other Document 3" style="padding: 4px 20px   !important;"
+                            onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row m-3 mt-0 d-none" id="add-doc-4">
+                      <div class="col-sm-4">
+                        <button class="btn btn-secondry">+ Add Document</button>
+                      </div>
+                    </div>
+                    <div class="row d-none" id="other-doc4">
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Document 4 Name <b>Optional</b></label>
+                          <input type="text" name="doc4Name" id="document4-name" class="form-control"
+                            data-error="Please enter Document 4 Name" placeholder="Enter Document 4 name">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="form-group">
+                          <label>Other Document 4 <b>Optional</b></label>
+                          <input type="file" name="otherDoc4" id="otherDoc4" class="form-control"
+                            data-error="Please provide Other Document 4" style="padding: 4px 20px   !important;"
+                            onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf">
+                          <div class="help-block with-errors"></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="col-sm-6 d-none lead-form-element business-loan-element">
+                      <div class="form-group">
+                        <label>Local Address Proof</label>
+                        <input type="file" name="addressProof" id="addressProof" class="form-control"
+                          data-error="Please enter your surname" placeholder="Enter"
+                          style="padding: 4px 20px   !important;">
+                        <div class="help-block with-errors"></div>
+                      </div>
+                    </div> -->
+                  </div>
+                  <div class="document_wrap"></div>
+                  <div class="row">
+                    <div class="row">
+                      <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <div id="msgSubmit" class="h3 text-center"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+  <script type="module" src="/javascripts/customer/profile.js"></script>
+  <script type="module" src="/javascripts/customer/my-documents.js"></script>
+  <script type="module" src="/javascripts/customer/add-lead.js"></script>
+  <%- include('../partials/footer') %>
+
+    <script>
+      const dashboard = document.getElementById('dashboard')
+
+      function validateFileSize(input) {
+        const maxFileSizeMB = 1;
+        const file = input.files[0];
+
+        if (file) {
+          const fileSizeMB = file.size / (1024 * 1024);
+          if (fileSizeMB > maxFileSizeMB) {
+            alert(`File size exceeds ${maxFileSizeMB} MB. Please choose a smaller file.`);
+            input.value = '';
+          }
+        }
+      }
+
+      const pancard = document.getElementById('pancardAdd')
+      const pancardError = document.getElementById('panNumberError')
+      const pattern = new RegExp("[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}");
+
+      pancard.addEventListener('blur', () => {
+        console.log(pancard.value);
+        if (pattern.test(pancard.value)) {
+          console.log("Valid PAN card number.");
+          pancardError.innerText = ""
+
+        } else {
+          console.log("Invalid PAN card number.");
+          pancardError.innerText = "Invalid PAN"
+        }
+      });
+    </script>
+
+    <script>
+      function formatInput(displayInput, hiddenElement) {
+        let hiddenInput = document.getElementById(hiddenElement);
+        let x = displayInput.value.replace(/,/g, '');
+
+        if (x === '') {
+          hiddenInput.value = '';
+          displayInput.value = '';
+        } else {
+          hiddenInput.value = x;
+          console.log('input', x, parseInt(x).toLocaleString('en-IN'));
+          displayInput.value = parseInt(x).toLocaleString('en-IN');
+        }
+      }
+    </script>
+
+
+    <style>
+      .nice-select {
+        margin-bottom: 35px
+      }
+    </style>

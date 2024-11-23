@@ -1,0 +1,147 @@
+<%- include('../partials/header') %>
+<!-- Start Signup Area -->
+<section class="signup-area">
+  <div class="row m-0">
+    <div class="col-lg-5 col-md-12 p-0 hidden-xs">
+      <div class="signup-image personal-loan-img">
+        <div
+          class="app-download-content "
+        >
+          <h2>Family Doctor</h2>
+          <div class="bar"></div>
+          <ul class="features-list">
+            <li>
+              <span
+                >
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineOne %>
+                </span
+              >
+            </li>
+            <li>
+              <span
+                >
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineTwo %>
+                </span
+              >
+            </li>
+            <li>
+              <span
+                >
+                <i class="flaticon-check-mark"></i>
+                <%= product.tagLineThree %>
+                </span
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+	
+	<div class="col-lg-12 col-md-12 p-0 mobile-visible" style="display:none">
+<div class="res_img_title">
+<div class="app-download-content ">
+            <h2>Family Doctor</h2>
+          <div class="bar"></div>         
+        </div>
+</div>
+<img src="/customer-assets/img/res-loan-bnr.png">
+</div>
+
+    <div class="col-lg-7 col-md-12 p-0">
+      <div class="signup-content">
+        <div class="d-table">
+          <div class="d-table-cell">
+            <form
+              class="personal-loan_wrap1 personal-loan_wrapper  family-doctor-enquiry-form"
+            >
+              <div class="app-download-content mt-80 ps-0"  style="margin-top:150px">
+                <h4 class="text-left">Family Doctor Enquiry</h4>
+                <div class="bar"></div>
+              </div>
+              <div class="row">
+                  <div class="form-group text-left mb-3 col-md-12">
+                    <input
+                      type="text"
+                      name="name"
+                      id="email"
+                      placeholder="Full Name"
+                      class="form-control"
+                      value="<%= user.PanVerifications?.name %>"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3 col-md-6">
+                    <input
+                      type="number"
+                      min="0"
+                      name="phone"
+                      id="email"
+                      placeholder="Phone"
+                      class="form-control no-arrow"
+                      value="<%= user.phone %>"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3 col-md-6">
+                      <input
+                        type="email"
+                        name="email"
+                        id="email"
+                        placeholder="Email Address"
+                        class="form-control"
+                        value="<%= user.email %>"
+                      />
+                    </div>
+
+                  <div class="form-group text-left mb-3 col-md-12">
+                    <input
+                      type="number"
+                      min="0"
+                      name="age"
+                      placeholder="Age"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3 col-sm-12">
+                    <input
+                      type="text"
+                      name="pincode"
+                      id="email"
+                      placeholder="Pin Code"
+                      class="form-control"
+                    />
+                  </div>
+
+                  <div class="form-group text-left mb-3 col-sm-12">
+                    <input
+                      type="text"
+                      name="city"
+                      id="email"
+                      placeholder="City"
+                      class="form-control"
+                      readonly
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn btn-primary w-100 mt-3 personal-loan_step1 step-1-form-btn"
+                  >
+                    Continue
+                  </button>
+
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Login Area -->
+<script type="module" src="/javascripts/customer/family-doctor-enquiry.js"></script>
+<%- include('../partials/footer') %>

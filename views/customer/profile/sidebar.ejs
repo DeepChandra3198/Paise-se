@@ -1,0 +1,85 @@
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a
+      class="nav-link <% if(type === 'credit-card') { %> active <% } %>"
+      id="security-tab"
+      data-bs-toggle="tab"
+      href="#security"
+      role="tab"
+      aria-controls="security"
+      ><i class="fas fa-chevron-left"></i> My Profile</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a
+      class="nav-link <% if(type !== 'credit-card') { %> active <% } %>"
+      id="cost-tab"
+      data-bs-toggle="tab"
+      href="#cost"
+      role="tab"
+      aria-controls="cost"
+      ><i class="fas fa-chevron-left"></i> My Enquiry</a
+    >
+  </li>
+
+  <li class="nav-item d-none">
+    <a
+      class="nav-link"
+      id="speed-tab"
+      data-bs-toggle="tab"
+      href="#speed"
+      role="tab"
+      aria-controls="speed"
+      ><i class="fas fa-chevron-left"></i> My Products</a
+    >
+  </li>
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      id="Cibil-tab"
+      data-bs-toggle="tab"
+      href="#Cibil"
+      role="tab"
+      aria-controls="Cibil"
+      ><i class="fas fa-chevron-left"></i> Check Cibil <span class="pulse mt-1 mx-4"></span></a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      id="documents-tab"
+      data-bs-toggle="tab"
+      href="#documents"
+      role="tab"
+      aria-controls="documents"
+      ><i class="fas fa-chevron-left"></i> My Documents</a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      id="refferal-tab"
+      data-bs-toggle="tab"
+      href="#refferal"
+      role="tab"
+      aria-controls="refferal"
+      ><i class="fas fa-chevron-left"></i> Refferal Program <span class="pulse mt-1 mx-4"></span></a
+    >
+  </li>
+
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      id="refferal-tab"
+      data-bs-toggle="tab"
+      href="javascript:;"
+      onclick="document.querySelector('.logout-form').submit()"
+      aria-controls="refferal"
+      ><i class="fas fa-sign-out-alt"></i>Logout</a
+    >
+  </li>
+</ul>

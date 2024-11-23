@@ -1,0 +1,389 @@
+<%- include('../partials/header'); %>
+<div class="main-content mt-5">
+  <div class="page-content">
+    <div class="">
+      <div class="container-fluid">
+        <div class="row">
+          <!--end col-->
+          <div class="col-xxl-12">
+            <div class="team-list row list-view-filter">
+              <div class="col-lg-12">
+                <div class="card m-4">
+                  <div class="card-header">
+                    <div class="row g-2">
+                      <div class="col-md-5 d-flex align-items-center">
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          Edit Lead
+                          <!-- export-customers -->
+                        </p>
+                        <!-- <div class="col-sm-auto" style="margin-left: 70vw">
+                          <button class="btn btn-outline-secondary add-btn">
+                            <i class="ri-upload-line me-1 align-bottom"></i>
+                            Update
+                          </button>
+                        </div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-box p-5 m-4">
+                  <form class="ctp-contact-form edit-lead-form">
+                    <div class="card-body">
+                      <div>
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          Information
+                        </p>
+                        <div class="row m-3">
+                          <% if (lead?.loanType) { %>
+                          <div class="col-sm-3">
+                            <b>Product :</b>
+                            <div class="mt-2"><%= lead.loanType %></div>
+                          </div>
+                          <% } %> 
+                          <% if (lead.productSelection) { %>
+                              <div class="col-sm-3">
+                                  <b>
+                                      <% if (lead.loanType == 'Personal Loan') { %>
+                                          Product Selection
+                                      <% } else { %>
+                                          Entity Type
+                                      <% } %>
+                                  </b>
+                                  :
+                                  <div class="mt-2"><%= lead.productSelection %></div>
+                              </div>                  
+                          <% } %> <% if (lead.chanelCode) { %>
+                          <div class="col-sm-3">
+                            <b>Chanel Code :</b>
+                            <div class="mt-2"><%= lead.chanelCode %></div>
+                          </div>
+                          <% } %> <% if (lead.customerName) { %>
+                          <div class="col-sm-3">
+                            <b>Customer Name :</b>
+                            <input name="customerName" value="<%= lead.customerName %>" class="form-control">
+                          </div>
+                          <% } %> <% if (lead.locationPin) { %>
+                              <div class="col-sm-3 <%= lead.productSelection ? 'mt-3' : '' %>">
+                                  <b>Area Code :</b>
+                                  <input type="text" value="<%= lead.locationPin %>" name="locationPin" id="location-pin" class="form-control" placeholder="enter">
+                              </div>
+                          <% } %>                          
+                          <div class="col-sm-3 mt-3">
+                            <b>State :</b><br>
+                            <input type="text" value="<%= lead.state %>" readonly name="state" id="pin-state" required="true" class="form-control">
+                          </div>
+                          <div class="col-sm-3 mt-3">
+                            <b>City :</b>
+                            <input type="text" value="<%= lead.city %>" readonly name="city" id="pin-city" required="true" class="form-control">
+                          </div> <% if (lead.gender) { %>
+                            <div class="col-sm-3 mt-3">
+                                <b>Gender :</b>
+                                <select name="gender" class="form-select p-2 mt-1">
+                                  <option value="">Select</option>
+                                  <option value="male" <%= lead.gender === 'male' ? 'selected' : '' %>>Male</option>
+                                  <option value="female" <%= lead.gender === 'female' ? 'selected' : '' %>>Female</option>
+                                </select>
+                              </div>                              
+                          <% } %> <% if (lead.dob) { %>
+                            <div class="col-sm-3 mt-3">
+                                <b>Date of Birth:</b>
+                                <input type="date" value="<%= lead.dob.toISOString().substr(0, 10) %>" name="dob" id="dob" class="form-control" placeholder="Date of Birth">
+                              </div>                              
+                          <% } %> <% if (lead.phone) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Phone :</b>
+                            <input value="<%= lead.phone %>" type="tel" name="phone" id="phone" class="form-control" pattern="[0-9]{10}" placeholder="Enter 10 digit phone">
+                          </div>
+                          <% } %> <% if (lead.companyName) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Company Name :</b>
+                            <input name="companyName" value="<%= lead.companyName %>" class="form-control">
+                          </div>
+                          <% } %> <% if (lead.netSalary) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Net Salary :</b>
+                            <input type="text" value="<%= lead.netSalary %>" name="netSalary" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.preferedLender) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Prefered Lender :</b>
+                            <input type="text" value="<%= lead.preferedLender %>" name="preferedLender" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.cardNameRequired) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Prefered Credit Card :</b>
+                            <input type="text" value="<%= lead.cardNameRequired %>" name="cardNameRequired" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.employmentType) { %>
+                            <div class="col-sm-3 mt-3">
+                                <b>Employment Type:</b>
+                                <select name="employmentType" class="form-select p-2 mt-1">
+                                  <option value="">Select</option>
+                                  <option value="salaried" <%= lead.employmentType === 'salaried' ? 'selected' : '' %>>Salaried</option>
+                                  <option value="selfEmployed" <%= lead.employmentType === 'selfEmployed' ? 'selected' : '' %>>Self Employed</option>
+                                </select>
+                              </div>                              
+                          <% } %> <% if (lead.grossReceipt) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Gross Receipt :</b>
+                            <input value="<%= lead.grossReceipt %>" type="text" name="grossReceipt" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.primaryBank) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Primary Bank :</b>
+                            <input value="<%= lead.primaryBank %>" type="text" name="primaryBank" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.profession) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Profession :</b>
+                            <input value="<%= lead.profession %>" type="text" name="profession" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.turnOver) { %>
+                          <div class="col-sm-3 mt-3">
+                            <b>Turnover :</b>
+                            <input value="<%= lead.turnOver %>" type="text" name="turnOver" class="form-control" placeholder="Enter">
+                            <div class="mt-2"><%= lead.turnOver %></div>
+                          </div>
+                          <% } %>
+                        </div>
+                        <div class="row m-3">
+                          <% if (lead.loanRequired) { %>
+                          <div class="col-sm-3">
+                            <b>Loan Required :</b>
+                            <input value="<%= lead.loanRequired %>" type="text" name="loanRequired" class="form-control" placeholder="Enter">
+                          </div>
+                          <% } %> <% if (lead.disbursedAmount) { %>
+                          <div class="col-sm-3">
+                            <b>Disbursed Amount :</b>
+                            <div class="mt-2"><%= lead.disbursedAmount %></div>
+                          </div>
+                          <% } %>
+                          <div class="col-sm-3">
+                            <b>Status:</b>
+                            <div class="mt-2"><%= lead.status %></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mt-3">
+                        <p class="fs-16 m-0 fw-semibold text-muted">
+                          Documents
+                        </p>
+                        <div class="row">
+                          <div class="col-sm-3 m-3">
+                            <b>Aadhar Card Document :</b>
+                            <% if (lead.aadharCardDocument) { %>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.aadharCardDocument %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <% } %> 
+                            <input type="file" name="aadharCardDocument" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <div class="col-sm-3 m-3">
+                            <b>Pancard Document :</b>
+                            <% if (lead.pancardDocument) { %>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.pancardDocument %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <% } %> 
+                            <input type="file" name="pancardDocument" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <div class="col-sm-3 m-3">
+                            <b>Bank Statement :</b>
+                            <% if (lead.bankStatement) { %>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.bankStatement %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <% } %> 
+                            <input type="file" name="bankStatement" onchange="validateFileSize(this)" accept=".pdf" />
+                          </div>
+                          <div class="col-sm-3 m-3">
+                            <b>Passport Photo :</b>
+                            <% if (lead.passportPhoto) { %>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.passportPhoto %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <% } %> 
+                            <input type="file" name="passportPhoto" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png" />
+                          </div>
+                          <% if (lead.coApAadharCardDocument){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>Co-Applicants Aadhaar:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.coApAadharCardDocument %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="coApAadharCardDocument" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <% } %> <% if(lead.coApPancardDocument){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>Co-Applicants Pancard :</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.coApPancardDocument %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="coApPancardDocument" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <% } %> <% if(lead.coApPassportPhoto) { %>
+                          <div class="col-sm-3 m-3">
+                            <b>Co-Applicants Passport Photo:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.coApPassportPhoto %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="coApPassportPhoto" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png" />
+                          </div>
+                          <% } %> <% if(lead.salarySlip){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>Salary Slip:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.salarySlip %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="salarySlip" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <% } %> <% if(lead.addressProof){%>
+                          <div class="col-sm-3 m-3">
+                            <b>Address Proof:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.addressProof %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="addressProof" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <% } %> <% if(lead.balanceSheetTwoYears) { %>
+                          <div class="col-sm-3 m-3">
+                            <b>2 Years Balance Sheet:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.balanceSheetTwoYears %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="balanceSheetTwoYears" onchange="validateFileSize(this)" accept=".jpg,.jpeg,.png,.pdf" />
+                          </div>
+                          <% } %> <% if(lead.ccBankOneYear){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>1 Year Banking CC:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.ccBankOneYear %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="ccBankOneYear" onchange="validateFileSize(this)" accept=".pdf" />
+                          </div>
+                          <% }%> <% if(lead.coiTwoYears){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>2 Years Baking COI:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.coiTwoYears %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="coiTwoYears" onchange="validateFileSize(this)" accept=".pdf" />
+                          </div>
+                          <% }%> <% if(lead.currentBankOneYear){ %>
+                          <div class="col-sm-3 m-3">
+                            <b>Current Banking One Year:</b>
+                            <div class="mt-2">
+                              <a
+                                href="/uploads/<%= lead.currentBankOneYear %>"
+                                target="_blank"
+                              >
+                                View
+                              </a>
+                            </div>
+                            <input type="file" name="currentBankOneYear" onchange="validateFileSize(this)" accept=".pdf" />
+                          </div>
+                          <% }%>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row mt-5">
+                      <div class="col-sm-3">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <div id="msgSubmit" class="h3 text-center"></div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!--end add modal-->
+            <!--end card-->
+          </div>
+          <!--end col-->
+        </div>
+      </div>
+      <!--end modal-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+<script type="module" src="/javascripts/customer/edit-lead.js"></script>
+<%- include('../partials/footer') %>
+
+<script>
+    const dashboard = document.getElementById('dashboard')
+
+    function validateFileSize(input) {
+      const maxFileSizeMB = 1;
+      const file = input.files[0];
+
+      if (file) {
+        const fileSizeMB = file.size / (1024 * 1024);
+        if (fileSizeMB > maxFileSizeMB) {
+          alert(`File size exceeds ${maxFileSizeMB} MB. Please choose a smaller file.`);
+          input.value = '';
+        }
+      }
+    }
+  </script>

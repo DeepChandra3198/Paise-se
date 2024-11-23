@@ -1,0 +1,54 @@
+/*# sourceMappingURL=custom.min.css.map */
+.documents_upload_tb {
+  position: relative;
+}
+.documents_upload_tb input {
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  z-index: 9999;
+  left: 0;
+  text-align: center;
+}
+.all_slt_check {
+  float: left;
+  width: auto;
+  margin-top: 16px;
+}
+.import_file {
+  position: relative;
+}
+
+.import_file input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+}
+.Tablewidth1500 {
+  width: 1500px;
+}
+.text_blue {
+  color: #2d4187 !important;
+}
+.width100 {
+  width: 100% !important;
+}
+.table th {
+  font-weight: normal !important;
+}
+.fallback {
+  width: 100%;
+  opacity: 0;
+  position: absolute;
+  z-index: 99;
+}
+.fallback input {
+  width: 100%;
+  height: 100%;
+}
+

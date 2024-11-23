@@ -1,0 +1,76 @@
+<%- include('./partials/header') %>
+
+
+<!-- Start Error Area -->
+<section class="error-area bg-f7fafd py-5 mb-5" style="margin-top: 7%">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <h3 class="heading mb-4">Let's verify your PAN details!</h3>
+            <lottie-player
+              src="https://assets7.lottiefiles.com/packages/lf20_4tiy5nnf.json"
+              background="transparent"
+              speed="1"
+              style="width: 320px; height: 320px"
+              loop
+              autoplay
+            ></lottie-player>
+          </div>
+          <div class="col-md-6 d-flex justify-content-center align-items-center">
+            <form class="mb-5 pan-form" method="post" id="panForm">
+              <div class="row">
+                <div class="col-md-12 form-group mb-3">
+                  <div class="input-group flex-nowrap">
+                    <input
+                      type="text"
+                      class="form-control <% if(user.PanVerifications !== null) { %> border-success <% } %>"
+                      placeholder="Your PAN card number"
+                      name="panNumber"
+                      id="panNumber"
+                      maxlength="10"
+                       <% if(user.PanVerifications === null) { %> value="" <% } else { %> readonly value="<%= `${user.pancard.charAt(0)}********${user.pancard.charAt(user.pancard.length - 1)}` %>" <% } %>
+                    />
+                    <span
+                      class="input-group-text bg-white border-success tick-mark <% if(user.PanVerifications === null) { %> d-none <% } %>"
+                      id="addon-wrapping"
+                    >
+                      &#10004;</span
+                    >
+                  </div>
+                </div>
+                <div class="col-md-12 form-group mb-3">
+                  <input
+                    type="text"
+                    class="form-control <% if(user.PanVerifications === null) { %> d-none <% } %>"
+                    id="name"
+                    placeholder="Your Name"
+                    value="<%= user.PanVerifications?.name %>"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <% if(user.PanVerifications === null) { %>
+                  <button class="btn btn-secondary px-4 rounded-0 verify-btn">
+                    Verify & Fetch Your Details
+                  </button>
+                  <% } %> <% if(user.PanVerifications !== null) { %>
+                  <button class="btn btn-secondary px-4 rounded-0 verify-btn">
+                    Your PAN details has been already matched!
+                  </button>
+                  <% } %>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Error Area -->
+<script type="module" src="/javascripts/customer/fetch-pan-details.js"></script>
+<%- include('./partials/footer') %>

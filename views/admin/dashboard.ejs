@@ -1,0 +1,270 @@
+<%- include('./partials/header'); %>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="main-content">
+  <div class="page-content">
+    <div class="container-fluid">
+      <!-- start page title -->
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="page-title-box d-sm-flex align-items-center justify-content-between"
+          >
+            <h4 class="mb-sm-0">Admin Dashboard</h4>
+          </div>
+        </div>
+      </div>
+      <!-- end page title -->
+
+      <div class="row">
+        <div class="col-xxl-12">
+          <div class="d-flex flex-column h-100">
+            <div class="row h-100">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body p-0">
+                    <div
+                      class="alert alert-warning border-0 rounded-0 m-0 d-flex align-items-center"
+                      role="alert"
+                    >
+                      <i
+                        data-feather="alert-triangle"
+                        class="text-warning me-2 icon-sm"
+                      ></i>
+                      <div class="flex-grow-1 text-truncate">
+                        Hello <%= process.env.APP_NAME %>
+                      </div>
+                      <div class="flex-shrink-0">
+                        <a
+                          href="pages-pricing.html"
+                          class="text-reset text-decoration-underline"
+                          >Late Login on :
+                          <span class="format-date">
+                            <%= user.updatedAt %>
+                          </span></a
+                        >
+                      </div>
+                    </div>
+
+                    <div class="row align-items-end">
+                      <div class="col-sm-8">
+                        <div class="p-3">
+                          <p class="fs-16 lh-base">
+                            You are authorized to Read, Write and Delete the
+                            data from admin.
+                            <i class="mdi mdi-arrow-right"></i>
+                          </p>
+                          <div class="mt-3">
+                            <a href="/admin/logout" class="btn btn-success"
+                              >Logout</a
+                            >
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-4">
+                        <div class="px-3">
+                          <img
+                            src="/customer-assets/img/logo.png"
+                            class="img-fluid"
+                            alt=""
+                            style="
+                              height: 100px;
+                              margin: 20px 0;
+                              text-align: right;
+                              float: right;
+                            "
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- end card-body-->
+                </div>
+              </div>
+              <!-- end col-->
+            </div>
+            <!-- end row-->
+
+            <div class="row">
+              <a href="/admin/customers" class="col-md-3">
+                <div>
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">Total Users</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0"
+                              ><%= customers %></span
+                            >
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span
+                              class="avatar-title bg-soft-info rounded-circle fs-2"
+                            >
+                              <i data-feather="users" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card body -->
+                  </div>
+                  <!-- end card-->
+                </div>
+              </a>
+              <!-- end col-->
+
+              <a href="/admin/staffs" class="col-md-3">
+                <div>
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">Total Staffs</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0"
+                              ><%= staffs %></span
+                            >
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span
+                              class="avatar-title bg-soft-info rounded-circle fs-2"
+                            >
+                              <i data-feather="users" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card body -->
+                  </div>
+                  <!-- end card-->
+                </div>
+              </a>
+
+              <a href="/admin/leads" class="col-md-3">
+                <div>
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">Total Leads</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0"
+                              ><%= leads %></span
+                            >
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span
+                              class="avatar-title bg-soft-info rounded-circle fs-2"
+                            >
+                              <i data-feather="activity" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card body -->
+                  </div>
+                  <!-- end card-->
+                </div>
+              </a>
+              <!-- end col-->
+              <!-- <div class="col-md-3">
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">Total Products</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0">7</span>
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                              <i data-feather="activity" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              <!-- end col-->
+              <!-- <div class="col-md-3">
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">Total Partners</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0">23</span>
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span class="avatar-title bg-soft-info rounded-circle fs-2">
+                              <i data-feather="clock" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> -->
+              <!-- end col-->
+              <!-- end col-->
+              <a href="/admin/leads?day=1" class="col-md-3">
+                <div>
+                  <div class="card card-animate">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <p class="fw-medium text-muted mb-0">New Leads</p>
+                          <h2 class="mt-4 ff-secondary fw-semibold">
+                            <span class="counter-value" data-target="0"
+                              ><%= leadsLastDay %></span
+                            >
+                          </h2>
+                        </div>
+                        <div>
+                          <div class="avatar-sm flex-shrink-0">
+                            <span
+                              class="avatar-title bg-soft-info rounded-circle fs-2"
+                            >
+                              <i data-feather="clock" class="text-info"></i>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- end card body -->
+                  </div>
+                  <!-- end card-->
+                </div>
+              </a>
+              <!-- end col-->
+              <!-- end col-->
+            </div>
+            <!-- end row-->
+          </div>
+        </div>
+        <!-- end col-->
+      </div>
+      <!-- end row-->
+    </div>
+    <!-- container-fluid -->
+  </div>
+  <!-- End Page-content -->
+</div>
+
+<%- include('./partials/footer'); %>

@@ -1,0 +1,174 @@
+<%- include('../../customer/partials/header') %>
+
+
+
+
+<style>
+.calculator-tab{margin-top:100px}
+@media only screen and (max-width: 767px) {
+.calculator-tab{margin-top:0 !important}
+}
+
+</style>
+
+<!-- Start Error Area -->
+<section class="error-area py-5 calculator-tab" >
+  <div class="container">
+    <div class="row mb-4">
+      <h3>Personal Loan Calculator</h3>
+      <p class="card-text small">
+        "The EMI calculation is based on interest rate input provided by the user and for
+        illustrative purposes only."
+      </p>
+    </div>
+	<div class="col-md-12">
+    <div class="row" style="margin:0">
+      <div class="col-md-8">
+        <div class="row p-3 border mb-5 rounded">
+          <div class="col-lg-7">
+            <div class="row">
+              <div class="col-6 px-0">
+                <label for="loanAmount" class="form-label fs-6 text-muted">Loan Amount</label>
+              </div>
+              <div class="col-6 px-0">
+                <div class="input-group mb-3 d-flex justify-content-end">
+                  <span class="input-group-text fs-14" id="basic-addon1">₹</span>
+                  <input
+                    type="text"
+                    class="form-control-sm border rounded-end no-arrow w-50 loan-amount-input"
+                    value="50000"
+                    max="10000000"
+                  />
+                </div>
+              </div>
+
+              <div class="mx-0 row justify-content-end mb-3">
+                <span class="text-right loan-amount-in-words small"></span>
+              </div>
+
+              <input
+                type="range"
+                class="custom-slider loan-amount-range"
+                min="1000"
+                max="10000000"
+                value="50000"
+                id="loanAmount"
+              />
+              <div class="d-flex justify-content-between mt-3">
+                <p class="small">1 Thousand</p>
+                <p class="small">1 Cr</p>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-6 px-0">
+                <label for="interestRate" class="form-label fs-6 text-muted">Interest Rate</label>
+              </div>
+              <div class="col-6 px-0">
+                <div class="input-group mb-3 d-flex justify-content-end">
+                  <span class="input-group-text fs-14" id="basic-addon1">%</span>
+                  <input
+                    type="text"
+                    class="form-control-sm border rounded-end no-arrow w-50 interest-rate-input"
+                    value="10.35"
+                    max="30"
+                  />
+                </div>
+              </div>
+
+              <input
+                type="range"
+                class="custom-slider interest-rate-range"
+                min="10.35"
+                step="0.01"
+                max="30"
+                value="8.3"
+                id="interestRate"
+              />
+              <div class="d-flex justify-content-between mt-3">
+                <p class="small">10.35 %</p>
+                <p class="small">30 %</p>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-6 px-0">
+                <label for="tenure" class="form-label fs-6 text-muted">Tenure</label>
+              </div>
+              <div class="col-6 px-0">
+                <div class="input-group mb-3 d-flex justify-content-end">
+                  <span class="input-group-text fs-14" id="basic-addon1">Yr</span>
+                  <input
+                    type="text"
+                    class="form-control-sm border rounded-end no-arrow w-50 tenure-input"
+                    value="5"
+                    max="7"
+                  />
+                </div>
+              </div>
+
+              <input
+                type="range"
+                class="custom-slider tenure-range"
+                min="1"
+                max="7"
+                value="5"
+                id="tenure"
+              />
+              <div class="d-flex justify-content-between mt-3">
+                <p class="small">1 Year</p>
+                <p class="small">7 Years</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="card border-0 bg-light-blue">
+              <div class="card-body">
+                <h5 class="card-title">EMI calculations</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item bg-light-blue">
+                  <span class="fw-light text-black-50">EMI</span><br />
+                  <span class="text-primary fw-bold fs-6">
+                    ₹ <span class="emi-amount">0.00</span>
+                  </span>
+                </li>
+                <li class="list-group-item bg-light-blue">
+                  <span class="fw-light text-black-50">Interest Payable</span><br />
+                  <span class="fw-bold fs-6"> ₹ <span class="interest-amount">0.00</span> </span>
+                </li>
+                <li class="list-group-item bg-light-blue">
+                  <span class="fw-light text-black-50">Total Amount Payble</span><br />
+                  <span class="fw-bold fs-6">
+                    ₹ <span class="total-amount-payable">0.00</span></span
+                  >
+                  <br />
+                  <span class="small text-black-50">(Principal + interest)</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col-12 mt-2">
+              <p class="small">
+                  To get best offers visit our
+                  <a href="/product/personal-loan/2" class="text-decoration-underline"
+                    >Personal Loan</a
+                  > page
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 d-flex justify-content-center">
+        <lottie-player
+          src="https://assets4.lottiefiles.com/packages/lf20_wbwrgmka.json"
+          background="transparent"
+          speed="1"
+          style="width: 400px; height: 400px"
+          loop
+          autoplay
+        ></lottie-player>
+      </div>
+    </div></div>
+  </div>
+</section>
+<!-- End Error Area -->
+<script type="module" src="/javascripts/emi-calculator.js"></script>
+<%- include('../../customer/partials/footer') %>

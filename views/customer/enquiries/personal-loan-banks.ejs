@@ -1,0 +1,162 @@
+<%- include('../partials/header') %>
+<style>
+  .blockquote-custom {
+    position: relative;
+    font-size: 1.1rem;
+    overflow: visible;
+  }
+
+  .blockquote-custom-icon {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -15px;
+    left: 50px;
+  }
+</style>
+<section class="pt-3 pb-3 mt-80 account-create-area breadcrumb mb-0">
+  <div class="container">
+    <div class="row">
+      <div class="account-create-content text-left">
+        <h2 class="mx-0"><%= banks.length %> Banks</h2>
+        <p class="mt-1">Available for you</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ptb-70 bg-f6f4f8 card_product_wrap">
+  <div class="container container_auto">
+    <div class="compare-cards-form">
+      <div class="row">
+        <% if(banks.length === 0) { %>
+        <h5 class="mb-3">
+          <i class="fa fa-box-open text-secondary"></i>
+          Oops! Basis data entered by you, lenders have no loan offer for you at this moment.
+        </h5>
+        <div class="col-md-6 d-flex justify-content-center">
+          <lottie-player
+            src="https://assets8.lottiefiles.com/packages/lf20_chws1oam.json"
+            background="transparent"
+            speed="1"
+            style="width: 400px; height: 400px"
+            loop
+            autoplay
+          ></lottie-player>
+        </div>
+        <div class="col-md-5 offset-md-1 d-flex justify-content-center">
+          <blockquote class="blockquote blockquote-custom bg-white p-5 rounded">
+            <div
+              class="blockquote-custom-icon bg-gradient-green shadow small fw-bold px-2 text-white"
+            >
+              Pre-Approved
+            </div>
+            <div class="row">
+              <div class="col-6 d-flex align-items-center">
+                <span class="h3 text-left">Health Insurance</span>
+              </div>
+              <div class="col-6 text-right d-flex align-items-top justify-content-end">
+                <i class="fa fa-heart text-danger fa-2x"></i>
+              </div>
+            </div>
+            <p class="mb-0 mt-4 font-italic">
+              Congratulations, you are eligible for pre-qualified health insurance from Niva BUPA in
+              just ₹15 per day
+            </p>
+            <br />
+            <a href="#" class="text-info font-italic fs-18 fw-bold text-left"
+              >Starting @ ₹ 15/day <i class="fa fa-arrow-right"></i
+            ></a>
+          </blockquote>
+        </div>
+        <% } else { %>
+        <h5 class="mb-3">
+          <img src="/customer-assets/img/tag-1.png" style="width: 20px" />
+          Available Loan Offers 
+        </h5>
+        <% } %> <% banks.forEach(bank => { %>
+        <div class="card product px-0 mb-3">
+          <div class="card-body">
+            <div class="row gy-3">
+              <div class="col-sm-auto">
+                <div class="avatar-lg bg-light rounded p-1">
+                  <img src="<%= bank.icon === null ?'/customer-assets/img/banking.png':`/uploads/${bank.icon}`%>" class="img-fluid d-block" style="width: 120px; height: 60px;" />
+                </div>
+              </div>
+              <div class="col-sm">
+                <h6 class="fs-14 text-truncate">
+                  <a href="javascript:;" class="text-dark"><%= bank.bankName %></a>
+                </h6>
+                <p class="mb-1">Applied loan amount:</p>
+                <ul class="list-inline text-muted">
+                  <!-- parseFloat(maxLoanAmount.toFixed(0)) -->
+                  <li class="">
+                    ₹ <%=
+                    Number(personalLoanInformation.loanAmount.toFixed(2)).toLocaleString('en-US') %>
+                  </li>
+                  <li class=""><%= personalLoanInformation.company %></li>
+                </ul>
+              </div>
+              <div class="col-sm-auto">
+                <div class="text-lg-end">
+                  <p class="text-muted mb-2">
+                    <span class="tag_sign ms-2"
+                      ><i class="fas fa-check me-1"></i> Offered Loan Amount
+                    </span>
+                  </p>
+                  <h5>
+                    ₹
+                    <span class="product-price"><b><%= bank.loanOffered %></b></span>
+                  </h5>
+                  <h6 class="fs-12 mb-0">
+                    <a href="javascript:;" class="btn btn-primary btn-small apply-now-btn">
+                      Apply Now
+                    </a>
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- card body -->
+          <div class="card-footer d-none">
+            <div class="row align-items-center gy-3">
+              <div class="col-sm">
+                <div class="d-flex flex-wrap my-n1">
+                  <div>
+                    <a
+                      href="JavaScript:void(0)"
+                      class="d-block text-body p-1 px-2 text-blue card-details_btn card-detail-btn"
+                      ><i class="fas fa-chevron-down fs-12"></i> Details</a
+                    >
+                  </div>
+                  <div class="mt-1 ms-5">
+                    <input type="checkbox" name="cardId" value="" class="cards-compare-checkbox" />
+                    Compare
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-auto">
+                <p class="mb-0">
+                  <img src="/customer-assets/img/tag-2.png" style="width: 20px" />
+                  Why this card
+                </p>
+                <h6 class="fs-12 mb-0">
+                  Complimentary Economy Class Ticket voucher on fee payment
+                  <a href="" target="_blank" class="btn btn-primary btn-small"> Apply Now </a>
+                </h6>
+              </div>
+            </div>
+          </div>
+          <!-- end card footer -->
+
+          <div class="card-details_wrap pt-4 pb-4 px-4 card-description d-none"></div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+</section>
+<script type="module" src="/javascripts/customer/personal-loan-banks.js"></script>
+<%- include('../partials/footer') %>

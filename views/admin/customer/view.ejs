@@ -1,0 +1,260 @@
+<%- include('../partials/header'); %>
+    <div class="main-content">
+        <div class="page-content">
+            <div class="">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!--end col-->
+                        <div class="col-xxl-12">
+                            <div class="team-list row list-view-filter">
+                                <div class="col-lg-12">
+                                    <div class="card team-box">
+                                        <div class="card-header">
+                                            <div class="row g-2">
+                                                <div class="col-md-5 d-flex align-items-center">
+                                                    <p class="fs-16 m-0 fw-semibold text-muted">
+                                                        Customer Details
+                                                        <!-- export-customers -->
+                                                    </p>
+                                                    <!-- <div class="col-sm-auto" style="margin-left: 70vw;">
+                                                        <button
+                                                            class="btn btn-outline-secondary add-btn">
+                                                            <i class="ri-upload-line me-1 align-bottom"></i>
+                                                            Update
+                                                        </button>
+                                                    </div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card team-box p-5">
+                                        <div class="card-body">
+                                            <div>
+                                                <p class="fs-16 m-0 fw-semibold text-muted">
+                                                    Basic Details
+                                                </p>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-6">
+                                                        <b>Profile :</b>
+                                                        <div class="m-2">
+                                                            <img src="/uploads/<%= customer.profile %>" alt="user"
+                                                                style="max-height: 150px;">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>Name :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.name %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Email :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.email %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Phone :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.phone %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Address :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.address %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>DOB :</b>
+                                                        <div class="mt-2">
+                                                            <%= new Date(customer.dob).toDateString() %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Status:</b>
+                                                        <form class="col-sm-auto ms-auto customer-status-form">
+                                                            <div class="mt-2">
+                                                                <select id="statusSelect" name="status">
+                                                                    <option value="Pending For Document"
+                                                                        <%=customer.status==='Pending' ? 'selected' : ''
+                                                                        %>>Pending For Document
+                                                                    </option>
+                                                                    <option value="Approved"
+                                                                        <%=customer.status==='Approved' ? 'selected'
+                                                                        : '' %>>Approved</option>
+                                                                    <option value="Rejected"
+                                                                        <%=customer.status==='Rejected' ? 'selected'
+                                                                        : '' %>>Rejected</option>
+                                                                </select>
+                                                                <div class="mt-2 d-none" id="remark">
+                                                                    <input type="text" placeholder="enter remark"
+                                                                        name="remark">
+                                                                </div>
+                                                                <div class="mt-2 d-none" id="role">
+                                                                    <select name="role">
+                                                                        <option value="">select role</option>
+                                                                        <option>normal</option>
+                                                                        <option>advance</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mt-2 d-none" id="agentCategory">
+                                                                    <select name="agentCategory">
+                                                                        <option value="">select agent category</option>
+                                                                        <% agentCategoryOptions.forEach(master=> { %>
+                                                                            <option value="<%= master.name %>">
+                                                                                <%= master.name %>
+                                                                            </option>
+                                                                            <% }) %>
+                                                                    </select>
+                                                                </div>
+                                                                <button class="btn btn-primary btn-sm submit">
+                                                                    Update
+                                                                </button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <% if (customer.remark) { %>
+                                                        <div class="col-sm-3">
+                                                            <b>Remark :</b>
+                                                            <div class="mt-2">
+                                                                <%= customer.remark %>
+                                                            </div>
+                                                        </div>
+                                                        <% } %>
+                                                            <% if (customer.chanelCode) { %>
+                                                                <div class="col-sm-3">
+                                                                    <b>Chanel Code :</b>
+                                                                    <div class="mt-2">
+                                                                        <%= customer.chanelCode %>
+                                                                    </div>
+                                                                </div>
+                                                                <% } %>
+                                                                    <% if (customer.role) { %>
+                                                                        <div class="col-sm-3">
+                                                                            <b>Role :</b>
+                                                                            <div class="mt-2">
+                                                                                <%= customer.role %>
+                                                                            </div>
+                                                                        </div>
+                                                                        <% } %>
+                                                                            <% if (customer.agentCategory) { %>
+                                                                                <div class="col-sm-3">
+                                                                                    <b>Agent Category :</b>
+                                                                                    <div class="mt-2">
+                                                                                        <%= customer.agentCategory %>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <p class="fs-16 m-0 fw-semibold text-muted">
+                                                    Bank Details
+                                                </p>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>Name :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.bankName %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Account Number :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.bankAccount %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Account Holder :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.bankAccountHolder %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Branch :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.bankBranch %>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>IFSC :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.bankIfsc %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <b>Cheque Document :</b>
+                                                        <div class="mt-2">
+                                                            <a href="/uploads/<%= customer.bankChequeDocument %>"
+                                                                target="_blank">
+                                                                View
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
+                                                <p class="fs-16 m-0 fw-semibold text-muted">
+                                                    KYC Details
+                                                </p>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>Aadhaar Number :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.aadhar %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <b>Aadhar Card Document :</b>
+                                                        <div class="mt-2">
+                                                            <a href="/uploads/<%= customer.aadharCardDocument %>"
+                                                                target="_blank">
+                                                                View
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row m-3">
+                                                    <div class="col-sm-3">
+                                                        <b>Pancard Number :</b>
+                                                        <div class="mt-2">
+                                                            <%= customer.pancard %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <b>Pancard Document :</b>
+                                                        <div class="mt-2">
+                                                            <a href="/uploads/<%= customer.pancardDocument %>"
+                                                                target="_blank">
+                                                                View
+                                                                <!-- <i class="fa fa-eye"></i> -->
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end add modal-->
+                            <!--end card-->
+                        </div>
+                        <!--end col-->
+                    </div>
+                </div>
+                <!--end modal-->
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+    </div>
+    <%- include('../partials/footer'); %>
+        <script type="module" src="/javascripts/admin/customer-view.js"></script>
