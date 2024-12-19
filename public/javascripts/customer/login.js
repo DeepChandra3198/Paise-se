@@ -2,16 +2,15 @@ import { handleMessage } from '../helpers.js';
 
 let otpID = 0;
 const productId = new URL(window.location.href).pathname.split('/').pop();
-// console.log(productId);
+
 function redirect() {
-  console.log(productId)
   switch (productId) {
     case 'login':
       location.href = `/customer/dashboard`;
       break;
-    // case 'loginDashboard':
-    //   location.href = `/customer/dashboard`;
-    //   break;
+    case '':
+      location.href = `/customer/dashboard`;
+      break;
     case '1':
       location.href = `/customer-info/${productId}`;
       break;
@@ -51,7 +50,6 @@ document.querySelector('.mobile-otp-form').addEventListener('submit', async (eve
 
     const phone = document.querySelector(`input[name="phone"]`).value;
     const password = document.querySelector(`input[name="password"]`).value;
-    console.log(phone, password, '===>> data')
     const response = await axios.post('/login-otp-validate', { phone, password });
     if (response.data.status === 'error') {
       return handleMessage('error', 'Something went wrong', response.data.message);
@@ -64,28 +62,6 @@ document.querySelector('.mobile-otp-form').addEventListener('submit', async (eve
   }
 });
 
-
-
-// Handle the second login form
-document.querySelector('.second-login-form').addEventListener('submit', async (event) => {
-  event.preventDefault();
-  try {
-    const phone = document.querySelector(`input[name="phone"]`).value;
-    const password = document.querySelector(`input[name="password"]`).value;
-
-    console.log(phone, password, '===>> second form data');
-    const response = await axios.post('/login-otp-validate', { phone, password });
-
-    if (response.data.status === 'error') {
-      return handleMessage('error', 'Something went wrong', response.data.message);
-    }
-
-    handleMessage('success', 'Success', response.data.message);
-    return redirect();
-  } catch (error) {
-    return handleMessage('error', 'Something went wrong', error.response.data.message);
-  }
-});
 // document.querySelector('.verify-otp').addEventListener('click', async () => {
 //   const otp = document.querySelector(`input[name="otp"]`).value;
 //   if (otp.length !== 4)

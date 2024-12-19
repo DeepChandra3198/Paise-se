@@ -121,42 +121,47 @@ model paiseseWebhook {
 }
 
 model User {
-  id                 Int      @id @default(autoincrement())
-  name               String?
-  email              String?  @unique
-  phone              String?  @unique
-  status             String?
-  remark             String?
-  chanelCode         String?  @unique
-  profile            String?
-  bankName           String?
-  pincode            String?
-  state              String?
-  city               String?
-  address            String?
-  bankAccount        String?
-  bankAccountHolder  String?
-  bankBranch         String?
-  bankIfsc           String?
-  bankChequeDocument String?
-  aadhar             String?
-  gstNumber          String?
-  password           String?
-  pancard            String?  @db.VarChar(10)
-  pancardDocument    String?
-  aadharCardDocument String?
-  dob                String?
-  utms               Json?
-  agreedToTerms      Boolean?
-  type               String   @default("customer")
-  staffType          String?
-  role               String?  @default("normal")
-  agentCategory      String?
-  payoutPercent      Float?
-  userType           String?
-  accountVerifyType  String?
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                       Int      @id @default(autoincrement())
+  name                     String?
+  email                    String?  @unique
+  phone                    String?  @unique
+  status                   String?
+  remark                   String?
+  chanelCode               String?  @unique
+  profile                  String?
+  bankName                 String?
+  pincode                  String?
+  state                    String?
+  city                     String?
+  address                  String?
+  bankAccount              String?
+  bankAccountHolder        String?
+  bankBranch               String?
+  bankIfsc                 String?
+  bankChequeDocument       String?
+  aadhar                   String?
+  gstNumber                String?
+  password                 String?
+  pancard                  String?  @db.VarChar(10)
+  pancardDocument          String?
+  aadharCardDocument       String?
+  dob                      String?
+  utms                     Json?
+  agreedToTerms            Boolean?
+  commissionAgentAgreement String?  @db.LongText
+  eSignVerifyData          String?  @db.LongText
+  eSignStatus              String?
+  eSignLink                String? 
+  eSignId                  String?
+  type                     String   @default("customer")
+  staffType                String?
+  role                     String?  @default("normal")
+  agentCategory            String?
+  payoutPercent            Float?
+  userType                 String?
+  accountVerifyType        String?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
 
   UserInformation          UserInformation[]
   BusinessLoanEnquiries    BusinessLoanEnquiries[]

@@ -278,38 +278,38 @@ router.post('/lead',
     { name: 'otherDoc4', maxCount: 1 },
   ]), ValidateRequestMiddleware(leadRequest), store);
 
-  
+
 
 router.post('/edit-lead/:id',
-upload.fields([
-  { name: 'bankStatement', maxCount: 1 },
-  { name: 'aadharCardDocument', maxCount: 1 },
-  { name: 'pancardDocument', maxCount: 1 },
-  { name: 'passportPhoto', maxCount: 1 },
-  { name: 'salarySlip', maxCount: 1 },
-  { name: 'addressProof', maxCount: 1 },
-  { name: 'coApAadharCardDocument', maxCount: 1 },
-  { name: 'coApPancardDocument', maxCount: 1 },
-  { name: 'coApPassportPhoto', maxCount: 1 },
-  { name: 'registrationCertificate', maxCount: 1 },
-  { name: 'udhyamAadhar', maxCount: 1 },
-  { name: 'gstReturnTwelveMonths', maxCount: 1 },
-  { name: 'itrTwoYears', maxCount: 1 },
-  { name: 'coiTwoYears', maxCount: 1 },
-  { name: 'balanceSheetTwoYears', maxCount: 1 },
-  { name: 'profitLossAnnexure', maxCount: 1 },
-  { name: 'taxAuditReport', maxCount: 1 },
-  { name: 'currentBankOneYear', maxCount: 1 },
-  { name: 'ccBankOneYear', maxCount: 1 },
-  { name: 'odBankOneYear', maxCount: 1 },
-  { name: 'runningLoanSheet', maxCount: 1 },
-  { name: 'ownershipProof', maxCount: 1 },
-  { name: 'detailSheet', maxCount: 1 },
-  { name: 'otherDoc1', maxCount: 1 },
-  { name: 'otherDoc2', maxCount: 1 },
-  { name: 'otherDoc3', maxCount: 1 },
-  { name: 'otherDoc4', maxCount: 1 },
-]), ValidateRequestMiddleware(leadRequest), update);
+  upload.fields([
+    { name: 'bankStatement', maxCount: 1 },
+    { name: 'aadharCardDocument', maxCount: 1 },
+    { name: 'pancardDocument', maxCount: 1 },
+    { name: 'passportPhoto', maxCount: 1 },
+    { name: 'salarySlip', maxCount: 1 },
+    { name: 'addressProof', maxCount: 1 },
+    { name: 'coApAadharCardDocument', maxCount: 1 },
+    { name: 'coApPancardDocument', maxCount: 1 },
+    { name: 'coApPassportPhoto', maxCount: 1 },
+    { name: 'registrationCertificate', maxCount: 1 },
+    { name: 'udhyamAadhar', maxCount: 1 },
+    { name: 'gstReturnTwelveMonths', maxCount: 1 },
+    { name: 'itrTwoYears', maxCount: 1 },
+    { name: 'coiTwoYears', maxCount: 1 },
+    { name: 'balanceSheetTwoYears', maxCount: 1 },
+    { name: 'profitLossAnnexure', maxCount: 1 },
+    { name: 'taxAuditReport', maxCount: 1 },
+    { name: 'currentBankOneYear', maxCount: 1 },
+    { name: 'ccBankOneYear', maxCount: 1 },
+    { name: 'odBankOneYear', maxCount: 1 },
+    { name: 'runningLoanSheet', maxCount: 1 },
+    { name: 'ownershipProof', maxCount: 1 },
+    { name: 'detailSheet', maxCount: 1 },
+    { name: 'otherDoc1', maxCount: 1 },
+    { name: 'otherDoc2', maxCount: 1 },
+    { name: 'otherDoc3', maxCount: 1 },
+    { name: 'otherDoc4', maxCount: 1 },
+  ]), ValidateRequestMiddleware(leadRequest), update);
 
 
 router.route('/register-account/:id').get(viewAccount)
@@ -320,7 +320,7 @@ router.route('/register-account/:id').get(viewAccount)
 
 router.get('/register-aggrement/:id', viewAgreement);
 
-router.post('/register-aggrement/:id', RegisterAgreement)
+router.post('/register-aggrement/:id',  RegisterAgreement)
 
 router.route('/set-password/:id').get(viewSetPassword)
   .post(upload.none(), setPassword);

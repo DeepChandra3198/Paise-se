@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `User` ADD COLUMN `eSignLink` VARCHAR(191) NULL,
+    ADD COLUMN `eSignStatus` VARCHAR(191) NULL;

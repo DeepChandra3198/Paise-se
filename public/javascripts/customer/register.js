@@ -169,7 +169,6 @@ pincode.addEventListener('blur', async (event) => {
 
 document.getElementById('verifyGstButton').addEventListener('click', async (event) => {
   event.preventDefault();
-  showLoader()
   const gstNoInput = document.getElementById('gstNumber');
   const gstNo = gstNoInput.value.trim();
 
@@ -178,6 +177,7 @@ document.getElementById('verifyGstButton').addEventListener('click', async (even
   }
 
   try {
+    showLoader()
     const response = await axios.post('/verifyGstNo', { gstNo });
     if (response.data.data === null) {
       return handleMessage('error', 'Invalid Gst Number!.', 'Error verifying GST number. Please try again.');

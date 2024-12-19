@@ -9,9 +9,10 @@ const GST_URLS = {
   GST_VERIFY: '/verify/gstin',
   ACCOUNT_VERIFY: '/verify/bank',
   ACCOUNT_STATUS: '/verify/status',
-  CHEQUE_VERIFY: '/document/extract'
+  CHEQUE_VERIFY: '/document/extract',
+  ESIGN_UPLOAD: '/esign/request',
+  ESIGN_STATUS: '/esign/status'
 }
-
 
 module.exports = {
   GRIDLINES_URLS,

@@ -1,5 +1,13 @@
 <%- include('./partials/header' , {hide : true}) %>
 
+  <style>
+    input,
+    select,
+    textarea {
+      font-family: Arial, sans-serif !important;
+    }
+  </style>
+
   <div class="preloader" style="display: block">
     <div class="loader">
       <div class="shadow"></div>
@@ -74,7 +82,7 @@
                             <input type="radio" id="account" name="accountVerifyType" class="rounded-checkbox"
                               value="Individual/Sole Proprietary" checked />
                             <label for="account" class="checkbox-label">
-                              account
+                              Account
                             </label>
                           </div>
 
@@ -83,7 +91,7 @@
                             <input type="radio" id="cheque" name="accountVerifyType" class="rounded-checkbox"
                               value="cheque" />
                             <label for="cheque" class="checkbox-label">
-                              cheque
+                              Cheque
                             </label>
                           </div>
                           <!-- check box end -->
@@ -182,4 +190,6 @@
   </script>
   <script type="module" src="/javascripts/customer/login.js"></script>
   <script type="module" src="/javascripts/customer/register-account.js"></script>
-  <%- include('./partials/footer') %>
+  <footer class="responsiveFooter" style="margin-top: 400px">
+    <%- include('./partials/footer') %>
+  </footer>

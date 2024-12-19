@@ -358,7 +358,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Name</label>
-                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="name" id="name"
+                        <input type="text" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="name" id="name"
                         class="form-control" value="<%= user.name %>"
                           data-error="Please enter your name" placeholder="Sergio Laughlin">
                           <div class="help-block with-errors"></div>
@@ -367,7 +368,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Email</label>
-                        <input type="email" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="email" id="email"
+                        <input type="email" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="email" id="email"
                         class="form-control" value="<%= user.email %>"
                           data-error="Please enter your email" placeholder="luvion@gmail.com">
                           <div class="help-block with-errors"></div>
@@ -377,7 +379,8 @@
                       <div class="form-group">
                         <label>Phone</label>
                         <input readonly="true" placeholder="enter 10 digit phone" type="text"
-                          <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="phone" id="phone"
+                          <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : '' %> name="phone"
+                        id="phone"
                         class="form-control" value="<%= user.phone %>"
                           data-error="Please enter your surname" placeholder="George" pattern="[0-9]{10}">
                           <div class="help-block with-errors"></div>
@@ -398,7 +401,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>DOB</label>
-                        <input type="date" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="dob" id="dob"
+                        <input type="date" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="dob" id="dob"
                         class="form-control"
                         value="<%= new Date(user.dob).toISOString().substr(0, 10) %>"
                           data-error="Please enter your surname" placeholder="George">
@@ -418,7 +422,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>PAN No</label>
-                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="pancard" id="pancard"
+                        <input type="text" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="pancard" id="pancard"
                         required="true" value="<%= user.pancard %>"
                           data-error="Please enter your number" class="form-control" placeholder="Enter"
                           pattern="[A-Za-z]{5}[0-9]{4}[A-Za-z]{1}">
@@ -428,7 +433,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Aadhar No</label>
-                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="aadhar" id="aadhar"
+                        <input type="text" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="aadhar" id="aadhar"
                         required="true" value="<%= user.aadhar %>"
                           data-error="Please enter your number" class="form-control" placeholder="Enter"
                           pattern="[0-9]{12}">
@@ -438,7 +444,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Area Pin</label>
-                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="pincode" id="pincode"
+                        <input type="text" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="pincode" id="pincode"
                         required="true" value="<%= user.pincode %>"
                           class="form-control" placeholder="Enter">
                       </div>
@@ -460,7 +467,8 @@
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Address</label>
-                        <input type="text" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> name="address" id="address"
+                        <input type="text" <%=(user.status==='Approved' || user.status==='Rejected' ) ? "disabled" : ''
+                          %> name="address" id="address"
                         required="true" value="<%= user.address %>"
                           data-error="Please enter your number" class="form-control" placeholder="Enter">
                           <div class="help-block with-errors"></div>
@@ -475,11 +483,24 @@
                       </div>
                     </div> -->
                     <br />
-                    <div class="col-sm-7">
-                      <button type="submit" <%= (user.status==='Approved' || user.status==='Rejected') ? "disabled" : '' %> class="btn btn-primary
-                        w-50">Update Profile</button>
-                      <div id="msgSubmit" class="h3 text-center hidden"></div>
+                    <div class="d-flex p-0">
+                      <div class="col-sm-7">
+                        <button type="submit" class="btn btn-primary w-50" <%=(user.status==='Approved' ||
+                          user.status==='Rejected' ) ? 'disabled' : '' %>>
+                          Update Profile
+                        </button>
+                        <div id="msgSubmit" class="h3 text-center hidden"></div>
+                      </div>
+                      <div>
+                        <% if (user.eSignStatus==='COMPLETED' ) { %>
+                          <a href="<%= user.eSignLink %>" class="btn btn-success w-100" target="_blank"
+                            rel="noopener noreferrer">
+                            Download Agreement
+                          </a>
+                          <% } %>
+                      </div>
                     </div>
+
                   </div>
                   <div class="clearfix"></div>
                 </form>
@@ -493,6 +514,12 @@
                 <div class="col-lg-12 col-sm-12">
                   <h5 class="mb-5">My Enquiry</h5>
                   <div class="row">
+                    <div class="col-sm-2">
+                      <div class="form-group">
+                        <input type="text" name="name" id="leadId" placeholder="Search by Id" class="form-control"
+                          style="padding:10px !important;margin-bottom:15px">
+                      </div>
+                    </div>
                     <div class="col-sm-2">
                       <div class="form-group">
                         <input type="text" name="name" id="leadCustomerName" placeholder="Search by Name"
@@ -862,8 +889,8 @@
 
                             <% if (totalDisbursedAmount.currentYearPercent>= 0) { %>
                               <span class="text-success">
-                                <i class="fas fa-arrow-alt-circle-up"></i>
-                                <%= totalDisbursedAmount.currentYearPercent %>%
+                                <!-- <i class="fas fa-arrow-alt-circle-up"></i> -->
+                                <%= totalDisbursedAmount.currentYearPercent %>
                               </span>
                               <img src="/assets/images/cart-icon1.png" class="chart_iconn" style="margin-left: 65px;">
                               <% } else { %>
@@ -914,9 +941,23 @@
                   <div class="row">
                     <div class="col-sm-4 mb-2">
                       <div class="form-group">
-                        <label for="loanType">Loan Type</label>
+                        <label for="loanType">Products </label>
                         <select name="loanType" class="nice-select loan-type" required="true">
                           <option value="">Select</option>
+                          <!-- <option value="Personal Loan">Personal Loan</option>
+                          <option value="Business Loan">Business Loan</option>
+                          <option value="Loan Against Property">Loan Against Property</option>
+                          <option value="Home Loan">Home Loan</option>
+                          <option value="Auto Loan">Auto Loan</option>
+                          <option value="Gold Loan">Gold Loan</option>
+                          <option value="Loan against shares and Mutual Funds">Loan against shares and Mutual Funds</option>
+                          <option value="Education Loan">Education Loan</option>
+                          <option value="Working Capital">Working Capital</option>
+                          <option value="Credit Card">Credit Card</option>
+                          <option value="Insurance">Insurance</option>
+                          <option value="Mutual Funds">Mutual Funds</option>
+                          <option value="Fixed Deposits">Fixed Deposits</option>
+                          <option value="Electric vehicles and solar financing">Electric vehicles and solar financing</option> -->
                           <option value="Personal Loan">Personal Loan</option>
                           <option value="Business Loan">Business Loan</option>
                           <option value="Prof Loan">Prof Loan</option>

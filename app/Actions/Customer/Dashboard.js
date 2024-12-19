@@ -171,9 +171,12 @@ async function Dashboard(req, res) {
     }
 
     console.log(req.query, 'req.query ,')
-    const { tab, leadCustomerName, leadCompanyName, leadPhone } = req.query
+    const { tab, leadCustomerName, leadCompanyName, leadPhone, leadId } = req.query
     const filterByObj = {
       userId: +req.cookies.userId
+    }
+    if (leadId) {
+      filterByObj.id = +leadId
     }
     if (leadCustomerName) {
       filterByObj.customerName = leadCustomerName
@@ -295,8 +298,8 @@ async function Dashboard(req, res) {
         userId: +req.cookies.userId,
         status: 'Disbursed',
         disbursedAt: {
-          gte: new Date(year-1, 0, 1).toISOString(),
-          lte: new Date(year-1, 11, 31).toISOString(),
+          gte: new Date(year - 1, 0, 1).toISOString(),
+          lte: new Date(year - 1, 11, 31).toISOString(),
         },
       },
       _sum: {
@@ -339,18 +342,18 @@ async function Dashboard(req, res) {
     totalDisbursedAmount.currentYearPercent = 0;
     totalDisbursedAmount.previousQuarterPercent = 0;
 
-    if(currentMonthDisbursedSum._sum.payoutAmount && previousMonthDisbursedSumByDate._sum.payoutAmount){
-      totalDisbursedAmount.currentMonthPercent = parseFloat((((currentMonthDisbursedSum._sum.payoutAmount / previousMonthDisbursedSumByDate._sum.payoutAmount)*100)-100).toFixed(2))
+    if (currentMonthDisbursedSum._sum.payoutAmount && previousMonthDisbursedSumByDate._sum.payoutAmount) {
+      totalDisbursedAmount.currentMonthPercent = parseFloat((((currentMonthDisbursedSum._sum.payoutAmount / previousMonthDisbursedSumByDate._sum.payoutAmount) * 100) - 100).toFixed(2))
     }
 
-    if(earlierMonthDisbursedSum._sum.payoutAmount && previousMonthDisbursedSum._sum.payoutAmount){
-      totalDisbursedAmount.previousMonthPercent = parseFloat(((previousMonthDisbursedSum._sum.payoutAmount / earlierMonthDisbursedSum._sum.payoutAmount)*100).toFixed(2))
+    if (earlierMonthDisbursedSum._sum.payoutAmount && previousMonthDisbursedSum._sum.payoutAmount) {
+      totalDisbursedAmount.previousMonthPercent = parseFloat(((previousMonthDisbursedSum._sum.payoutAmount / earlierMonthDisbursedSum._sum.payoutAmount) * 100).toFixed(2))
     }
-    if(earlierYearDisbursedSum._sum.payoutAmount && currentYearDisbursedSum._sum.payoutAmount){
-      totalDisbursedAmount.currentYearPercent = parseFloat(((currentYearDisbursedSum._sum.payoutAmount / earlierYearDisbursedSum._sum.payoutAmount)*100).toFixed(2))
+    if (earlierYearDisbursedSum._sum.payoutAmount && currentYearDisbursedSum._sum.payoutAmount) {
+      totalDisbursedAmount.currentYearPercent = parseFloat(((currentYearDisbursedSum._sum.payoutAmount / earlierYearDisbursedSum._sum.payoutAmount) * 100).toFixed(2))
     }
-    if(previousQuarterDisbursedSum._sum.payoutAmount && earlierQuarterDisbursedSum._sum.payoutAmount){
-      totalDisbursedAmount.previousQuarterPercent = parseFloat(((previousQuarterDisbursedSum._sum.payoutAmount / earlierQuarterDisbursedSum._sum.payoutAmount)*100).toFixed(2))
+    if (previousQuarterDisbursedSum._sum.payoutAmount && earlierQuarterDisbursedSum._sum.payoutAmount) {
+      totalDisbursedAmount.previousQuarterPercent = parseFloat(((previousQuarterDisbursedSum._sum.payoutAmount / earlierQuarterDisbursedSum._sum.payoutAmount) * 100).toFixed(2))
     }
 
     console.log('Total disbursed amount for this User:', totalDisbursedAmount);

@@ -181,13 +181,15 @@ const leadSearch = document.getElementById('leadSearch')
 const leadCustomerName = document.getElementById('leadCustomerName')
 const leadCompanyName = document.getElementById('leadCompanyName')
 const leadPhone = document.getElementById('leadPhone')
+const leadId = document.getElementById('leadId')
 
 leadSearch.addEventListener('click', async () => {
   const leadCustomerNameValue = leadCustomerName.value;
   const leadCompanyNameValue = leadCompanyName.value;
   const leadPhoneValue = leadPhone.value;
-  let url = `${window.location.href.split('/customer')[0]}/customer/dashboard?tab=4&leadCustomerName=${leadCustomerName.value}&leadCompanyName=${leadCompanyName.value}&leadPhone=${leadPhone.value}`
-  console.log('hsssssssssssssshhhhhhhhshhhhhsh', url, window.location.href.split('/customer')[0])
+  const leadIdValue = leadId.value;
+  let url = `${window.location.href.split('/customer')[0]}/customer/dashboard?tab=4&leadCustomerName=${leadCustomerName.value}&leadCompanyName=${leadCompanyName.value}&leadPhone=${leadPhone.value}&leadId=${leadId.value}`
+  // console.log('hsssssssssssssshhhhhhhhshhhhhsh', url, window.location.href.split('/customer')[0])
   window.location.href = url
 })
 
@@ -224,9 +226,9 @@ locationPin.addEventListener('blur', async (event) => {
 const dashboardFrom = document.getElementById('dashboardFrom')
 const dashboardTo = document.getElementById('dashboardTo')
 
-dashboardFrom.addEventListener('change' , async ()=>{
-  console.log(new Date(dashboardFrom.value) , new Date(dashboardTo.value) , 'changed')
+dashboardFrom.addEventListener('change', async () => {
+  console.log(new Date(dashboardFrom.value), new Date(dashboardTo.value), 'changed')
 })
-dashboardTo.addEventListener('change' , async ()=>{
-  console.log(new Date(dashboardFrom.value) , new Date(dashboardTo.value) , 'changed')
+dashboardTo.addEventListener('change', async () => {
+  console.log(new Date(dashboardFrom.value), new Date(dashboardTo.value), 'changed')
 })
